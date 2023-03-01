@@ -26,9 +26,6 @@
   font-size: 16px;
   width: 100%;
 }
-.username_section input:focus ,
-.email_section input:focus {
-}
 
 .login_input_icon {
   font-size: 20px;
