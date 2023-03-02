@@ -20,6 +20,7 @@ export const Registration = () => {
     }
     e.preventDefault();
   };
+  
   return (
     <div className="login_section">
       <h3>Registration</h3>

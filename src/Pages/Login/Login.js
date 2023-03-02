@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import "./Login.css";
-import { useForm } from "react-hook-form";
 
 export const Login = () => {
   const {
@@ -12,6 +12,7 @@ export const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => console.log(data);
+  
   return (
     <div className="login_section">
       <h3>Login</h3>

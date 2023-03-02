@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { FiPlay } from "react-icons/fi";
 import { GoCalendar } from "react-icons/go";
@@ -16,25 +16,25 @@ export const NavBar = () => {
       <div className="navbar_sections">
         <section>
           <NavigationLink icon={<FiPlay />} routePath={"/"} />
-
           <hr className="nav_devider" />
-
           <NavigationLink icon={<MdExitToApp />} routePath={"/home"} />
           <NavigationLink
             icon={<MdOutlineWindow />}
             routePath={"/registration"}
           />
           <NavigationLink icon={<AiOutlineLogout />} routePath={"/importers"} />
-
           <hr className="nav_devider" />
-
           <NavigationLink icon={<GoCalendar />} routePath={"/calendar"} />
-        </section>
-        
-        <section>
           <NavigationLink
             icon={<IoSettingsOutline />}
             routePath={"/settings"}
+          />
+        </section>
+
+        <section>
+          <NavigationLink
+            icon={<AiOutlineQuestionCircle />}
+            routePath={"/question"}
           />
           <NavigationLink icon={<BiLogOut />} routePath={"/login"} />
         </section>
