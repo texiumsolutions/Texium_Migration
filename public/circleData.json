@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "title": "Select File",
+    "des": "Browse effective file to upload"
+  },
+  {
+    "id": 2,
+    "title": "Entity Mapping",
+    "des": "Tell us what your exclusive headers means"
+  },
+    
+  {
+    "id": 3,
+    "title": "Data Mapping",
+    "des": "Help us map your grade & section with what we understand"
+    
+  },
+  {
+    "id": 4,
+    "title": "Summary",
+    "des": "Tell us what your exclusive headers means"
+  }
+]
+  
