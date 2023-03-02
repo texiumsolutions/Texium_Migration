@@ -1,0 +1,44 @@
+.navbar_container {
+  height: 100%;
+  box-shadow: 1px 1px 5px var(--background);
+}
+.nav_logo {
+  width: 80%;
+}
+.navbar_sections {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.route_link {
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+}
+
+.navbar_icon {
+  margin-top: 7px;
+}
+
+.route_btn {
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.5em;
+  color: var(--text);
+  background-color: transparent;
+}
+
+.active {
+  background-color: var(--secondary);
+}
+
+.nav_devider {
+  border: 1px solid var(--primary);
+  width: 97%;
+}
