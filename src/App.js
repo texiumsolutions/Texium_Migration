@@ -10,7 +10,6 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
       </Routes>
-      <ToastContainer></ToastContainer>
     </div>
   );
 }
