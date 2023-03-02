@@ -2,8 +2,8 @@
   box-shadow: 1px 1px 5px #bbbbbb;
   background-color: #fff;
   border-radius: 5px;
-  width: 120%;
-  padding: 20%;
+  width: clamp(230px, 20vw, 16vw);
+  padding: 50px;
 }
 .login_section h3 {
   color: var(--primary);
@@ -16,6 +16,7 @@
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid var(--primary);
+  border-radius: 3px;
 }
 
 .username_section input,
@@ -31,8 +32,9 @@
   font-size: 20px;
 }
 
-.submit_btn {
-  padding: 7px 35px;
+.login_btn {
+  width: 100%;
+  padding: 10px 35px;
   border-radius: 7px;
   border: none;
   font-size: 18px;
@@ -40,11 +42,21 @@
   color: var(--white);
   cursor: pointer;
 }
-.submit_btn:hover {
+.login_btn:hover {
   background-color: var(--white);
   border: 3px solid var(--primary);
   transition: background-color 250ms;
-  padding: 4px 32px;
+  padding: 7px 32px;
   color: var(--primary);
   font-weight: 500;
+}
+
+.registration_link {
+  text-align: left;
+  font-size: 14px;
+}
+
+.registration_page_link {
+  text-decoration: none;
+  color: var(--primary);
 }
