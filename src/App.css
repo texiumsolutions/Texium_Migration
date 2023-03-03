@@ -2,7 +2,7 @@
   --background: #dddddd;
   --secondary: #4aa5ff;
   --primary: #3366ff;
-  --white: #f8f8f8;
+  --white: #ffffff;
   --text: #202020;
 }
 .App {
@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: 80px calc(100% - 80px);
   width: 100%;
-  background: radial-gradient(#fff, #f6f6ff);
+  background: radial-gradient(#ffffff, #eeeeff);
 }
 
 .navbar_section {
@@ -23,3 +23,7 @@
   justify-content: center;
   align-items: center;
 }
+
+/* ~~~~~~~~~~~~~~~~ */
+/* Global CSS Style */
+/* ~~~~~~~~~~~~~~~~ */

@@ -1,0 +1,7 @@
+.card_container {
+  overflow: auto;
+  padding: 1.5em;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px var(--background);
+}
