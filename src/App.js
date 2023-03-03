@@ -14,9 +14,7 @@ import { NavBar } from "./Shared/NavBar/NavBar";
 function App() {
   return (
     <div className="App">
-      <div className="navbar_section">
-        <NavBar />
-      </div>
+     
       
       <div className="content_section">
         <Routes>
