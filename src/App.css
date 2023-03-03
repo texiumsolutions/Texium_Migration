@@ -1,6 +1,6 @@
 :root {
   --background: #dddddd;
-  --secondary: #99ccff;
+  --secondary: #4aa5ff;
   --primary: #3366ff;
   --white: #f8f8f8;
   --text: #202020;
@@ -8,15 +8,16 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template-columns: 80px 100%;
-  height: 98vh;
-  background: radial-gradient(#fff, #f0f0ff);
+  grid-template-columns: 80px calc(100% - 80px);
+  width: 100%;
+  background: radial-gradient(#fff, #f6f6ff);
 }
 
 .navbar_section {
   grid-row: 1 / 2;
 }
 .content_section {
+  height: 100vh;
   grid-row: 2/-1;
   display: flex;
   justify-content: center;
