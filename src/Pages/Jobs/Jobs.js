@@ -1,21 +1,43 @@
 import React from "react";
-import { FaPause, FaPlay, FaSquare } from "react-icons/fa";
-import { IoReloadCircle } from "react-icons/io5";
-import { Card } from "../../components/Card/Card";
-import { FileInput } from "../../components/FileInput/FileInput";
-import './Jobs.css';
+import "./Jobs.css";
+import { Table } from 'antd';
 
 export const Jobs = () => {
+  const dataSource = [
+    {
+      key: '1',
+      name: 'Mike',
+      age: 32,
+      address: '10 Downing Street',
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street',
+    },
+  ];
+  
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
   return (
-    <Card width={"calc(100vw - 80px - 5em)"} height={"calc(100vh - 5em)"}>
-      <div className="table_header">
-        <button type="button"><FaPlay /></button>
-        <button type="button"><FaPause /></button>
-        <button type="button"><FaSquare /></button>
-        
-        <button className="reload_btn" type="button"><IoReloadCircle /></button>
-      </div>
-      <FileInput />
-    </Card>
+    <div >
+      <Table dataSource={dataSource} columns={columns} />
+    </div>
   );
 };

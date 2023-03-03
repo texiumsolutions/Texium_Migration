@@ -66,11 +66,15 @@ export const Registration = () => {
     createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({displayName:data.name, photoURL:data.url});
 
-    navigate('/');
+    navigate('/home');
   };
 
   return (
-    <div>
+    <div style={{
+    
+      marginLeft:"500px",
+      padding:"100px"
+    }}>
       {/* <div className="login_section">
       <h3>Registration</h3>
 

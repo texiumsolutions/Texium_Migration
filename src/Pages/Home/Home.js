@@ -3,15 +3,22 @@ import { NavBar } from "../../Shared/NavBar/NavBar";
 
 export const Home = () => {
   return (
-    <div>
+    <div style={{
+      display:"flex"
+    }}>
       <NavBar></NavBar>
-      <h1> 
+      <h1 style={{
+      width:"100%",
+      height:"100%",
+      marginLeft:"500px",
+      padding:"100px"
+    }}> 
         WELCOME!{" "}
-        <small>
-          <small>
+        
+         
             <small style={{color: "var(--primary)"}}>TEXIUM MIGRATION</small>
-          </small>
-        </small>
+        
+        
       </h1>
     </div>
   );

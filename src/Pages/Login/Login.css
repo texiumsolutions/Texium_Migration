@@ -4,6 +4,8 @@
   border-radius: 5px;
   width: clamp(230px, 20vw, 16vw);
   padding: 50px;
+  
+ 
 }
 .login_section h3 {
   color: var(--primary);

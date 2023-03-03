@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.css";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -20,6 +20,7 @@ export const Login = () => {
     loading,
     error,
   ] = useSignInWithEmailAndPassword(auth);
+  const navigate= useNavigate(); 
   let signInError;
   if( loading){
     return <Loading></Loading>
@@ -39,10 +40,19 @@ console.log(user);
   
     console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
+    navigate('/home');
   };
   
   return (
-    
+    <div style={{
+      justifyContent:"center",
+      alignItems:"center",
+      // display:"flex",
+      width:"100%",
+      height:"100%",
+      marginLeft:"500px",
+      padding:"100px"
+    }}>
     <div className="login_section">
       <h3>Login</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -136,6 +146,7 @@ console.log(user);
           </Link>
         </p>
       </form>
+    </div>
     </div>
   );
 };
