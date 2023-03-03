@@ -1,13 +1,16 @@
 .navbar_container {
-  height: 100%;
+  height: 100vh;
+  width: 80px;
   box-shadow: 1px 1px 5px var(--background);
 }
 .nav_logo {
   width: 80%;
+  height: 20px;
+  padding-top: 50px;
+  cursor: pointer;
 }
 .navbar_sections {
-  height: 100%;
-  width: 100%;
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,6 +32,8 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 30px;
+  width: 100%;
+  padding-block: 5px;
   line-height: 1.5em;
   color: var(--text);
   background-color: transparent;
