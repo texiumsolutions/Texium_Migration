@@ -14,6 +14,9 @@ export const Registration = () => {
     setRegisteredData(newRegisteredData);
   };
   const handleOnSubmit = (e) => {
+    console.log(registeredData.email);
+    console.log(registeredData.password);
+
     if (registeredData.password !== registeredData.confirmPassword) {
       alert("hoy nai");
       return
