@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-import Loading from "./Loading";
+import Loading from "../../Shared/Loading/Loading";
 
 export const Registration = () => {
   // const [registeredData, setRegisteredData] = useState({});

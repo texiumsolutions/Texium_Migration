@@ -8,6 +8,7 @@ import { Importes } from "./Pages/Importes/Importes";
 import { Jobs } from "./Pages/Jobs/Jobs";
 import { Login } from "./Pages/Login/Login";
 import { MigSets } from "./Pages/MigSets/MigSets";
+import Loading from "./Shared/Loading/Loading";
 import { Registration } from "./Pages/Registration/Registration";
 import RequireAuth from "./Pages/Registration/RequireAuth";
 import { Scanner } from "./Pages/Scanner/Scanner";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/loading" element={<Loading/>} />
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       
