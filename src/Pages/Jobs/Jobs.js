@@ -1,6 +1,7 @@
 import React from "react";
 import "./Jobs.css";
 import { Table } from 'antd';
+import { NavBar } from "../../Shared/NavBar/NavBar";
 
 export const Jobs = () => {
   const dataSource = [
@@ -37,6 +38,7 @@ export const Jobs = () => {
   ];
   return (
     <div >
+      <NavBar />
       <Table dataSource={dataSource} columns={columns} />
     </div>
   );

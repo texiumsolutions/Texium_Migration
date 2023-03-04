@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div style={{
-      marginLeft:"500px",
-      padding:"100px"
-    }}>
+    <div
+      style={{
+        marginLeft: "500px",
+        padding: "100px",
+      }}
+    >
       <h1>Oppps!!</h1>
       <h2>404 </h2>
 

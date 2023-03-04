@@ -1,7 +1,8 @@
 import React from 'react'
+import { NavBar } from '../../Shared/NavBar/NavBar'
 
 export const MigSets = () => {
   return (
-    <div>MigSets</div>
+    <div><NavBar />MigSets</div>
   )
 }
