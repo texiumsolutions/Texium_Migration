@@ -1,8 +1,15 @@
+.login_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
 .login_section {
   box-shadow: 1px 1px 5px #bbbbbb;
   background-color: #fff;
   border-radius: 5px;
-  width: clamp(230px, 20vw, 16vw);
+  width: clamp(230px, 17vw, 20vw);
   padding: 50px;
 }
 .login_section h3 {

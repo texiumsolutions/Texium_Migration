@@ -1,136 +1,45 @@
-import { async } from "@firebase/util";
-import React, { useState } from "react";
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
+import React from "react";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../../components/Loading/Loading";
 import auth from "../../firebase.init";
-import Loading from "./Loading";
 
 export const Registration = () => {
-  // const [registeredData, setRegisteredData] = useState({});
-
-  // const handleOnChange = (e) => {
-  //   const field = e.target.name;
-  //   const value = e.target.value;
-  //   const newRegisteredData = { ...registeredData };
-  //   newRegisteredData[field] = value;
-  //   console.log(newRegisteredData);
-  //   setRegisteredData(newRegisteredData);
-  // };
-  // const handleOnSubmit = (e) => {
-  //   console.log(registeredData.email);
-  //   console.log(registeredData.password);
-
-  //   if (registeredData.password !== registeredData.confirmPassword) {
-  //     alert("hoy nai");
-  //     return
-  //   }
-  //   e.preventDefault();
-  // };
-
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
-  const navigate= useNavigate(); 
+  const navigate = useNavigate();
   let signInError;
   if (loading || updating) {
     return <Loading></Loading>;
   }
   if (error || Uerror) {
     signInError = (
-      <p
-        style={{
-          fontSize: "11px",
-          color: "red",
-        }}
-      >
-        {error?.message || Uerror?.message}
-      </p>
+      <p className="error_message">{error?.message || Uerror?.message}</p>
     );
   }
   if (user) {
     console.log(user);
   }
   const onSubmit = async (data) => {
-    
     createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({displayName:data.name, photoURL:data.url});
+    await updateProfile({ displayName: data.name, photoURL: data.url });
 
-    navigate('/');
+    navigate("/home");
   };
 
   return (
-    <div>
-      {/* <div className="login_section">
-      <h3>Registration</h3>
-
-      <div className="username_section ">
-        <BiUser className="login_input_icon" />
-        <input
-          onChange={handleOnChange}
-          type="email"
-          name="email"
-          placeholder="User Email"
-          required
-        />
-      </div>
-
-      <br />
-
-      <div className="email_section">
-        <BiLockAlt className="login_input_icon" />
-        <input
-          onChange={handleOnChange}
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-      </div>
-
-      <br />
-
-      <div className="email_section">
-        <BiLockAlt className="login_input_icon" />
-        <input
-          onChange={handleOnChange}
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          required
-        />
-      </div>
-
-      <br />
-
-      <input
-        onClick={handleOnSubmit}
-        className="login_btn"
-        type="submit"
-        name="submit"
-        value="Register"
-      />
-
-      <br />
-
-      <p className="registration_link">
-        Have Account?{" "}
-        <Link to="/" className="registration_page_link">
-          Login Here
-        </Link>
-      </p>
-    </div> */}
-
+    <div className="login_container">
       <div className="login_section">
         <h3>Registration</h3>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -140,28 +49,20 @@ export const Registration = () => {
               type="text"
               name="name"
               placeholder="Name"
-              
               {...register("userName", {
-                required:{
-                  value:true,
-                  message:'Name is Required'
-                }
+                required: {
+                  value: true,
+                  message: "Name is Required",
+                },
               })}
             />
-         
           </div>
           {errors.userName?.type === "required" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.userName.message}
-            </span>
+            <span className="error_message">{errors.userName.message}</span>
           )}
+
           <br />
+
           <div className="username_section ">
             <BiUser className="login_input_icon" />
             <input
@@ -181,26 +82,10 @@ export const Registration = () => {
             />
           </div>
           {errors.email?.type === "required" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.email.message}
-            </span>
+            <span className="error_message">{errors.email.message}</span>
           )}
           {errors.email?.type === "pattern" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.email.message}
-            </span>
+            <span className="error_message">{errors.email.message}</span>
           )}
 
           <br />
@@ -227,38 +112,15 @@ export const Registration = () => {
               })}
             />
           </div>
+
           {errors.password?.type === "required" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.password.message}
-            </span>
+            <span className="error_message">{errors.password.message}</span>
           )}
           {errors.password?.type === "minLength" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.password.message}
-            </span>
+            <span className="error_message">{errors.password.message}</span>
           )}
           {errors.password?.type === "maxLength" && (
-            <span
-              style={{
-                fontSize: "11px",
-                color: "red",
-                padding: "10px",
-              }}
-            >
-              {errors.password.message}
-            </span>
+            <span className="error_message">{errors.password.message}</span>
           )}
 
           <br />

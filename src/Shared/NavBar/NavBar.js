@@ -1,4 +1,6 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineLogout, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { FiPlay } from "react-icons/fi";
@@ -7,13 +9,18 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdExitToApp, MdOutlineWindow } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import auth from "../../firebase.init";
 import "./NavBar.css";
 import { NavigationLink } from "./NavigationLink";
 
 export const NavBar = () => {
+  const [user] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+  };
   return (
     <div className="navbar_container">
-      <Link to="/">
+      <Link to="/home">
         <img src={logo} className="nav_logo" alt="Logo" />
       </Link>
 
@@ -25,10 +32,7 @@ export const NavBar = () => {
 
           <NavigationLink icon={<MdExitToApp />} routePath={"/scanner"} />
 
-          <NavigationLink
-            icon={<MdOutlineWindow />}
-            routePath={"/importers"}
-          />
+          <NavigationLink icon={<MdOutlineWindow />} routePath={"/importers"} />
 
           <NavigationLink icon={<AiOutlineLogout />} routePath={"/migsets"} />
 
@@ -43,11 +47,14 @@ export const NavBar = () => {
         </section>
 
         <section>
-          <NavigationLink
-            icon={<AiOutlineQuestionCircle />}
-            routePath={"/"}
-          />
-          <NavigationLink icon={<BiLogOut />} routePath={"/login"} />
+          <NavigationLink icon={<AiOutlineQuestionCircle />} routePath={"/help"} />
+          {user && (
+            <NavigationLink
+              icon={<BiLogOut />}
+              routePath={"/"}
+              onClick={logout}
+            />
+          )}
         </section>
       </div>
     </div>

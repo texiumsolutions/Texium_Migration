@@ -1,7 +1,9 @@
 import React from 'react'
+import { NavBar } from '../../Shared/NavBar/NavBar'
 
 export const Importes = () => {
   return (
-    <div>Importes</div>
+    <div>
+      <NavBar />Importes</div>
   )
 }

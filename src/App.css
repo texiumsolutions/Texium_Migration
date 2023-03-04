@@ -10,6 +10,7 @@
   display: grid;
   grid-template-columns: 80px calc(100% - 80px);
   width: 100%;
+  height: 100%;
   background: radial-gradient(#ffffff, #eeeeff);
 }
 
@@ -27,3 +28,23 @@
 /* ~~~~~~~~~~~~~~~~ */
 /* Global CSS Style */
 /* ~~~~~~~~~~~~~~~~ */
+
+.container {
+  display: grid;
+  grid-template-columns: 80px calc(100vw - 80px);
+}
+.nav_container {
+  height: 100vh;
+  width: 80px;
+  box-shadow: 1px 1px 5px var(--background);
+}
+.content_container {
+  margin: 10px;
+  height: 100vh;
+}
+
+.error_message {
+  font-size: 11px;
+  color: #ff2d2d;
+  padding: 10px;
+}
