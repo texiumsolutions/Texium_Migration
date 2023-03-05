@@ -8,8 +8,9 @@ export const Home = () => {
       <div className="nav_container">
         <NavBar />
       </div>
+      
       <div className="content_container">
-        <Card >
+        <Card height="calc(100%)" width="calc(100%)">
           <h1>
             WELCOME!{" "}
             <small style={{ color: "var(--primary)" }}>

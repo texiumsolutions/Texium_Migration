@@ -5,6 +5,29 @@
   --white: #ffffff;
   --text: #202020;
 }
+
+/* ~~~~~~~~~~~~~~~~~~ */
+/* Scroll Bar Section */
+/* ~~~~~~~~~~~~~~~~~~ */
+
+::-webkit-scrollbar {
+  scroll-behavior: smooth;
+  width: 0.8vw;
+  height: 1.6vh;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 100vw;
+  margin-block: 0.2em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border: 0.18em solid var(--background);
+  border-radius: 100vw;
+}
+
 .App {
   text-align: center;
   display: grid;
@@ -39,8 +62,9 @@
   box-shadow: 1px 1px 5px var(--background);
 }
 .content_container {
-  margin: 10px;
-  height: 100vh;
+  padding: 0.7em;
+  height: calc(100% - 4.4em);
+  width: calc(100% - 4.4em);
 }
 
 .error_message {

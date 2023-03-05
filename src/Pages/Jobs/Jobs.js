@@ -1,45 +1,22 @@
 import React from "react";
-import "./Jobs.css";
-import { Table } from 'antd';
+import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
+import "./Jobs.css";
 
 export const Jobs = () => {
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
-  
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-    },
-  ];
   return (
-    <div >
-      <NavBar />
-      <Table dataSource={dataSource} columns={columns} />
+    <div className="container">
+      <div className="nav_container">
+        <NavBar />
+      </div>
+      
+      <div className="content_container">
+        <Card height="calc(100%)" width="calc(100%)">
+          <h1>
+            Jobs
+          </h1>
+        </Card>
+      </div>
     </div>
   );
 };

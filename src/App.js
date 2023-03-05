@@ -13,8 +13,8 @@ import { Login } from "./Pages/Login/Login";
 import { MigSets } from "./Pages/MigSets/MigSets";
 import NotFound from "./Pages/NotFound/NotFound";
 import { Registration } from "./Pages/Registration/Registration";
-import RequireAuth from "./Pages/Registration/RequireAuth";
 import { Scanner } from "./Pages/Scanner/Scanner";
+import RequireAuth from "./Shared/RequireAuth/RequireAuth";
 
 function App() {
   const [user] = useAuthState(auth);
