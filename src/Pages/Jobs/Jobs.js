@@ -69,6 +69,29 @@ const data = [
         year: '1944',
     },
 ]
+const customStyles={
+  rows: {
+    style: {
+        minHeight: '72px',
+    },
+},
+headCells: {
+    style: {
+        paddingLeft: '8px', // override the cell padding for head cells
+        paddingRight: '8px',
+        backgroundColor:"#C1C1C1",
+        border: "1px solid black"
+
+    },
+},
+cells: {
+    style: {
+        paddingLeft: '8px', // override the cell padding for data cells
+        paddingRight: '8px',
+        backgroundColor:"#F5F5F5"
+    },
+},
+}
  
   
   return (
@@ -87,7 +110,7 @@ const data = [
         title="Running Jobs (0 out of 0)"
         columns={columns}
         data={data}
-        
+        customStyles={customStyles}
       />
         </Card>
       </div>
