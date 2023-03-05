@@ -56,9 +56,14 @@ export const NavBar = () => {
             routePath={"/help"}
           />
           {user && (
-            <NavLink onClick={() => setShowModal(true)} className="route_btn logout_btn">
+            <NavLink
+              onClick={() => setShowModal(true)}
+              className="route_btn logout_btn"
+            >
               <button className="route_btn" type="button">
-                <div className="navbar_icon"><BiLogOut /></div>
+                <div className="navbar_icon">
+                  <BiLogOut />
+                </div>
               </button>
             </NavLink>
           )}

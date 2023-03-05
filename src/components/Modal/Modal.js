@@ -7,7 +7,6 @@ import "./Modal.css";
 
 export const Modal = ({ text, btnText, setShowModal, worning }) => {
   const handleModalClose = () => {
-    setShowModal(false);
     signOut(auth);
   };
 
@@ -19,14 +18,25 @@ export const Modal = ({ text, btnText, setShowModal, worning }) => {
           {worning ? "Worning" : null}
         </small>
         <p>{text}</p>
-        <Link
-          className="modal_btn"
-          to="/"
-          onClick={handleModalClose}
-          type="button"
-        >
-          {btnText}
-        </Link>
+
+        <div className="modal-btns">
+          <Link
+            className="modal_btn"
+            to="#"
+            onClick={() => setShowModal(false)}
+            type="button"
+          >
+            Cancel
+          </Link>
+          <Link
+            className="modal_btn"
+            to="/"
+            onClick={handleModalClose}
+            type="button"
+          >
+            {btnText}
+          </Link>
+        </div>
       </div>
     </div>
   );
