@@ -3,6 +3,5 @@
   padding: 1.5em;
   max-height: calc(100vh - 4.4em);
   background-color: var(--white);
-  border-radius: 10px;
   box-shadow: 1px 1px 5px var(--background);
 }
