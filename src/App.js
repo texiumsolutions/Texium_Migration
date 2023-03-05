@@ -2,6 +2,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading/Loading";
+import { Modal } from "./components/Modal/Modal";
 import auth from "./firebase.init";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
@@ -46,8 +47,11 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/loading" element={<Loading />} />
           <Route path="*" element={<NotFound></NotFound>}></Route>
+
+          {/* Testing Routes */}
+          <Route path="/loading" element={<Loading />} />
+          <Route path="/modal" element={<Modal />} />
         </Routes>
       )}
     </div>
