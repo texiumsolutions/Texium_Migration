@@ -15,6 +15,11 @@ export const Jobs = () => {
           <h1>
             Jobs
           </h1>
+         <table>
+          <th>
+            
+          </th>
+         </table>
         </Card>
       </div>
     </div>

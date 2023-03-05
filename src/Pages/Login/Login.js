@@ -18,6 +18,7 @@ export const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   let signInError;
+  
   if (loading) {
     return <Loading></Loading>;
   }
