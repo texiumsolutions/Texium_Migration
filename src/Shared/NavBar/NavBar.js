@@ -32,7 +32,7 @@ export const NavBar = () => {
         <section>
           <NavigationLink icon={<FiPlay />} routePath={"/jobs"} />
 
-          <hr className="nav_devider" />
+          <hr className="nav_divider" />
 
           <NavigationLink icon={<MdExitToApp />} routePath={"/scanner"} />
 
@@ -40,7 +40,7 @@ export const NavBar = () => {
 
           <NavigationLink icon={<AiOutlineLogout />} routePath={"/migsets"} />
 
-          <hr className="nav_devider" />
+          <hr className="nav_divider" />
 
           <NavigationLink icon={<GoCalendar />} routePath={"/dashboard"} />
 

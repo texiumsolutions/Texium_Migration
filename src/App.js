@@ -42,7 +42,14 @@ function App() {
             }
           />
           <Route path="/jobs" element={<Jobs />} />
+
           <Route path="/scanner" element={<Scanner />} />
+          <Route path="/scanner/openTab/" element={<OpenTab />}>
+            <Route path="details" element={<OpenTabDetails />} />
+            <Route path="run" element={<OpenTabRun />} />
+            <Route path="objects" element={<OpenTabObjects />} />
+          </Route>
+
           <Route path="/importers" element={<Importes />} />
           <Route path="/migsets" element={<MigSets />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -51,14 +58,10 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="*" element={<NotFound></NotFound>}></Route>
+          <Route path="*" element={<NotFound />}></Route>
 
           {/* Testing Routes */}
           <Route path="/loading" element={<Loading />} />
-          <Route path="/scanner/openTab" element={<OpenTab />} />
-          <Route path="/scanner/openTab/details" element={<OpenTabDetails />} />
-          <Route path="/scanner/openTab/run" element={<OpenTabRun />} />
-          <Route path="/scanner/openTab/objects" element={<OpenTabObjects />} />
           <Route path="/modal" element={<Modal />} />
         </Routes>
       )}
