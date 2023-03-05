@@ -111,6 +111,13 @@ cells: {
         columns={columns}
         data={data}
         customStyles={customStyles}
+        pointerOnHover
+        responsive
+        selectableRows
+        selectableRowsHighlight
+        selectableRowsRadio="radio"
+        fixedHeaderScrollHeight="700px"
+        highlightOnHover
       />
         </Card>
       </div>
