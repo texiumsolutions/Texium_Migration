@@ -2,6 +2,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading/Loading";
+import { Modal } from "./components/Modal/Modal";
 import auth from "./firebase.init";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
@@ -13,6 +14,10 @@ import { Login } from "./Pages/Login/Login";
 import { MigSets } from "./Pages/MigSets/MigSets";
 import NotFound from "./Pages/NotFound/NotFound";
 import { Registration } from "./Pages/Registration/Registration";
+import { OpenTab } from "./Pages/Scanner/OpenTab/OpenTab";
+import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDetails";
+import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
+import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
 
@@ -46,8 +51,15 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/loading" element={<Loading />} />
           <Route path="*" element={<NotFound></NotFound>}></Route>
+
+          {/* Testing Routes */}
+          <Route path="/loading" element={<Loading />} />
+          <Route path="/scanner/openTab" element={<OpenTab />} />
+          <Route path="/scanner/openTab/details" element={<OpenTabDetails />} />
+          <Route path="/scanner/openTab/run" element={<OpenTabRun />} />
+          <Route path="/scanner/openTab/objects" element={<OpenTabObjects />} />
+          <Route path="/modal" element={<Modal />} />
         </Routes>
       )}
     </div>

@@ -37,7 +37,9 @@
   color: var(--text);
   background-color: transparent;
 }
-
+.logout_btn {
+  background-color: transparent !important;
+}
 .active {
   background-color: var(--secondary);
 }
