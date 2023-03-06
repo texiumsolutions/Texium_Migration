@@ -1,0 +1,25 @@
+.parameter_container {
+  width: 100%;
+  font-size: 14px;
+}
+.parameter_container table .input_field_section {
+  width: 80%;
+}
+.parameter_container table tr td .parameter_inputfield {
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-left: 15px;
+  font-family: "Poppins", sans-serif;
+  resize: none;
+}
+.parameter_container table tr td .parameter_inputfield:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.parameter_container table tr td p {
+  color: var(--text);
+  font-weight: 500;
+}

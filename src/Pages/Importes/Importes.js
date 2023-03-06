@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import DataTable from 'react-data-table-component';
+import { Link } from "react-router-dom";
 
 export const Importes = () => {
   const columns = [
@@ -71,7 +72,7 @@ const data = [
         year: '1984',
     },
     {
-        id: 2,
+        id: 3,
         title: 'Orange',
         year: '1944',
     },
@@ -95,7 +96,6 @@ cells: {
     style: {
         paddingLeft: '8px', 
         paddingRight: '8px',
-        backgroundColor:"#F5F5F5"
     },
 },
 }
@@ -122,8 +122,11 @@ cells: {
         fixedHeaderScrollHeight="700px"
         highlightOnHover
       />
+      <Link to="/importers/importdetails">Go the next page</Link>
         </Card>
+        
       </div>
+      
     </div>
   );
 };
