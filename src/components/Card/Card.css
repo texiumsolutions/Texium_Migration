@@ -1,6 +1,7 @@
 .card_container {
   overflow: auto;
   padding: 1.5em;
+  border-radius: 10px;
   max-height: calc(100vh - 4.4em);
   background-color: var(--white);
   box-shadow: 1px 1px 5px var(--background);
