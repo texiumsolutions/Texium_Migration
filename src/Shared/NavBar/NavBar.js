@@ -36,9 +36,9 @@ export const NavBar = () => {
 
           <NavigationLink icon={<MdExitToApp />} routePath={"/scanner"} />
 
-          <NavigationLink icon={<MdOutlineWindow />} routePath={"/importers"} />
+          <NavigationLink icon={<MdOutlineWindow />} routePath={"/migsets"} />
 
-          <NavigationLink icon={<AiOutlineLogout />} routePath={"/migsets"} />
+          <NavigationLink icon={<AiOutlineLogout />} routePath={"/importers"} />
 
           <hr className="nav_divider" />
 

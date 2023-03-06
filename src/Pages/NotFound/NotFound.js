@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+ 
 const NotFound = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  
   return (
     <div
       style={{
@@ -12,7 +16,7 @@ const NotFound = () => {
       <h1>Oppps!!</h1>
       <h2>404 </h2>
 
-      <Link to="/">BACK TO HOME</Link>
+      <Link to="from">BACK TO HOME</Link>
     </div>
   );
 };

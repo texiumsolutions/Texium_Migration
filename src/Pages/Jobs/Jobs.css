@@ -1,0 +1,13 @@
+.table_container{
+
+}
+.table_heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(193, 196, 199);
+}
+.table_data{
+  border: 1px solid black;
+  margin: 10px;
+}
