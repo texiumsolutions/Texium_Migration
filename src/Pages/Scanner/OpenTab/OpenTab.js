@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 import "./OpenTab.css";
-import { OpenTabDetails } from "./OpenTabDetails/OpenTabDetails";
-import { OpenTabObjects } from "./OpenTabObjects/OpenTabObjects";
-import { OpenTabRun } from "./OpenTabRun/OpenTabRun";
 
 export const OpenTab = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -22,7 +19,7 @@ export const OpenTab = () => {
         <Card height="calc(100%)" width="calc(100%)">
           <div>
             <div className="opentab_header">
-              <Link className="opentab_back_btn" to={"#"}>
+              <Link className="opentab_back_btn" to={"/scanner"}>
                 Back
               </Link>
               <p>File name</p>
@@ -31,7 +28,7 @@ export const OpenTab = () => {
             <div className="opentab_navbar">
               <div className="opentab_navigations">
                 <NavLink
-                  to={"/scanner/openTab/details"}
+                  to={"details"}
                   onClick={() => setShowDetails(!showDetails)}
                   className={({ isActive }) =>
                     isActive
@@ -43,7 +40,7 @@ export const OpenTab = () => {
                 </NavLink>
 
                 <NavLink
-                  to={"/scanner/openTab/run"}
+                  to={"run"}
                   onClick={() => setShowRun(!showRun)}
                   className={({ isActive }) =>
                     isActive
@@ -55,7 +52,7 @@ export const OpenTab = () => {
                 </NavLink>
 
                 <NavLink
-                  to={"/scanner/openTab/objects"}
+                  to={"objects"}
                   onClick={() => setShowObjects(!showObjects)}
                   className={({ isActive }) =>
                     isActive
@@ -68,17 +65,13 @@ export const OpenTab = () => {
               </div>
 
               <div className="opentab_buttons">
-                <button type="button">Close</button>
-                <button type="button">Save & Run</button>
-                <button type="button">Save</button>
+                <button className="opentab_btn" type="button">Close</button>
+                <button className="opentab_btn" type="button">Save & Run</button>
+                <button className="opentab_btn opentab_save_btn" type="button">Save</button>
               </div>
             </div>
 
-            {showDetails ? <OpenTabDetails /> : null}
-
-            {showRun ? <OpenTabRun /> : null}
-
-            {showObjects ? <OpenTabObjects /> : null}
+            <Outlet />
           </div>
         </Card>
       </div>

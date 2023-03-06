@@ -44,7 +44,7 @@
   background-color: var(--secondary);
 }
 
-.nav_devider {
+.nav_divider {
   border: 1px solid var(--primary);
   width: 97%;
 }
