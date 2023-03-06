@@ -47,7 +47,7 @@ const ImportDetails = () => {
                     : "opentab_navlink"
                 }
               >
-                Scan Runs
+                Selection
               </NavLink>
 
               <NavLink
@@ -59,7 +59,7 @@ const ImportDetails = () => {
                     : "opentab_navlink"
                 }
               >
-                Source Objects
+                Import Runs
               </NavLink>
             </div>
 
