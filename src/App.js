@@ -8,6 +8,10 @@ import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
+import Details from "./Pages/Importes/ChildRoutes/Details";
+import ImportsRun from "./Pages/Importes/ChildRoutes/ImportsRun";
+import Selection from "./Pages/Importes/ChildRoutes/Selection";
+import ImportDetails from "./Pages/Importes/ImportDetails";
 import { Importes } from "./Pages/Importes/Importes";
 import { Jobs } from "./Pages/Jobs/Jobs";
 import { Login } from "./Pages/Login/Login";
@@ -51,6 +55,12 @@ function App() {
           </Route>
 
           <Route path="/importers" element={<Importes />} />
+          <Route path="/importers/importdetails" element={<ImportDetails/>} />
+          <Route path="/importers/importdetails/" element={<ImportDetails />}>
+            <Route path="details" element={<Details />} />
+            <Route path="selection" element={<Selection />} />
+            <Route path="import-runs" element={<ImportsRun />} />
+          </Route>
           <Route path="/migsets" element={<MigSets />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/configuration" element={<Configuration />} />

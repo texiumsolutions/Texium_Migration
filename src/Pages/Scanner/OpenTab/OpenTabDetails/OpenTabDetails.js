@@ -42,9 +42,9 @@ export const OpenTabDetails = () => {
               <option value="" disabled hidden>
                 Select an option
               </option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
+              <option value="option1">File System</option>
+              <option value="option2">MongoDB</option>
+              <option value="option3">DataBase(MySQL)</option>
             </select>
 
             <label className="label" htmlFor="Description">
