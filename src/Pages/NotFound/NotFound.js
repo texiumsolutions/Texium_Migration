@@ -1,22 +1,27 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
- 
+import { Link, useNavigate } from "react-router-dom";
+import notfound from "../../assets/404NotFound.gif";
+import { Card } from "../../components/Card/Card";
+import "./NotFound.css";
+
 const NotFound = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
-  
-  return (
-    <div
-      style={{
-        marginLeft: "500px",
-        padding: "100px",
-      }}
-    >
-      <h1>Oppps!!</h1>
-      <h2>404 </h2>
 
-      <Link to="from">BACK TO HOME</Link>
+  function handleGoBack() {
+    navigate(-1);
+  }
+
+  return (
+    <div className="notfound_container">
+      <Card width={"calc(100vw - 6em)"} height={"calc(100vh - 6em)"}>
+        <div className="notfound_contents">
+          <img className="notfound_image" src={notfound} alt="Not Found" />
+
+          <Link className="notfound_back_btn" onClick={handleGoBack}>
+            Go Back
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 };
