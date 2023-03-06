@@ -64,7 +64,11 @@ export const Jobs = () => {
       year: "1984",
     },
     {
+<<<<<<< HEAD
       id: 3,
+=======
+      id: 2,
+>>>>>>> 2168e026838794bab4f1d616289f45cc45304296
       title: "Orange",
       year: "1944",
     },

@@ -34,7 +34,7 @@ export const Scanner = () => {
 
           <FileInput />
 
-          <Link to={"/scanner/openTab"}>GO</Link>
+          <Link to={"/scanner/openTab/details"}>GO</Link>
         </Card>
       </div>
 
