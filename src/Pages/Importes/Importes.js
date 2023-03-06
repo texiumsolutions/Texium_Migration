@@ -80,7 +80,7 @@ const data = [
 const customStyles={
   rows: {
     style: {
-        minHeight: '72px',
+     backgroundColor:"#FFF"
     },
 },
 headCells: {
@@ -88,7 +88,7 @@ headCells: {
         paddingLeft: '8px', 
         paddingRight: '8px',
         backgroundColor:"#C1C1C1",
-        border: "1px solid black"
+        borderRight: "1px solid black"
 
     },
 },
@@ -121,6 +121,7 @@ cells: {
         selectableRowsRadio="radio"
         fixedHeaderScrollHeight="700px"
         highlightOnHover
+        dense
       />
       <Link to="/importers/importdetails">Go the next page</Link>
         </Card>
