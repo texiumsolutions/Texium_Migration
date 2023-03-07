@@ -1,13 +1,12 @@
-import { signOut } from "firebase/auth";
 import React from "react";
 import { BiError } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import auth from "../../firebase.init";
 import "./Modal.css";
 
 export const Modal = ({ text, btnText, setShowModal, worning }) => {
   const handleModalClose = () => {
-    signOut(auth);
+    // signOut(auth);
+    setShowModal(false);
   };
 
   return (
@@ -30,7 +29,7 @@ export const Modal = ({ text, btnText, setShowModal, worning }) => {
           </Link>
           <Link
             className="modal_btn"
-            to="/"
+            to="/scanner/openTab/objects"
             onClick={handleModalClose}
             type="button"
           >

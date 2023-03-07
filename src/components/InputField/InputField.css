@@ -5,7 +5,7 @@
 .parameter_container table .input_field_section {
   width: 80%;
 }
-.parameter_container table tr td .parameter_inputfield {
+.parameter_container table tbody tr td .parameter_inputfield {
   width: 100%;
   outline: none;
   border: none;
@@ -16,10 +16,13 @@
   font-family: "Poppins", sans-serif;
   resize: none;
 }
-.parameter_container table tr td .parameter_inputfield:focus {
+.parameter_container table tbody tr td .parameter_inputfield:focus {
   border-bottom: 2px solid var(--primary);
 }
-.parameter_container table tr td p {
+.parameter_container table tbody tr td .parameter_inputfield:hover {
+  border-bottom: 2px solid var(--primary);
+}
+.parameter_container table tbody tr td p {
   color: var(--text);
   font-weight: 500;
 }
