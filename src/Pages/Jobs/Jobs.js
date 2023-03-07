@@ -1,74 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import "./Jobs.css";
 
 export const Jobs = () => {
-  const columns = [
-    {
-      name: "ID",
-      selector: (row) => row.id,
-    },
-    {
-      name: "Jobs Type",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Description",
-      selector: (row) => row.description,
-    },
-    {
-      name: "Run Number",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Object Count",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Start",
-      selector: (row) => row.year,
-    },
-    {
-      name: "End",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Status",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Progess",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Location",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Port Number",
-      selector: (row) => row.title,
-    },
-  ];
-
-  const data = [
-    {
-      id: 1,
-      title: "Beetlejuice",
-      year: "1988",
-    },
-    {
-      id: 2,
-      title: "Ghostbusters",
-      year: "1984",
-    },
-    {
-      id: 2,
-      title: "Orange",
-      year: "1944",
-    },
-  ];
   const customStyles = {
     rows: {
       style: {
@@ -90,7 +26,14 @@ export const Jobs = () => {
       },
     },
   };
+  const [user, setUser] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost:5000/user")
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }, []);
+  const columns = user.length > 0 ? Object.keys(user[0]) : [];
   return (
     <div className="container">
       <div className="nav_container">
@@ -103,8 +46,11 @@ export const Jobs = () => {
 
           <DataTable
             title="Running Jobs (0 out of 0)"
-            columns={columns}
-            data={data}
+            columns={columns.map((column) => ({
+              name: column,
+              selector: column,
+            }))}
+            data={user}
             customStyles={customStyles}
             pointerOnHover
             responsive
@@ -113,6 +59,9 @@ export const Jobs = () => {
             selectableRowsRadio="radio"
             fixedHeaderScrollHeight="700px"
             highlightOnHover
+            dense
+            pagination
+            paginationPerPage={20}
           />
         </Card>
       </div>

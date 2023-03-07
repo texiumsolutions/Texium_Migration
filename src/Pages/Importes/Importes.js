@@ -1,82 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import DataTable from 'react-data-table-component';
 import { Link } from "react-router-dom";
 
 export const Importes = () => {
-  const columns = [
-    {
-        name: 'ID',
-        selector: row => row.id,
-    },
-    {
-        name: 'Name',
-        selector: row => row.year,
-    },
-    {
-        name: 'Processing Type',
-        selector: row => row.description,
-    },
-    {
-        name: 'Creation Date',
-        selector: row => row.year,
-    },
-    {
-        name: 'Total Object',
-        selector: row => row.title,
-    },
-    {
-        name: 'Unproceed',
-        selector: row => row.year,
-    },
-    {
-        name: 'Transformed',
-        selector: row => row.title,
-    },
-    {
-        name: 'Validated',
-        selector: row => row.year,
-    },
-    {
-        name: 'Imported',
-        selector: row => row.title,
-    },
-    {
-        name: 'Partially Imported',
-        selector: row => row.year,
-    },
-    {
-        name: 'Errors',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Operation',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Date',
-        selector: row => row.year,
-    }
-];
 
-const data = [
-    {
-        id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-    },
-    {
-        id: 2,
-        title: 'Ghostbusters',
-        year: '1984',
-    },
-    {
-        id: 3,
-        title: 'Orange',
-        year: '1944',
-    },
-]
 const customStyles={
   rows: {
     style: {
@@ -99,6 +28,14 @@ cells: {
     },
 },
 }
+const [user, setUser] = useState([]);
+useEffect(() => {
+    fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setUser(data))
+}, []);
+const columns =
+user.length > 0 ? Object.keys(user[0]) : [];
   return (
     <div className="container">
       <div className="nav_container">
@@ -108,11 +45,13 @@ cells: {
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">
           <h1>
-            Importes
+            Importes data: {user.length}
           </h1>
+        
           <DataTable
-        columns={columns}
-        data={data}
+          
+          columns={columns.map((column) => ({ name: column, selector: column }))}
+        data={user}
         customStyles={customStyles}
         pointerOnHover
         responsive
@@ -122,6 +61,8 @@ cells: {
         fixedHeaderScrollHeight="700px"
         highlightOnHover
         dense
+        pagination
+        paginationPerPage={20}
       />
       <Link to="/importers/importdetails">Go the next page</Link>
         </Card>
