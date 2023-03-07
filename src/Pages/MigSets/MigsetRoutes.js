@@ -3,8 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import { Card } from '../../components/Card/Card';
 import { NavBar } from '../../Shared/NavBar/NavBar';
 
-const ImportDetails = () => {
-  
+const MigsetRoutes = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [showRun, setShowRun] = useState(false);
   const [showObjects, setShowObjects] = useState(false);
@@ -27,7 +26,7 @@ const ImportDetails = () => {
           <div className="opentab_navbar">
             <div className="opentab_navigations">
               <NavLink
-                to={"details"}
+                to={"properties"}
                 onClick={() => setShowDetails(!showDetails)}
                 className={({ isActive }) =>
                   isActive
@@ -35,11 +34,11 @@ const ImportDetails = () => {
                     : "opentab_navlink"
                 }
               >
-                Details
+                Properties
               </NavLink>
 
               <NavLink
-                to={"selection"}
+                to={"transformation"}
                 onClick={() => setShowRun(!showRun)}
                 className={({ isActive }) =>
                   isActive
@@ -47,11 +46,11 @@ const ImportDetails = () => {
                     : "opentab_navlink"
                 }
               >
-                Selection
+                Transformation
               </NavLink>
 
               <NavLink
-                to={"import-runs"}
+                to={"source-object"}
                 onClick={() => setShowObjects(!showObjects)}
                 className={({ isActive }) =>
                   isActive
@@ -59,7 +58,29 @@ const ImportDetails = () => {
                     : "opentab_navlink"
                 }
               >
-                Import Runs
+                Source Object
+              </NavLink>
+              <NavLink
+                to={"target-object"}
+                onClick={() => setShowObjects(!showObjects)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "opentab_navlink opentab_active"
+                    : "opentab_navlink"
+                }
+              >
+                Target Object
+              </NavLink>
+              <NavLink
+                to={"error-object"}
+                onClick={() => setShowObjects(!showObjects)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "opentab_navlink opentab_active"
+                    : "opentab_navlink"
+                }
+              >
+                Error Object
               </NavLink>
             </div>
 
@@ -78,4 +99,4 @@ const ImportDetails = () => {
   );
 };
 
-export default ImportDetails;
+export default MigsetRoutes;

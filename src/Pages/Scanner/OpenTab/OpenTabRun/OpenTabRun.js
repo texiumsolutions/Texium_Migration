@@ -4,6 +4,7 @@ import { Card } from "../../../../components/Card/Card";
 
 export const OpenTabRun = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/sourceFileInfo")
@@ -11,6 +12,12 @@ export const OpenTabRun = () => {
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
   }, []);
+
+  const handleSelectedRowsChange = (state) => {
+    setSelectedRows(state.selectedRows);
+  };
+
+  console.log(selectedRows);
 
   const customStyles = {
     headCells: {
@@ -46,6 +53,7 @@ export const OpenTabRun = () => {
         pointerOnHover
         responsive
         selectableRows
+        onSelectedRowsChange={handleSelectedRowsChange}
         selectableRowsHighlight
         selectableRowsRadio="radio"
         fixedHeaderScrollHeight="700px"

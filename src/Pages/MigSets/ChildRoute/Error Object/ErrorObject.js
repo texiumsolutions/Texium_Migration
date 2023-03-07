@@ -1,7 +1,7 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
 
-const ImportsRun = () => {
+const ErrorObject = () => {
   const columns = [
     {
         name: 'ID',
@@ -62,12 +62,21 @@ const data = [
         id: 1,
         title: 'Beetlejuice',
         year: '1988',
-    }
+    },
+    {
+        id: 2,
+        title: 'Ghostbusters',
+        year: '1984',
+    },
+    {
+        id: 3,
+        title: 'Orange',
+        year: '1944',
+    },
 ]
 const customStyles={
   rows: {
     style: {
-     backgroundColor:"#FFF"
     },
 },
 headCells: {
@@ -75,7 +84,7 @@ headCells: {
         paddingLeft: '8px', 
         paddingRight: '8px',
         backgroundColor:"#C1C1C1",
-        borderRight: "1px solid black"
+        border: "1px solid black"
 
     },
 },
@@ -83,24 +92,28 @@ cells: {
     style: {
         paddingLeft: '8px', 
         paddingRight: '8px',
+        backgroundColor:"#FFF"
     },
 },
 }
   return (
-    <DataTable
-    columns={columns}
-    data={data}
-    customStyles={customStyles}
-    pointerOnHover
-    responsive
-    selectableRows
-    selectableRowsHighlight
-    selectableRowsRadio="radio"
-    fixedHeaderScrollHeight="700px"
-    highlightOnHover
-    dense
-  />
+    <div>
+      Error Object
+      <DataTable
+        columns={columns}
+        data={data}
+        customStyles={customStyles}
+        pointerOnHover
+        responsive
+        selectableRows
+        selectableRowsHighlight
+        selectableRowsRadio="radio"
+        fixedHeaderScrollHeight="700px"
+        highlightOnHover
+        dense
+      />
+    </div>
   );
 };
 
-export default ImportsRun;
+export default ErrorObject;
