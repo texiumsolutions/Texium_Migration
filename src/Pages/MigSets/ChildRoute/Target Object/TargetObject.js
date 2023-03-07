@@ -1,10 +1,7 @@
-import React from 'react'
+import React from 'react';
 import DataTable from 'react-data-table-component';
-import { Link } from 'react-router-dom';
-import { Card } from '../../components/Card/Card'
-import { NavBar } from '../../Shared/NavBar/NavBar'
 
-export const MigSets = () => {
+const TargetObject = () => {
   const columns = [
     {
         name: 'ID',
@@ -80,7 +77,6 @@ const data = [
 const customStyles={
   rows: {
     style: {
-        minHeight: '72px',
     },
 },
 headCells: {
@@ -96,22 +92,14 @@ cells: {
     style: {
         paddingLeft: '8px', 
         paddingRight: '8px',
-        backgroundColor:"#F5F5F5"
+        backgroundColor:"#FFF"
     },
 },
 }
   return (
-    <div className="container">
-      <div className="nav_container">
-        <NavBar />
-      </div>
-      
-      <div className="content_container">
-        <Card height="calc(100%)" width="calc(100%)">
-          <h1>
-            MigSets
-          </h1>
-          <DataTable
+    <div>
+      <h3>Target Object</h3>
+      <DataTable
         columns={columns}
         data={data}
         customStyles={customStyles}
@@ -123,10 +111,9 @@ cells: {
         fixedHeaderScrollHeight="700px"
         highlightOnHover
         dense
-      /> <Link to="/migsets/migsets-route">Go the next page</Link>
-        </Card>
-
-      </div>
+      />
     </div>
-  )
-}
+  );
+};
+
+export default TargetObject;
