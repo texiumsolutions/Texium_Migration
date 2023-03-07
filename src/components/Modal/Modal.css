@@ -9,6 +9,7 @@
   align-items: center;
   background-color: #00000033;
   backdrop-filter: blur(4px);
+  z-index: 1000;
 }
 
 .modal_content {

@@ -15,6 +15,12 @@ import ImportDetails from "./Pages/Importes/ImportDetails";
 import { Importes } from "./Pages/Importes/Importes";
 import { Jobs } from "./Pages/Jobs/Jobs";
 import { Login } from "./Pages/Login/Login";
+import ErrorObject from "./Pages/MigSets/ChildRoute/Error Object/ErrorObject";
+import Propertise from "./Pages/MigSets/ChildRoute/Propertise/Propertise";
+import SourceObject from "./Pages/MigSets/ChildRoute/Source Object/SourceObject";
+import TargetObject from "./Pages/MigSets/ChildRoute/Target Object/TargetObject";
+import Transformation from "./Pages/MigSets/ChildRoute/Transformation/Transformation";
+import MigsetRoutes from "./Pages/MigSets/MigsetRoutes";
 import { MigSets } from "./Pages/MigSets/MigSets";
 import NotFound from "./Pages/NotFound/NotFound";
 import { Registration } from "./Pages/Registration/Registration";
@@ -62,6 +68,14 @@ function App() {
             <Route path="import-runs" element={<ImportsRun />} />
           </Route>
           <Route path="/migsets" element={<MigSets />} />
+          <Route path="/migsets/migsets-route" element={<MigsetRoutes/>} />
+          <Route path="/migsets/migsets-route" element={<MigsetRoutes />}>
+            <Route path="properties" element={<Propertise />} />
+            <Route path="transformation" element={<Transformation />} />
+            <Route path="source-object" element={<SourceObject />} />
+            <Route path="target-object" element={<TargetObject />} />
+            <Route path="error-object" element={<ErrorObject />} />
+          </Route>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/help" element={<Help />} />

@@ -8,6 +8,8 @@ export const OpenTabDetails = () => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
 
+  
+
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
@@ -30,7 +32,7 @@ export const OpenTabDetails = () => {
               Name
             </label>
             <br />
-            <input type="text" name="fileName" placeholder="File Name" />
+            <input className="opentab_details_input" type="text" name="fileName" placeholder="File Name" />
 
             <label className="label" htmlFor="fileSystem">
               Type
@@ -38,20 +40,23 @@ export const OpenTabDetails = () => {
 
             <br />
 
-            <select value={selectedValue} onChange={handleChange}>
+            <select className="opentab_details_input" value={selectedValue} onChange={handleChange}>
               <option value="" disabled hidden>
                 Select an option
               </option>
-              <option value="option1">File System</option>
-              <option value="option2">MongoDB</option>
-              <option value="option3">DataBase(MySQL)</option>
+              <option value="File System">File System</option>
+              <option value="MongoDB">MongoDB</option>
+              <option value="DataBase(MySQL)">DataBase(MySQL)</option>
             </select>
 
             <label className="label" htmlFor="Description">
               Description
             </label>
+
             <br />
+
             <textarea
+            className="opentab_details_input"
               ref={textareaRef}
               value={value}
               onChange={handleTextareaChange}
@@ -67,13 +72,35 @@ export const OpenTabDetails = () => {
         <Card height={"calc(100vh - 255px)"}>
           <div className="parameter_container">
             <table>
-              <InputField text={"scanFolderPaths"} type={"text"} />
-              <InputField text={"excludeFolderPaths"} type={"text"} />
-              <InputField text={"excludeFiles"} type={"text"} />
-              <InputField text={"scanChangedFilesBehaviour"} type={"text"} />
-              <InputField text={"moveFilesToFolder"} type={"text"} />
-              <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-              <InputField text={"scanFolders"} type={"checkbox"} />
+              <tbody>
+                {selectedValue === "File System" && (
+                  <>
+                    <InputField text={"scanFolderPaths"} type={"text"} />
+                    <InputField text={"excludeFolderPaths"} type={"text"} />
+                    <InputField text={"excludeFiles"} type={"text"} />
+                    <InputField
+                      text={"scanChangedFilesBehaviour"}
+                      type={"text"}
+                    />
+                    <InputField text={"moveFilesToFolder"} type={"text"} />
+                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
+                    <InputField text={"scanFolders"} type={"checkbox"} />
+                  </>
+                )}
+                {selectedValue === "MongoDB" && (
+                  <>
+                    <InputField text={"scanQuary"} type={"text"} />
+                    <InputField text={"excludeAllData"} type={"text"} />
+                    <InputField text={"excludeData"} type={"text"} />
+                  </>
+                )}
+                {selectedValue === "DataBase(MySQL)" && (
+                  <>
+                    <InputField text={"scanQuaryForAll"} type={"text"} />
+                    <InputField text={"excludeSingleData"} type={"text"} />
+                  </>
+                )}
+              </tbody>
             </table>
           </div>
         </Card>

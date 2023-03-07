@@ -18,6 +18,7 @@ export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [user] = useAuthState(auth);
+
   const logout = () => {
     signOut(auth);
   };
@@ -73,7 +74,8 @@ export const NavBar = () => {
         <Modal
           worning
           text="Am I Disturbing You?"
-          btnText="Yes"
+          btnText="Sign Out"
+          path="/"
           logout={logout}
           setShowModal={setShowModal}
         />

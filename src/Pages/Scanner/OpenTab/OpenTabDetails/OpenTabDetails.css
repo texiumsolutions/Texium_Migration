@@ -14,9 +14,7 @@
 .opentab_details_form .label {
   font-size: 10px;
 }
-.opentab_details_form input,
-select,
-textarea {
+.opentab_details_form .opentab_details_input {
   outline: none;
   width: 100%;
   border: none;
@@ -28,8 +26,9 @@ textarea {
   font-family: "Poppins", sans-serif;
   resize: none;
 }
-.opentab_details_form input:focus,
-select:focus,
-textarea:focus {
+.opentab_details_form .opentab_details_input:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.opentab_details_form .opentab_details_input:hover {
   border-bottom: 2px solid var(--primary);
 }
