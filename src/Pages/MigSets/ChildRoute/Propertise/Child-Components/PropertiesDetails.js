@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
-import { Card } from "../../../components/Card/Card";
-import { InputField } from "../../../components/InputField/InputField";
-import './Details.css';
+import DataTable from "react-data-table-component";
+import { Card } from "../../../../../components/Card/Card";
+import { InputField } from "../../../../../components/InputField/InputField";
+import { NavBar } from "../../../../../Shared/NavBar/NavBar";
+import MigsetRoutes from "../../../MigsetRoutes";
+import Propertise from "../Propertise";
 
-const Details = () => {
+const PropertiesDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -108,4 +111,4 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default PropertiesDetails;

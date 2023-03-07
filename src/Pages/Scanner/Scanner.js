@@ -37,8 +37,6 @@ export const Scanner = () => {
           <Link to={"/scanner/openTab/details"}>GO</Link>
         </Card>
       </div>
-
-      {/* <Outlet /> */}
     </div>
   );
 };

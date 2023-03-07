@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
+import { Modal } from "../../../components/Modal/Modal";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 import "./OpenTab.css";
 
@@ -8,6 +9,7 @@ export const OpenTab = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [showRun, setShowRun] = useState(false);
   const [showObjects, setShowObjects] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="container">
@@ -66,8 +68,8 @@ export const OpenTab = () => {
 
               <div className="opentab_buttons">
                 <button className="opentab_btn" type="button">Close</button>
-                <button className="opentab_btn" type="button">Save & Run</button>
-                <button className="opentab_btn opentab_save_btn" type="button">Save</button>
+                <button onClick={() => setShowModal(true)} className="opentab_btn" type="button">Save & Run</button>
+                <button onClick={() => setShowModal(true)} className="opentab_btn opentab_save_btn" type="button">Save</button>
               </div>
             </div>
 
@@ -75,6 +77,14 @@ export const OpenTab = () => {
           </div>
         </Card>
       </div>
+      {showModal ? (
+        <Modal
+          worning
+          text="Are you sure to save?"
+          btnText="Yes"
+          setShowModal={setShowModal}
+        />
+      ) : null}
     </div>
   );
 };

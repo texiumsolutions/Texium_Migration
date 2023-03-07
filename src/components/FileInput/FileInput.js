@@ -33,6 +33,20 @@ export const FileInput = () => {
     };
   };
 
+  const customStyles = {
+    headCells: {
+      style: {
+        backgroundColor: "#dddddd",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px",
+        paddingRight: "8px",
+      },
+    },
+  };
+
   return (
     <div>
       <input type="file" onChange={handleChange} />
@@ -40,6 +54,7 @@ export const FileInput = () => {
         title="Excel Data"
         columns={columns}
         data={data}
+        customStyles={customStyles}
         dense
         fixedHeader
         Delayed

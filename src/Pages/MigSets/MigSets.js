@@ -108,9 +108,25 @@ cells: {
       
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">
+          <div style={{
+            display:'flex'
+          }}>
+            <div>
+            <button>
+Add
+            </button>
+            <button>
+Edit
+            </button>
+            <button>
+                Delete
+            </button>
+            </div>
           <h1>
             MigSets
           </h1>
+          
+          </div>
           <DataTable
         columns={columns}
         data={data}

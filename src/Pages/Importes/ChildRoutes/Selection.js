@@ -1,57 +1,100 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import DataTable from 'react-data-table-component';
 
 const Selection = () => {
-   
-const customStyles={
-  rows: {
-    style: {
-     backgroundColor:"#FFF"
+  const columns = [
+    {
+      name: "ID",
+      selector: (row) => row.id,
     },
-},
-headCells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
-        backgroundColor:"#C1C1C1",
-        borderRight: "1px solid black"
+    {
+      name: "Name",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Type",
+      selector: (row) => row.type,
+    },
+    {
+      name: "Description",
+      selector: (row) => row.description,
+    },
+    {
+      name: "Job Server Host",
+      selector: (row) => row.host,
+    },
+    {
+      name: "Job Server Port",
+      selector: (row) => row.port,
+    },
+    {
+      name: "Run Number",
+      selector: (row) => row.number,
+    },
+    {
+      name: "Last Run Out",
+      selector: (row) => row.runout,
+    },
+    {
+      name: "Last Run Status",
+      selector: (row) => row.runstatus,
+    }
+  ];
 
+  const data = [
+    {
+      id: 1,
+      name: "Beetlejuice",
+      type: "File Systems",
+      description: "Descripton",
+      host: "5000",
+      port: "400",
+      number: "77788",
+      runout: "1988",
+      runstatus: "1900088"
+    }
+  ];
+  const customStyles = {
+    rows: {
+      style: {
+        backgroundColor: "#FFF",
+      },
     },
-},
-cells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
+    headCells: {
+      style: {
+        paddingLeft: "8px",
+        paddingRight: "8px",
+        backgroundColor: "#C1C1C1",
+        borderRight: "1px solid black",
+      },
     },
-},
-}
-const [user, setUser] = useState([]);
+    cells: {
+      style: {
+        paddingLeft: "8px",
+        paddingRight: "8px",
+      },
+    },
+  };
 
-useEffect(() => {
-    fetch('http://localhost:5000/user')
-            .then(res => res.json())
-            .then(data => setUser(data))
-}, []);
-const columns =
-user.length > 0 ? Object.keys(user[0]) : [];
   return (
- 
-          <DataTable
-          columns={columns.map((column) => ({ name: column, selector: column }))}
-        data={user}
-        customStyles={customStyles}
-        pointerOnHover
-        responsive
-        selectableRows
-        selectableRowsHighlight
-        selectableRowsRadio="radio"
-        fixedHeaderScrollHeight="700px"
-        highlightOnHover
-        dense
-        pagination
-        paginationPerPage={20}
-      />
+<>
+
+<DataTable
+        columns={columns }
+      data={data}
+      customStyles={customStyles}
+      pointerOnHover
+      responsive
+      selectableRows
+      selectableRowsHighlight
+      selectableRowsRadio="radio"
+      fixedHeaderScrollHeight="700px"
+      highlightOnHover
+      dense
       
+    />
+          
+     </> 
   );
 };
 

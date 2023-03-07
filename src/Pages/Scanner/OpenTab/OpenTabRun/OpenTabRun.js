@@ -1,117 +1,57 @@
-import React from 'react'
-import DataTable from 'react-data-table-component';
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import { Card } from "../../../../components/Card/Card";
 
 export const OpenTabRun = () => {
-  const columns = [
-    {
-        name: 'ID',
-        selector: row => row.id,
-    },
-    {
-        name: 'Name',
-        selector: row => row.year,
-    },
-    {
-        name: 'Processing Type',
-        selector: row => row.description,
-    },
-    {
-        name: 'Creation Date',
-        selector: row => row.year,
-    },
-    {
-        name: 'Total Object',
-        selector: row => row.title,
-    },
-    {
-        name: 'Unproceed',
-        selector: row => row.year,
-    },
-    {
-        name: 'Transformed',
-        selector: row => row.title,
-    },
-    {
-        name: 'Validated',
-        selector: row => row.year,
-    },
-    {
-        name: 'Imported',
-        selector: row => row.title,
-    },
-    {
-        name: 'Partially Imported',
-        selector: row => row.year,
-    },
-    {
-        name: 'Errors',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Operation',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Date',
-        selector: row => row.year,
-    }
-];
+  const [sourceFileInfo, setSourceFileInfo] = useState([]);
 
-const data = [
-    {
-        id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-    },
-    {
-        id: 2,
-        title: 'Ghostbusters',
-        year: '1984',
-    },
-    {
-        id: 3,
-        title: 'Orange',
-        year: '1944',
-    },
-]
-const customStyles={
-  rows: {
-    style: {
-    },
-},
-headCells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
-        backgroundColor:"#C1C1C1",
-        border: "1px solid black"
+  useEffect(() => {
+    fetch("http://localhost:5000/sourceFileInfo")
+      .then((response) => response.json())
+      .then((data) => setSourceFileInfo(data))
+      .catch((error) => alert(error));
+  }, []);
 
+  const customStyles = {
+    headCells: {
+      style: {
+        backgroundColor: "#dddddd",
+        borderRight: "1px solid var(--primary)",
+        color: "var(--primary)",
+      },
     },
-},
-cells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
-        backgroundColor:"#FFF"
+    cells: {
+      style: {
+        paddingLeft: "16px",
+        paddingRight: "8px",
+        borderRight: "1px solid var(--background)",
+      },
     },
-},
-}
+  };
+
+  const columns =
+    sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+
   return (
-    <div>
-      <h1>OpenTabRun</h1>
+    <Card height={"calc(100vh - 200px)"}>
       <DataTable
-        columns={columns}
-        data={data}
+        columns={columns.map((column) => ({ name: column, selector: column }))}
+        data={sourceFileInfo}
         customStyles={customStyles}
+        dense
+        fixedHeader
+        Delayed
+        highlightOnHover
+        pagination
         pointerOnHover
         responsive
         selectableRows
         selectableRowsHighlight
         selectableRowsRadio="radio"
         fixedHeaderScrollHeight="700px"
-        highlightOnHover
-        dense
+        paginationPerPage={20}
+        paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
       />
-      </div>
-  )
-}
+    </Card>
+  );
+};

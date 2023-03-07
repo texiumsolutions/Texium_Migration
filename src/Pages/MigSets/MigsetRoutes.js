@@ -84,11 +84,11 @@ const MigsetRoutes = () => {
               </NavLink>
             </div>
 
-            <div className="opentab_buttons">
+            {/* <div className="opentab_buttons">
               <button className="opentab_btn" type="button">Close</button>
               <button className="opentab_btn" type="button">Save & Run</button>
               <button className="opentab_btn opentab_save_btn" type="button">Save</button>
-            </div>
+            </div> */}
           </div>
 
           <Outlet />
