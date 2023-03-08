@@ -7,6 +7,9 @@ import "./Modal.css";
 
 export const Modal = ({ text, btnText, path, setShowModal, worning }) => {
   const handleModalClose = () => {
+    setShowModal(false);
+  };
+  const handleModalSignOut = () => {
     signOut(auth);
     setShowModal(false);
   };
@@ -33,7 +36,7 @@ export const Modal = ({ text, btnText, path, setShowModal, worning }) => {
             <Link
               className="modal_btn"
               to={path}
-              onClick={handleModalClose}
+              onClick={handleModalSignOut}
               type="button"
             >
               {btnText}
