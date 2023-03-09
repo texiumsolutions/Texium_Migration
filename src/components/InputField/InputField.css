@@ -36,23 +36,27 @@
   display: hidden;
 }
 .mongoDb_parameter button {
-  background-color: var(--background);
+  background-color: transparent;
+  border: none;
+  margin-left: 20px;
+}
+.mongoDB_save_btn {
+  background-color: var(--white);
   text-decoration: none;
   border: none;
   border-radius: 7px;
-  padding: 7px 30px;
+  padding: 5px 15px;
   cursor: pointer;
-  color: var(--text);
-  margin-left: 20px;
+  color: var(--primary);
   transition: background-color 200ms;
-}
-.mongoDb_parameter button:hover {
-  background-color: var(--white);
   border: 2px solid var(--primary);
-  padding: 5px 28px;
+  text-decoration: none;
   color: var(--primary);
 }
-.mongoDB_save_btn {
-  text-decoration: none;
-  color: var(--text);
+.mongoDB_save_btn:hover {
+  color: var(--white);
+  background-color: var(--primary);
+  border: 2px solid var(--secondary);
+  padding: 5px 15px;
+  color: var(--white);
 }

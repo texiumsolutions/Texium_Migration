@@ -15,9 +15,9 @@ export const OpenTabRun = () => {
 
   const handleSelectedRowsChange = (state) => {
     setSelectedRows(state.selectedRows);
+    console.log(state.selectedRows);
   };
 
-  console.log(selectedRows);
 
   const customStyles = {
     headCells: {
@@ -39,9 +39,10 @@ export const OpenTabRun = () => {
 
   const columns =
     sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+
   const columnsToDisplay = columns.slice(0, -1);
 
-  const data = sourceFileInfo.flatMap((info) => {
+  const data = sourceFileInfo.map((info) => {
     const flatInfo = {};
     for (const key in info) {
       if (typeof info[key] === "object" && info[key] !== null) {
@@ -55,31 +56,39 @@ export const OpenTabRun = () => {
     return flatInfo;
   });
 
+  const getField = (row, field) => {
+    const fields = field.split(".");
+    let value = row[fields[0]];
+    for (let i = 1; i < fields.length; i++) {
+      value = value?.[fields[i]];
+    }
+    return value;
+  };
+
   return (
     <Card height={"calc(100vh - 200px)"}>
       <DataTable
         columns={columnsToDisplay.map((column) => ({
           name: column,
-          selector: column,
+          selector: (row) => getField(row, column),
         }))}
         data={data}
         customStyles={customStyles}
         defaultSortAsc
         dense
-        // omit
         fixedHeader
         Delayed
         highlightOnHover
-        pagination
         pointerOnHover
         responsive
-        selectableRows
         persistTableHead
         noDataComponent="No Data? Please Wait!"
-        onSelectedRowsChange={handleSelectedRowsChange}
-        selectableRowsHighlight
-        selectableRowsRadio="radio"
         fixedHeaderScrollHeight="700px"
+        selectableRows
+        onSelectedRowsChange={handleSelectedRowsChange}
+        selectableRowsSelected={selectedRows}
+        selectableRowsHighlight
+        pagination
         paginationPerPage={20}
         paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
       />
