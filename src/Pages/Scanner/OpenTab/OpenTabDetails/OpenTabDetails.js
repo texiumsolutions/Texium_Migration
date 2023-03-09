@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
@@ -10,6 +11,9 @@ export const OpenTabDetails = () => {
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const selectedRowData = location.state?.selectedRowData;
+  console.log(selectedRowData);
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -57,6 +61,14 @@ export const OpenTabDetails = () => {
     <div className="opentab_details_container">
       <div className="opentab_details">
         <p>Details</p>
+        <div>
+          {selectedRowData && (
+            <p>
+              
+              {/* Selected row data: {selectedRowData.id} */}
+            </p>
+          )}
+        </div>
         <Card height={"calc(100vh - 255px)"}>
           <form className="opentab_details_form">
             <label className="label" htmlFor="fileName">

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 15px;
 }
 .table_header button {
   display: flex;
@@ -21,4 +22,24 @@
   color: #007700 !important;
   font-size: 24px !important;
   margin-left: 10px !important;
+}
+
+/* all scanner global css */
+
+.filter_input {
+  outline: none;
+  width: 25%;
+  border: none;
+  font-size: 14px;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-bottom: 15px;
+  font-family: "Poppins", sans-serif;
+}
+.filter_input:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.filter_input:hover {
+  border-bottom: 2px solid var(--primary);
 }
