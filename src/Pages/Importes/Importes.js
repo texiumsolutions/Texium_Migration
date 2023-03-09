@@ -7,105 +7,117 @@ import { GoDiffAdded } from "react-icons/go";
 import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-const columns = [
-  {
-    name: "ID",
-    selector: (row) => row.id,
-    sortable: true,
-  },
-  {
-    name: "Name",
-    selector: (row) => row.name,
-    sortable: true,
-  },
-  {
-    name: "Type",
-    selector: (row) => row.type,
-    sortable: true,
-  },
-  {
-    name: "Description",
-    selector: (row) => row.description,
-    sortable: true,
-  },
-  {
-    name: "Job Server Host",
-    selector: (row) => row.host,
-    sortable: true,
-  },
-  {
-    name: "Job Server Port",
-    selector: (row) => row.port,
-    sortable: true,
-  },
-  {
-    name: "Run Number",
-    selector: (row) => row.number,
-    sortable: true,
-  },
-  {
-    name: "Last Run Out",
-    selector: (row) => row.runout,
-    sortable: true,
-  },
-  {
-    name: "Last Run Status",
-    selector: (row) => row.runstatus,
-    sortable: true,
-  },
-  {
-    name: "Edit",
-    cell: (row) => <button onClick={() => console.log(row)}>Edit</button>,
-  },
+import Loading from "../../components/Loading/Loading";
+// const columns = [
+//   {
+//     name: "ID",
+//     selector: (row) => row.id,
+//     sortable: true,
+//   },
+//   {
+//     name: "Name",
+//     selector: (row) => row.name,
+//     sortable: true,
+//   },
+//   {
+//     name: "Type",
+//     selector: (row) => row.type,
+//     sortable: true,
+//   },
+//   {
+//     name: "Description",
+//     selector: (row) => row.description,
+//     sortable: true,
+//   },
+//   {
+//     name: "Job Server Host",
+//     selector: (row) => row.host,
+//     sortable: true,
+//   },
+//   {
+//     name: "Job Server Port",
+//     selector: (row) => row.port,
+//     sortable: true,
+//   },
+//   {
+//     name: "Run Number",
+//     selector: (row) => row.number,
+//     sortable: true,
+//   },
+//   {
+//     name: "Last Run Out",
+//     selector: (row) => row.runout,
+//     sortable: true,
+//   },
+//   {
+//     name: "Last Run Status",
+//     selector: (row) => row.runstatus,
+//     sortable: true,
+//   },
+//   {
+//     name: "Edit",
+//     cell: (row) => <button onClick={() => console.log(row)}>Edit</button>,
+//   },
 
-  {
-    name: "Delete",
-    cell: (row) => (
-      <button onClick={() => console.log(row)}>Delete</button>
-    ),
-  },
-];
+//   {
+//     name: "Delete",
+//     cell: (row) => (
+//       <button onClick={() => console.log(row)}>Delete</button>
+//     ),
+//   },
+// ];
 export const Importes = () => {
+  const [sourceFileInfo, setSourceFileInfo] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/sourceFileInfo")
+      .then((response) => response.json())
+      .then((data) => setSourceFileInfo(data))
+      .catch((error) => alert(error));
+  }, []);
+
+  const handleSelectedRowsChange = (state) => {
+    setSelectedRows(state.selectedRows);
+  };
+
+  console.log(selectedRows);
+
   const customStyles = {
-    rows: {
-      style: {
-        backgroundColor: "#FFF",
-      },
-    },
     headCells: {
       style: {
-        paddingLeft: "8px",
-        paddingRight: "8px",
-        backgroundColor: "#C1C1C1",
-        borderRight: "1px solid black",
+        backgroundColor: "#dddddd",
+        borderRight: "1px solid var(--primary)",
+        fontWeight: "900",
+        color: "var(--primary)",
       },
     },
     cells: {
       style: {
-        paddingLeft: "8px",
+        paddingLeft: "16px",
         paddingRight: "8px",
+        borderRight: "1px solid var(--background)",
       },
     },
   };
 
-  const [user, setUser] = useState([]);
+  const columns =
+    sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+  const columnsToDisplay = columns.slice(0, -1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get("http://localhost:5000/users");
-      setUser(result.data);
-    };
-    fetchData();
-  }, []);
-
-  // const columns = user.length > 1 ? Object.keys(user['']) : [];
-
-  const [selectedRows, setSelectedRows] = useState([]);
-  const handleSelectedRowsChange = (state) => {
-    setSelectedRows(state.selectedRows);
-    console.log(selectedRows);
-  };
-
+  const data = sourceFileInfo.flatMap((info) => {
+    const flatInfo = {};
+    for (const key in info) {
+      if (typeof info[key] === "object" && info[key] !== null) {
+        for (const subKey in info[key]) {
+          flatInfo[`${key}.${subKey}`] = info[key][subKey];
+        }
+      } else {
+        flatInfo[key] = info[key];
+      }
+    }
+    return flatInfo;
+  });
   return (
     <div className="container">
       <div className="nav_container">
@@ -157,26 +169,34 @@ export const Importes = () => {
                 <AiFillDelete></AiFillDelete>
               </button>
             </div>
-            <h4>Importes data: {user.length}</h4>
+            <h4>Importes data: {data.length}</h4>
           </div>
 
           <DataTable
-            // columns={columns.map((column) => ({
-            //   name: column,
-            //   selector: column,
-            // }))}
-            columns={columns}
-            data={user}
+            columns={columnsToDisplay.map((column) => ({
+              name: column,
+              selector: column,
+            }))}
+            data={data}
             customStyles={customStyles}
+            defaultSortAsc
+            dense
+            fixedHeader
+            Delayed
+            highlightOnHover
+            pagination
             pointerOnHover
             responsive
             selectableRows
+            persistTableHead
+            noDataComponent={<Loading></Loading>}
             onSelectedRowsChange={handleSelectedRowsChange}
             selectableRowsHighlight
             selectableRowsRadio="radio"
             fixedHeaderScrollHeight="700px"
-            highlightOnHover
-            dense
+            paginationPerPage={20}
+            paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
+            
           />
           <Link to="/importers/importdetails">Go the next page</Link>
         </Card>

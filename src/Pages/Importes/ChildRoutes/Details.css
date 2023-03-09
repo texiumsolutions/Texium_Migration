@@ -1,10 +1,14 @@
 .opentab_details_container {
-  display: grid;
+  
   gap: 15px;
   height: 100%;
   text-align: left;
+  display: grid;
   grid-template-columns: 1fr 2fr;
+  width: 100%;
+  
 }
+
 .opentab_details_container p {
   font-weight: 600;
   color: var(--primary);

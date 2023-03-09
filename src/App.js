@@ -31,6 +31,7 @@ import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
 import Add from "./Pages/Importes/ChildRoutes/Add";
+import Test from "./Pages/NotFound/Test";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -88,6 +89,7 @@ function App() {
 
           {/* Testing Routes */}
           <Route path="/loading" element={<Loading />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/modal" element={<Modal />} />
         </Routes>
       )}

@@ -1,14 +1,37 @@
 import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Card } from "../../../components/Card/Card";
 import { InputField } from "../../../components/InputField/InputField";
-import './Details.css';
+import "./Details.css";
 
 const Add = () => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    fetch("http://localhost:5000/testing", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((inserted) => {
+        if (inserted.insertedId) {
+          alert("Added New Product Successfully");
+
+          reset();
+        } else {
+          alert("Failed add to the data");
+        }
+      });
+  };
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
-
-  
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -18,28 +41,41 @@ const Add = () => {
     setValue(event.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+      ;
     }
   };
   return (
     <div className="opentab_details_container">
-      <div className="opentab_details">
-        <p>Add Data</p>
-        <Card height={"calc(100vh - 255px)"}>
-          <form className="opentab_details_form">
-            <label className="label" htmlFor="fileName">
+      <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="opentab_details">
+          <p>Add Data</p>
+          <Card height={"calc(100vh - 255px)"}>
+            <label className="label" htmlFor="">
               Name
             </label>
             <br />
-            <input className="opentab_details_input" type="text" name="fileName" placeholder="File Name" />
+            <input
+              className="opentab_details_input"
+              type="text"
+              placeholder="File Name"
+              {...register("fileName")}
+            />
 
-            <label className="label" htmlFor="fileSystem">
+            <label className="label" htmlFor="option">
               Type
             </label>
 
             <br />
 
-            <select className="opentab_details_input" value={selectedValue} onChange={handleChange}>
+            <select
+              type="text"
+              {...register("dropdown")}
+              required
+              className="opentab_details_input"
+              value={selectedValue}
+              onChange={handleChange}
+            >
               <option value="" disabled hidden>
                 Select an option
               </option>
@@ -48,22 +84,29 @@ const Add = () => {
               <option value="DataBase(MySQL)">DataBase(MySQL)</option>
             </select>
 
-            <label className="label" htmlFor="Description">
+            <label className="label" >
               Description
             </label>
 
             <br />
 
             <textarea
-            className="opentab_details_input"
+              type="text"
+              name="description"
+              className="opentab_details_input"
               ref={textareaRef}
               value={value}
               onChange={handleTextareaChange}
-              placeholder="Description"
+              id="description" 
+              // {...register("description")}
+              
+              
             />
-          </form>
-        </Card>
-      </div>
+
+            <input type="submit" />
+          </Card>
+        </div>
+      </form>
 
       <div className="opentab_parameters">
         <p>Parameters</p>
@@ -74,16 +117,41 @@ const Add = () => {
               <tbody>
                 {selectedValue === "File System" && (
                   <>
-                    <InputField text={"scanFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFiles"} type={"text"} />
+                    <InputField
+                      text={"scanFolderPaths"}
+                      type={"text"}
+                      {...register("scanFolder")}
+                    />
+                    <InputField
+                      text={"excludeFolderPaths"}
+                      type={"text"}
+                      {...register("excludeFolder")}
+                    />
+                    <InputField
+                      text={"excludeFiles"}
+                      type={"text"}
+                      {...register("excludeFiles")}
+                    />
                     <InputField
                       text={"scanChangedFilesBehaviour"}
                       type={"text"}
+                      {...register("scanChangedFiles")}
                     />
-                    <InputField text={"moveFilesToFolder"} type={"text"} />
-                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-                    <InputField text={"scanFolders"} type={"checkbox"} />
+                    <InputField
+                      text={"moveFilesToFolder"}
+                      type={"text"}
+                      {...register("moveFilesToFolder")}
+                    />
+                    <InputField
+                      text={"ignoreHiddenFiles"}
+                      type={"checkbox"}
+                      {...register("ignoreHiddenFiles")}
+                    />
+                    <InputField
+                      text={"scanFolders"}
+                      type={"checkbox"}
+                      {...register("scanFolders")}
+                    />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
