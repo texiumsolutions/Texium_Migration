@@ -6,64 +6,7 @@ import { Link } from "react-router-dom";
 import { GoDiffAdded } from "react-icons/go";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-// const columns = [
-//   {
-//     name: "ID",
-//     selector: (row) => row.id,
-//     sortable: true,
-//   },
-//   {
-//     name: "Name",
-//     selector: (row) => row.name,
-//     sortable: true,
-//   },
-//   {
-//     name: "Type",
-//     selector: (row) => row.type,
-//     sortable: true,
-//   },
-//   {
-//     name: "Description",
-//     selector: (row) => row.description,
-//     sortable: true,
-//   },
-//   {
-//     name: "Job Server Host",
-//     selector: (row) => row.host,
-//     sortable: true,
-//   },
-//   {
-//     name: "Job Server Port",
-//     selector: (row) => row.port,
-//     sortable: true,
-//   },
-//   {
-//     name: "Run Number",
-//     selector: (row) => row.number,
-//     sortable: true,
-//   },
-//   {
-//     name: "Last Run Out",
-//     selector: (row) => row.runout,
-//     sortable: true,
-//   },
-//   {
-//     name: "Last Run Status",
-//     selector: (row) => row.runstatus,
-//     sortable: true,
-//   },
-//   {
-//     name: "Edit",
-//     cell: (row) => <button onClick={() => console.log(row)}>Edit</button>,
-//   },
 
-//   {
-//     name: "Delete",
-//     cell: (row) => (
-//       <button onClick={() => console.log(row)}>Delete</button>
-//     ),
-//   },
-// ];
 export const Importes = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -127,6 +70,8 @@ export const Importes = () => {
           .then(res => res.json())
           .then(data =>{
             console.log(data);
+            const remaining = sourceFileInfo.filter(sourceFileInfo =>sourceFileInfo._id !== id);
+            setSourceFileInfo(remaining);
           })
     }
   }
