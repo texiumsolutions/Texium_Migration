@@ -4,10 +4,8 @@ import { NavBar } from "../../Shared/NavBar/NavBar";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import { GoDiffAdded } from "react-icons/go";
-import axios from "axios";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import Loading from "../../components/Loading/Loading";
 // const columns = [
 //   {
 //     name: "ID",

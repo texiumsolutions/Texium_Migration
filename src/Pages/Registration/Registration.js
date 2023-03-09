@@ -28,9 +28,9 @@ export const Registration = () => {
       <p className="error_message">{error?.message || Uerror?.message}</p>
     );
   }
-  // if (user) {
-  //   console.log(user);
-  // }
+  if (user) {
+    console.log(user);
+  }
   const onSubmit = async (data) => {
     createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name, photoURL: data.url });
