@@ -9,6 +9,7 @@ import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
 import Details from "./Pages/Importes/ChildRoutes/Details";
+import Edit from "./Pages/Importes/ChildRoutes/Add";
 import ImportsRun from "./Pages/Importes/ChildRoutes/ImportsRun";
 import Selection from "./Pages/Importes/ChildRoutes/Selection";
 import ImportDetails from "./Pages/Importes/ImportDetails";
@@ -30,6 +31,7 @@ import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabOb
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
+import Add from "./Pages/Importes/ChildRoutes/Add";
 
 function App() {
   const [user] = useAuthState(auth);
@@ -64,6 +66,7 @@ function App() {
           <Route path="/importers/importdetails" element={<ImportDetails/>} />
           <Route path="/importers/importdetails/" element={<ImportDetails />}>
             <Route path="details" element={<Details />} />
+            <Route path="Add" element={<Add />} />
             <Route path="selection" element={<Selection />} />
             <Route path="import-runs" element={<ImportsRun />} />
           </Route>

@@ -26,7 +26,7 @@ const customStyles = {
   };
   const [user, setUser] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);

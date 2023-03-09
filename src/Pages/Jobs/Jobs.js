@@ -13,14 +13,14 @@ export const Jobs = () => {
     },
     headCells: {
       style: {
-        paddingLeft: "8px", // override the cell padding for head cells
+        paddingLeft: "8px",
         paddingRight: "8px",
         backgroundColor: "#C1C1C1",
       },
     },
     cells: {
       style: {
-        paddingLeft: "8px", // override the cell padding for data cells
+        paddingLeft: "8px",
         paddingRight: "8px",
         backgroundColor: "#F5F5F5",
       },

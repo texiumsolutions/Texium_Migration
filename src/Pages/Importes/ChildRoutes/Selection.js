@@ -1,5 +1,5 @@
-import React from 'react';
-import DataTable from 'react-data-table-component';
+import React from "react";
+import DataTable from "react-data-table-component";
 
 const Selection = () => {
   const columns = [
@@ -38,7 +38,7 @@ const Selection = () => {
     {
       name: "Last Run Status",
       selector: (row) => row.runstatus,
-    }
+    },
   ];
 
   const data = [
@@ -51,8 +51,8 @@ const Selection = () => {
       port: "400",
       number: "77788",
       runout: "1988",
-      runstatus: "1900088"
-    }
+      runstatus: "1900088",
+    },
   ];
   const customStyles = {
     rows: {
@@ -77,24 +77,21 @@ const Selection = () => {
   };
 
   return (
-<>
-
-<DataTable
-        columns={columns }
-      data={data}
-      customStyles={customStyles}
-      pointerOnHover
-      responsive
-      selectableRows
-      selectableRowsHighlight
-      selectableRowsRadio="radio"
-      fixedHeaderScrollHeight="700px"
-      highlightOnHover
-      dense
-      
-    />
-          
-     </> 
+    <>
+      <DataTable
+        columns={columns}
+        data={data}
+        customStyles={customStyles}
+        pointerOnHover
+        responsive
+        selectableRows
+        selectableRowsHighlight
+        selectableRowsRadio="radio"
+        fixedHeaderScrollHeight="700px"
+        highlightOnHover
+        dense
+      />
+    </>
   );
 };
 
