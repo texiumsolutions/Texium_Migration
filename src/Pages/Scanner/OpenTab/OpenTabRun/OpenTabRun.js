@@ -4,6 +4,7 @@ import { Card } from "../../../../components/Card/Card";
 
 export const OpenTabRun = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/sourceFileInfo")
@@ -12,11 +13,18 @@ export const OpenTabRun = () => {
       .catch((error) => alert(error));
   }, []);
 
+  const handleSelectedRowsChange = (state) => {
+    setSelectedRows(state.selectedRows);
+  };
+
+  console.log(selectedRows);
+
   const customStyles = {
     headCells: {
       style: {
         backgroundColor: "#dddddd",
         borderRight: "1px solid var(--primary)",
+        fontWeight: "900",
         color: "var(--primary)",
       },
     },
@@ -31,14 +39,34 @@ export const OpenTabRun = () => {
 
   const columns =
     sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+  const columnsToDisplay = columns.slice(0, -1);
+
+  const data = sourceFileInfo.flatMap((info) => {
+    const flatInfo = {};
+    for (const key in info) {
+      if (typeof info[key] === "object" && info[key] !== null) {
+        for (const subKey in info[key]) {
+          flatInfo[`${key}.${subKey}`] = info[key][subKey];
+        }
+      } else {
+        flatInfo[key] = info[key];
+      }
+    }
+    return flatInfo;
+  });
 
   return (
     <Card height={"calc(100vh - 200px)"}>
       <DataTable
-        columns={columns.map((column) => ({ name: column, selector: column }))}
-        data={sourceFileInfo}
+        columns={columnsToDisplay.map((column) => ({
+          name: column,
+          selector: column,
+        }))}
+        data={data}
         customStyles={customStyles}
+        defaultSortAsc
         dense
+        // omit
         fixedHeader
         Delayed
         highlightOnHover
@@ -46,6 +74,9 @@ export const OpenTabRun = () => {
         pointerOnHover
         responsive
         selectableRows
+        persistTableHead
+        noDataComponent="No Data? Please Wait!"
+        onSelectedRowsChange={handleSelectedRowsChange}
         selectableRowsHighlight
         selectableRowsRadio="radio"
         fixedHeaderScrollHeight="700px"

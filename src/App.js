@@ -8,8 +8,7 @@ import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
-import Details from "./Pages/Importes/ChildRoutes/Details";
-import Edit from "./Pages/Importes/ChildRoutes/Add";
+import Details from "./Pages/Importes/ChildRoutes/Details"
 import ImportsRun from "./Pages/Importes/ChildRoutes/ImportsRun";
 import Selection from "./Pages/Importes/ChildRoutes/Selection";
 import ImportDetails from "./Pages/Importes/ImportDetails";

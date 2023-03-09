@@ -67,9 +67,23 @@ export const OpenTab = () => {
               </div>
 
               <div className="opentab_buttons">
-                <button className="opentab_btn" type="button">Close</button>
-                <button onClick={() => setShowModal(true)} className="opentab_btn" type="button">Save & Run</button>
-                <button onClick={() => setShowModal(true)} className="opentab_btn opentab_save_btn" type="button">Save</button>
+                <button className="opentab_btn" type="button">
+                  Close
+                </button>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="opentab_btn"
+                  type="button"
+                >
+                  Save & Run
+                </button>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="opentab_btn opentab_save_btn"
+                  type="button"
+                >
+                  Save
+                </button>
               </div>
             </div>
 
@@ -82,6 +96,7 @@ export const OpenTab = () => {
           worning
           text="Are you sure to save?"
           btnText="Yes"
+          path="/scanner/openTab/objects"
           setShowModal={setShowModal}
         />
       ) : null}

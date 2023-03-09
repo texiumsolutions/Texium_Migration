@@ -7,8 +7,39 @@ export const OpenTabDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
+  const [file, setFile] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  
+  const fileOnChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const sendFile = (event) => {
+    event.preventDefault();
+    let formData = new FormData();
+
+    formData.append("avater", file);
+
+    fetch("http://localhost:5000/uploadFile", {
+      method: "post",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((resBody) => {
+        if (resBody.success) {
+          setSuccessMessage(resBody.message);
+          setErrorMessage("");
+        } else {
+          setErrorMessage(resBody.message);
+          setSuccessMessage("");
+        }
+      })
+      .catch((error) => {
+        setErrorMessage("Failed to upload file.");
+        setSuccessMessage("");
+      });
+  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -32,7 +63,12 @@ export const OpenTabDetails = () => {
               Name
             </label>
             <br />
-            <input className="opentab_details_input" type="text" name="fileName" placeholder="File Name" />
+            <input
+              className="opentab_details_input"
+              type="text"
+              name="fileName"
+              placeholder="File Name"
+            />
 
             <label className="label" htmlFor="fileSystem">
               Type
@@ -40,7 +76,11 @@ export const OpenTabDetails = () => {
 
             <br />
 
-            <select className="opentab_details_input" value={selectedValue} onChange={handleChange}>
+            <select
+              className="opentab_details_input"
+              value={selectedValue}
+              onChange={handleChange}
+            >
               <option value="" disabled hidden>
                 Select an option
               </option>
@@ -56,7 +96,7 @@ export const OpenTabDetails = () => {
             <br />
 
             <textarea
-            className="opentab_details_input"
+              className="opentab_details_input"
               ref={textareaRef}
               value={value}
               onChange={handleTextareaChange}
@@ -89,9 +129,15 @@ export const OpenTabDetails = () => {
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
-                    <InputField text={"scanQuary"} type={"text"} />
-                    <InputField text={"excludeAllData"} type={"text"} />
-                    <InputField text={"excludeData"} type={"text"} />
+                    <InputField
+                      selectedValue={selectedValue}
+                      fileOnChange={fileOnChange}
+                      sendFile={sendFile}
+                      errorMessage={errorMessage}
+                      successMessage={successMessage}
+                      text={"fileInfo"}
+                      type={"file"}
+                    />
                   </>
                 )}
                 {selectedValue === "DataBase(MySQL)" && (

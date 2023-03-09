@@ -1,11 +1,16 @@
+import { signOut } from "firebase/auth";
 import React from "react";
 import { BiError } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 import "./Modal.css";
 
-export const Modal = ({ text, btnText, setShowModal, worning }) => {
+export const Modal = ({ text, btnText, path, setShowModal, worning }) => {
   const handleModalClose = () => {
-    // signOut(auth);
+    setShowModal(false);
+  };
+  const handleModalSignOut = () => {
+    signOut(auth);
     setShowModal(false);
   };
 
@@ -27,14 +32,25 @@ export const Modal = ({ text, btnText, setShowModal, worning }) => {
           >
             Cancel
           </Link>
-          <Link
-            className="modal_btn"
-            to="/scanner/openTab/objects"
-            onClick={handleModalClose}
-            type="button"
-          >
-            {btnText}
-          </Link>
+          {!btnText === "Yes" ? (
+            <Link
+              className="modal_btn"
+              to={path}
+              onClick={handleModalSignOut}
+              type="button"
+            >
+              {btnText}
+            </Link>
+          ) : (
+            <Link
+              className="modal_btn"
+              to={path}
+              onClick={handleModalClose}
+              type="button"
+            >
+              {btnText}
+            </Link>
+          )}
         </div>
       </div>
     </div>

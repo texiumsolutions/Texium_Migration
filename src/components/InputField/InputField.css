@@ -3,7 +3,7 @@
   font-size: 14px;
 }
 .parameter_container table .input_field_section {
-  width: 80%;
+  width: 100%;
 }
 .parameter_container table tbody tr td .parameter_inputfield {
   width: 100%;
@@ -25,4 +25,34 @@
 .parameter_container table tbody tr td p {
   color: var(--text);
   font-weight: 500;
+}
+
+.mongoDb_parameter {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.mongoDb_parameter input {
+  display: hidden;
+}
+.mongoDb_parameter button {
+  background-color: var(--background);
+  text-decoration: none;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 30px;
+  cursor: pointer;
+  color: var(--text);
+  margin-left: 20px;
+  transition: background-color 200ms;
+}
+.mongoDb_parameter button:hover {
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  padding: 5px 28px;
+  color: var(--primary);
+}
+.mongoDB_save_btn {
+  text-decoration: none;
+  color: var(--text);
 }

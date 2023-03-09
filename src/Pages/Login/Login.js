@@ -14,7 +14,7 @@ export const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
   let signInError;
@@ -25,11 +25,7 @@ export const Login = () => {
   if (error) {
     signInError = <p className="error_message">{error?.message}</p>;
   }
-  if (user) {
-    console.log(user);
-  }
   const onSubmit = (data) => {
-    console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
     navigate("/home");
   };
