@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation
+} from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
 import { Modal } from "../../../components/Modal/Modal";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 import "./OpenTab.css";
 
 export const OpenTab = () => {
+  const location = useLocation();
   const [showDetails, setShowDetails] = useState(false);
   const [showRun, setShowRun] = useState(false);
   const [showObjects, setShowObjects] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const profileName = location.state?.data?.selectedRows[0].Name;
 
   return (
     <div className="container">
@@ -24,7 +32,7 @@ export const OpenTab = () => {
               <Link className="opentab_back_btn" to={"/scanner"}>
                 Back
               </Link>
-              <p>File name</p>
+              <p>{profileName}</p>
             </div>
 
             <div className="opentab_navbar">

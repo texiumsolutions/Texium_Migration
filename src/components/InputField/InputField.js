@@ -5,6 +5,7 @@ import "./InputField.css";
 export const InputField = ({
   text,
   type,
+  value,
   selectedValue,
   fileOnChange,
   sendFile,
@@ -39,7 +40,7 @@ export const InputField = ({
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </>
         ) : (
-          <input className={"parameter_inputfield"} type={type} name={type} />
+          <input className={"parameter_inputfield"} type={type} name={type} defaultValue={value} />
         )}
       </td>
     </tr>

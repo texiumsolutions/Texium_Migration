@@ -1,9 +1,9 @@
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading/Loading";
 import { Modal } from "./components/Modal/Modal";
-import auth from "./firebase.init";
+// import auth from "./firebase.init";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { Help } from "./Pages/Help/Help";
@@ -29,26 +29,26 @@ import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDe
 import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
-import RequireAuth from "./Shared/RequireAuth/RequireAuth";
+// import RequireAuth from "./Shared/RequireAuth/RequireAuth";
 
 function App() {
-  const [user] = useAuthState(auth);
+//   const [user] = useAuthState(auth);
 
   return (
     <div className="App">
-      {!user ? (
+      {/* {!user ? (
         <>
           <Login />
         </>
-      ) : (
+      ) : ( */}
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/home"
             element={
-              <RequireAuth>
-                <Home />
-              </RequireAuth>
+              //   <RequireAuth>
+              <Home />
+              //   </RequireAuth>
             }
           />
           <Route path="/jobs" element={<Jobs />} />
@@ -61,14 +61,14 @@ function App() {
           </Route>
 
           <Route path="/importers" element={<Importes />} />
-          <Route path="/importers/importdetails" element={<ImportDetails/>} />
+          <Route path="/importers/importdetails" element={<ImportDetails />} />
           <Route path="/importers/importdetails/" element={<ImportDetails />}>
             <Route path="details" element={<Details />} />
             <Route path="selection" element={<Selection />} />
             <Route path="import-runs" element={<ImportsRun />} />
           </Route>
           <Route path="/migsets" element={<MigSets />} />
-          <Route path="/migsets/migsets-route" element={<MigsetRoutes/>} />
+          <Route path="/migsets/migsets-route" element={<MigsetRoutes />} />
           <Route path="/migsets/migsets-route" element={<MigsetRoutes />}>
             <Route path="properties" element={<Propertise />} />
             <Route path="transformation" element={<Transformation />} />
@@ -88,7 +88,7 @@ function App() {
           <Route path="/loading" element={<Loading />} />
           <Route path="/modal" element={<Modal />} />
         </Routes>
-      )}
+      {/* )} */}
     </div>
   );
 }
