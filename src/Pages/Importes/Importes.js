@@ -71,7 +71,7 @@ export const Importes = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceFileInfo")
+    fetch("http://localhost:5000/users")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
@@ -118,6 +118,20 @@ export const Importes = () => {
     }
     return flatInfo;
   });
+
+  const handleDelete = id =>{
+    const proceed = window.confirm('Are you sure to delete?');
+    if(proceed){
+      const url = `http://localhost:5000/users/${id}`
+          fetch(url, {
+            method:'DELETE'
+          })
+          .then(res => res.json())
+          .then(data =>{
+            console.log(data);
+          })
+    }
+  }
   return (
     <div className="container">
       <div className="nav_container">
@@ -164,7 +178,7 @@ export const Importes = () => {
                   cursor: "pointer",
                   margin: "10px",
                 }}
-                to=""
+                onClick={() => handleDelete(sourceFileInfo._id)}
               >
                 <AiFillDelete></AiFillDelete>
               </button>
@@ -189,7 +203,7 @@ export const Importes = () => {
             responsive
             selectableRows
             persistTableHead
-            noDataComponent={<Loading></Loading>}
+            noDataComponent="No Data? Please Wait!"
             onSelectedRowsChange={handleSelectedRowsChange}
             selectableRowsHighlight
             selectableRowsRadio="radio"
@@ -198,7 +212,7 @@ export const Importes = () => {
             paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
             
           />
-          <Link to="/importers/importdetails">Go the next page</Link>
+          {/* <Link to="/importers/importdetails">Go the next page</Link> */}
         </Card>
       </div>
     </div>
