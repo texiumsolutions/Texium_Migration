@@ -12,18 +12,16 @@ export const OpenTabDetails = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
-  const selectedRowData = location.state?.data.selectedRows[0];
+  console.log(value);
 
   // passed Datas
-  const profileName = selectedRowData.Name;
-  const Description = selectedRowData.Description;
-  const Last_Run_On = selectedRowData.Last_Run_On;
+  const profileName = location.state?.name;
+  const Description = location.state?.Description;
+  const Last_Run_On = location.state?.Last_Run_On;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = selectedRowData.Run_Number;
-  const Type = selectedRowData.Type;
-  const Id = selectedRowData._id;
-
-  console.log();
+  const Run_Number = location.state?.Run_Number;
+  const Type = location.state?.Type;
+  const Id = location.state?.Id;
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -154,7 +152,7 @@ export const OpenTabDetails = () => {
                     <InputField
                       text={"Run Number"}
                       type={"text"}
-                      value={Run_Number}
+                      value={Run_Number === "" ? "No Runtime" : Run_Number}
                     />
                     <InputField
                       selectedValue={selectedValue}

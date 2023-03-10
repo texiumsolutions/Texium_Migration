@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation
-} from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
 import { Modal } from "../../../components/Modal/Modal";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
@@ -17,7 +12,7 @@ export const OpenTab = () => {
   const [showObjects, setShowObjects] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const profileName = location.state?.data?.selectedRows[0].Name;
+  const profileName = location.state?.name;
 
   return (
     <div className="container">

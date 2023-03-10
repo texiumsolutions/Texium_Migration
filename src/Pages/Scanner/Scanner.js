@@ -22,8 +22,18 @@ export const Scanner = () => {
   const handleSelectedRowsChange = (rows) => {
     if (rows && rows.selectedRows) {
       const selectedRow = rows.selectedRows[0];
-      setSelectedRows(selectedRow);
-      navigate(`/scanner/openTab/details`, { state: { data: rows } });
+      setSelectedRows(selectedRows);
+      navigate(`/scanner/openTab/details`, {
+        state: {
+          name: selectedRow.Name,
+          Description: selectedRow.Description,
+          Last_Run_On: selectedRow.Last_Run_On,
+          normalDate: selectedRow.normalDate,
+          Run_Number: selectedRow.Run_Number,
+          Type: selectedRow.Type,
+          Id: selectedRow._id,
+        },
+      });
     }
   };
 
@@ -64,6 +74,17 @@ export const Scanner = () => {
     button: true,
   };
   columnsToDisplay.push(detailsButton);
+
+  // Delete Button
+  const deleteButton = {
+    cell: () => (
+      <button onClick={() => alert("Will be done by Sumaya")}>Delete</button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+  columnsToDisplay.push(deleteButton);
 
   const data = sourceFileInfo.map((info) => {
     const flatInfo = {};
