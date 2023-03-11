@@ -46,112 +46,12 @@ const ImportsAdd = () => {
   };
   return (
     <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+  
+
       <div className="opentab_details_container">
         <div className="opentab_details">
-          <p>Details</p>
-          <Card height={"calc(100vh - 255px)"}>
-            <form className="opentab_details_form">
-              <label className="label" htmlFor="">
-                Name
-              </label>
-              <br />
-              <input
-                className="opentab_details_input"
-                type="text"
-                placeholder="File Name"
-                {...register("fileName")}
-              />
-
-              <label className="label" htmlFor="fileSystem">
-                Type
-              </label>
-
-              <br />
-
-              <select
-                type="text"
-                {...register("dropdown")}
-                required
-                className="opentab_details_input"
-                value={selectedValue}
-                onChange={handleChange}
-              >
-                <option value="" disabled hidden>
-                  Select an option
-                </option>
-                <option value="File System">File System</option>
-                <option value="MongoDB">MongoDB</option>
-                <option value="DataBase(MySQL)">DataBase(MySQL)</option>
-              </select>
-
-              <label className="label" htmlFor="Description">
-                Description
-              </label>
-
-              <br />
-
-              <textarea
-                type="text"
-                name="description"
-                className="opentab_details_input"
-                {...register("description")}
-                // ref={textareaRef}
-                value={value}
-                onChange={handleTextareaChange}
-                // id="description"
-              />
-            </form>
-          </Card>
-        </div>
-
-        <div className="opentab_parameters">
-          <p>Parameters</p>
-
-          <Card height={"calc(100vh - 255px)"}>
-            <div className="parameter_container">
-              <table>
-                <tbody>
-                  {selectedValue === "File System" && (
-                    <>
-                      <InputField text={"scanFolderPaths"} type={"text"} />
-                      <InputField text={"excludeFolderPaths"} type={"text"} />
-                      <InputField text={"excludeFiles"} type={"text"} />
-                      <InputField
-                        text={"scanChangedFilesBehaviour"}
-                        type={"text"}
-                      />
-                      <InputField text={"moveFilesToFolder"} type={"text"} />
-                      <InputField
-                        text={"ignoreHiddenFiles"}
-                        type={"checkbox"}
-                      />
-                      <InputField text={"scanFolders"} type={"checkbox"} />
-                    </>
-                  )}
-                  {selectedValue === "MongoDB" && (
-                    <>
-                      <InputField text={"scanQuary"} type={"text"} />
-                      <InputField text={"excludeAllData"} type={"text"} />
-                      <InputField text={"excludeData"} type={"text"} />
-                    </>
-                  )}
-                  {selectedValue === "DataBase(MySQL)" && (
-                    <>
-                      <InputField text={"scanQuaryForAll"} type={"text"} />
-                      <InputField text={"excludeSingleData"} type={"text"} />
-                    </>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </Card>
-        </div>
-      </div>
-
-      {/* <div className="opentab_details_container">
-        <div className="opentab_details">
           <p>Add Data</p>
-          <Card height={"calc(100vh)"}>
+          <Card height={"calc(100vh - 255px)"}>
             <label className="label" htmlFor="">
               Name
             </label>
@@ -194,12 +94,14 @@ const ImportsAdd = () => {
               name="description"
               className="opentab_details_input"
               {...register("description")}
-              // ref={textareaRef}
+             
               value={value}
               onChange={handleTextareaChange}
-              // id="description"
+             
             />
+             <input className="submit_button" type="submit" value="Save & Run" />
           </Card>
+         
         </div>
         <div className="opentab_parameters">
        
@@ -211,26 +113,27 @@ const ImportsAdd = () => {
                 <tbody>
                   {selectedValue === "File System" && (
                     <>
-                      <label className="label" htmlFor="">
-                        Run Time
-                      </label>
-                      <input
-                        className="opentab_details_input"
-                        type="text"
-                        {...register("run_time")}
-                      />
-                      <label className="label" htmlFor="">
-                        Last Run On
-                      </label>
-                      <input
-                        className="opentab_details_input"
-                        type="text"
-                        {...register("last_run_on")}
-                      />
-                      <label className="label" htmlFor="">
-                      Last Run Status
-                      </label>
+                     
                       <InputField
+                        text={"Run Time"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"run_time"}
+                      />
+                  
+                      <InputField
+                        text={"Last Run On"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"last_run_on"}
+                      />
+                    
+                      <InputField
+                      text={"Last Run Status"}
                         className="opentab_details_input"
                         type={"text"}
                         handleSubmit={handleSubmit}
@@ -241,48 +144,62 @@ const ImportsAdd = () => {
                   )}
                   {selectedValue === "MongoDB" && (
                     <>
-                      <label className="label" htmlFor="">
-                        Scan Quary
-                      </label>
-                      <input
+                  
+                      <InputField
+                      text={"Scan Query"}
                         className="opentab_details_input"
-                        type="text"
-                        text="Run Time"
-                        {...register("scan_query")}
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scan_query"}
                       />
-                      <label className="label" htmlFor="">
-                        excludeAllData
-                      </label>
-                      <input
+                      <InputField
+                      text={"Exclude AllData"}
                         className="opentab_details_input"
-                        type="text"
-                        text="Run Time"
-                        {...register("exclude_allData")}
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_allData"}
                       />
-                      <label className="label" htmlFor="">
-                        Exclude Data
-                      </label>
-                      <input
+                      <InputField
+                      text={"Exclude Data"}
                         className="opentab_details_input"
-                        type="text"
-                        text="Run Time"
-                        {...register("exclude_data")}
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_data"}
                       />
+                      
                     </>
                   )}
                   {selectedValue === "DataBase(MySQL)" && (
                     <>
-                      <InputField text={"scanQuaryForAll"} type={"text"} />
-                      <InputField text={"excludeSingleData"} type={"text"} />
+                    <InputField
+                        text={"Scan Quary For All"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scanQuaryForAll"}
+                      />
+                    <InputField
+                        text={"Exclude Single Data"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"excludeSingleData"}
+                      />
+
                     </>
                   )}
                 </tbody>
               </table>
             </div>
-            <input className="submit_button" type="submit" value="Save" />
+            
           </Card>
         </div>
-      </div> */}
+      </div>
     </form>
   );
 };
