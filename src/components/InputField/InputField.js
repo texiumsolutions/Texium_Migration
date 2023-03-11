@@ -5,11 +5,14 @@ import "./InputField.css";
 export const InputField = ({
   text,
   type,
+  value,
   selectedValue,
   fileOnChange,
   sendFile,
   successMessage,
   errorMessage,
+  register,
+  registerFieldText,
 }) => {
   return (
     <tr>
@@ -39,7 +42,13 @@ export const InputField = ({
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </>
         ) : (
-          <input className={"parameter_inputfield"} type={type} name={type} />
+          <input
+            className={"parameter_inputfield"}
+            type={type}
+            name={type}
+            defaultValue={value}
+            {...register(registerFieldText)}
+          />
         )}
       </td>
     </tr>

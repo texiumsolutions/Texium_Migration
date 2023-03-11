@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Card } from "../../../components/Card/Card";
 import { InputField } from "../../../components/InputField/InputField";
-import './Details.css';
+import './ImportsDetails.css';
 
-const Details = () => {
+const ImportsDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -108,4 +108,4 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default ImportsDetails;

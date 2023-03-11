@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { FaPause, FaPlay, FaSquare } from "react-icons/fa";
 import { IoReloadCircle } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import "./Scanner.css";
@@ -10,6 +10,7 @@ import "./Scanner.css";
 export const Scanner = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/sourceFileInfo")
@@ -18,21 +19,13 @@ export const Scanner = () => {
       .catch((error) => alert(error));
   }, []);
 
-  // const handleSelectedRowsChange = (event) => {
-  //   const selectedRow = event.selectedRows[0];
-  //   const newSelectedRows = [selectedRow]; 
-  //   setSelectedRows(selectedRow); 
-  //   console.log(selectedRow);
-
-  //   if (event.selectedCount > 1) {
-  //     event.selectedRows.forEach((row) => {
-  //       if (row.isSelected) {
-  //         row.isSelected = false;
-  //       }
-  //     });
-  //     event.selectedCount = 0;
-  //   }
-  // };
+  const handleSelectedRowsChange = (rows) => {
+    if (rows && rows.selectedRows) {
+      const selectedRow = rows.selectedRows[0];
+      setSelectedRows(selectedRow);
+      navigate(`/scanner/openTab/details`, { state: { data: rows } });
+    }
+  };
 
   const customStyles = {
     headCells: {
@@ -64,23 +57,25 @@ export const Scanner = () => {
   }));
   const detailsButton = {
     cell: () => (
-      <Link
-        to={{
-          pathname: "/scanner/openTab/details",
-          state: { data: selectedRows[0] }
-        }}
-      >
-        Show
-      </Link>
+      <button onClick={() => alert("Will be done by Sumaya")}>Show</button>
     ),
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
   };
   columnsToDisplay.push(detailsButton);
+  const deleteButton = {
+    cell: () => (
+      <button onClick={() => alert("Are you sure to delete?")}>Delete</button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+  columnsToDisplay.push(deleteButton);
 
   const data = sourceFileInfo.map((info) => {
-    const flatInfo = { isSelected: true };
+    const flatInfo = {};
     for (const key in info) {
       if (typeof info[key] === "object" && info[key] !== null) {
         for (const subKey in info[key]) {
@@ -139,9 +134,8 @@ export const Scanner = () => {
             responsive
             persistTableHead
             noDataComponent="No Data? Please Wait!"
-            // selectableRows="single"
-            // onSelectedRowsChange={handleSelectedRowsChange}
-            // selectableRowsSelected={selectedRows}
+            selectableRows
+            onSelectedRowsChange={handleSelectedRowsChange}
             selectableRowsHighlight
             subHeader
             subHeaderComponent={
@@ -156,8 +150,6 @@ export const Scanner = () => {
             paginationPerPage={15}
             paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
           />
-
-          <Link to={"/scanner/openTab/details"}>GO</Link>
         </Card>
       </div>
     </div>

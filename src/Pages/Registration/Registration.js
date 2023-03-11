@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  useCreateUserWithEmailAndPassword,
-  useUpdateProfile,
+    useCreateUserWithEmailAndPassword,
+    useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
@@ -15,7 +15,7 @@ export const Registration = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
   const navigate = useNavigate();
@@ -28,9 +28,9 @@ export const Registration = () => {
       <p className="error_message">{error?.message || Uerror?.message}</p>
     );
   }
-  if (user) {
-    console.log(user);
-  }
+  // if (user) {
+  //   console.log(user);
+  // }
   const onSubmit = async (data) => {
     createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name, photoURL: data.url });

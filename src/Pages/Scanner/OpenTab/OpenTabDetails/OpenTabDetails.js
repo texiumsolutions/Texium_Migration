@@ -6,14 +6,24 @@ import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const [value, setValue] = useState("");
+  const [defaultValue, setDefaultValue] = useState("");
   const textareaRef = useRef(null);
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
-  const selectedRowData = location.state?.selectedRowData;
-  console.log(selectedRowData);
+  const selectedRowData = location.state?.data.selectedRows[0];
+
+  // passed Datas
+  const profileName = selectedRowData.Name;
+  const Description = selectedRowData.Description;
+  const Last_Run_On = selectedRowData.Last_Run_On;
+  const normalDate = new Date(Last_Run_On).toLocaleDateString();
+  const Run_Number = selectedRowData.Run_Number;
+  const Type = selectedRowData.Type;
+  const Id = selectedRowData._id;
+  const File_type = selectedRowData.File_type;
+  console.log();
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -50,7 +60,7 @@ export const OpenTabDetails = () => {
   };
 
   const handleTextareaChange = (event) => {
-    setValue(event.target.value);
+    setDefaultValue(event.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -61,14 +71,6 @@ export const OpenTabDetails = () => {
     <div className="opentab_details_container">
       <div className="opentab_details">
         <p>Details</p>
-        <div>
-          {selectedRowData && (
-            <p>
-              
-              {/* Selected row data: {selectedRowData.id} */}
-            </p>
-          )}
-        </div>
         <Card height={"calc(100vh - 255px)"}>
           <form className="opentab_details_form">
             <label className="label" htmlFor="fileName">
@@ -80,6 +82,8 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
+              defaultValue={profileName}
+              
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -90,8 +94,10 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              value={selectedValue}
+              // value={selectedValue}
               onChange={handleChange}
+              defaultValue={File_type && selectedValue}
+              disabled
             >
               <option value="" disabled hidden>
                 Select an option
@@ -110,7 +116,7 @@ export const OpenTabDetails = () => {
             <textarea
               className="opentab_details_input"
               ref={textareaRef}
-              value={value}
+              defaultValue={Description}
               onChange={handleTextareaChange}
               placeholder="Description"
             />
@@ -134,13 +140,25 @@ export const OpenTabDetails = () => {
                       text={"scanChangedFilesBehaviour"}
                       type={"text"}
                     />
-                    <InputField text={"moveFilesToFolder"} type={"text"} />
+                    value
                     <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
                     <InputField text={"scanFolders"} type={"checkbox"} />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
+                    <InputField text={"id"} type={"text"} value={Id} />
+                    <InputField text={"Type"} type={"text"} value={Type} />
+                    <InputField
+                      text={"Last Run On"}
+                      type={"text"}
+                      value={normalDate}
+                    />
+                    <InputField
+                      text={"Run Number"}
+                      type={"text"}
+                      value={Run_Number}
+                    />
                     <InputField
                       selectedValue={selectedValue}
                       fileOnChange={fileOnChange}
