@@ -1,47 +1,67 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Test = () => {
-  const { register, handleSubmit, reset } = useForm();
-  const [name, setName] = useState("");
+  const [data, setData] = useState([]);
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  // const handleSubmit = (e) => {
-  //    e.preventDefault();
-  //   console.log(name); // the name value can be accessed here
-  //  };
-  const onSubmit = (data) => {
-    console.log(data);
-
-    fetch("http://localhost:5000/testing", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((inserted) => {
-        if (inserted.insertedId) {
-          alert("Added New Product Successfully");
-
-          reset();
-        } else {
-          alert("Failed add to the data");
-        }
+  useEffect(() => {
+    axios.get('http://localhost:5000/testing')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error(error);
       });
-  };
+  }, []);
+  const handleDelete = (id) => {
+    // axios.delete(`http://localhost:5000/testing/${id}`)
+    //   .then(response => {
+    //     setData(prevData => prevData.filter(item => item._id !== id));
+    //     console.log(data)
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+    // alert(id);
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method:'DELETE'
+    }).then((result) =>{
+      result.json().then((res)=>{
+         console.warn(res)
+      })
+    })
+   
+  }
   return (
     <div>
-       <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name">Name:</label>
-      <input type="text" id="name" name="name" value={name} onChange={handleNameChange} {...register("fileName")} />
-      <button type="submit">Submit</button>
-    </form>
+        <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Run Time</th>
+          <th>Last Run On</th>
+          <th>Last Run Status</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map(item => (
+          <tr key={item._id}>
+            <td>{item._id}</td>
+            <td>{item.fileName}</td>
+            <td>{item.dropdown}</td>
+            <td>{item.description}</td>
+            <td>{item.run_time}</td>
+            <td>{item.last_run_on}</td>
+            <td>{item.last_run_status}</td>
+            <td><button onClick={() => handleDelete(item._id)}>Delete</button></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
     </div>
   );
 };
