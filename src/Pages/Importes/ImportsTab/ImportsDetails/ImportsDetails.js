@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
-import "./OpenTabDetails.css";
+import "./ImportsDetails.css";
 
-export const OpenTabDetails = () => {
+export const ImportsDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [defaultValue, setDefaultValue] = useState("");
   const textareaRef = useRef(null);
@@ -21,9 +21,9 @@ export const OpenTabDetails = () => {
   const Run_Number = location.state?.Run_Number;
   const Type = location.state?.Type;
   const Id = location.state?._id;
-  const File_type = location.state?.File_type;
+  // const File_type = location.state?.Type;
+  console.log(Type);
   console.log(defaultValue);
-
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -83,7 +83,6 @@ export const OpenTabDetails = () => {
               name="fileName"
               placeholder="File Name"
               defaultValue={profileName}
-              
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -94,9 +93,8 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              // value={selectedValue}
               onChange={handleChange}
-              defaultValue={File_type && selectedValue}
+              defaultValue={Type && selectedValue}
               disabled
             >
               <option value="" disabled hidden>

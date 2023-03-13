@@ -1,72 +1,23 @@
 import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Card } from "../../../../components/Card/Card";
-import { InputField } from "../../../../components/InputField/InputField";
-import "./OpenTabDetails.css";
+import { Card } from "../../../../../components/Card/Card";
+import { InputField } from "../../../../../components/InputField/InputField";
 
-export const OpenTabDetails = () => {
+const PropertiesDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const [defaultValue, setDefaultValue] = useState("");
+  const [value, setValue] = useState("");
   const textareaRef = useRef(null);
-  const [file, setFile] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const location = useLocation();
-
-  // passed Datas
-  const profileName = location.state?.name;
-  const Description = location.state?.Description;
-  const Last_Run_On = location.state?.Last_Run_On;
-  const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = location.state?.Run_Number;
-  const Type = location.state?.Type;
-  const Id = location.state?._id;
-  const File_type = location.state?.File_type;
-  console.log(defaultValue);
-
-
-  const fileOnChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-
-  const sendFile = (event) => {
-    event.preventDefault();
-    let formData = new FormData();
-
-    formData.append("avater", file);
-
-    fetch("http://localhost:5000/uploadFile", {
-      method: "post",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((resBody) => {
-        if (resBody.success) {
-          setSuccessMessage(resBody.message);
-          setErrorMessage("");
-        } else {
-          setErrorMessage(resBody.message);
-          setSuccessMessage("");
-        }
-      })
-      .catch((error) => {
-        setErrorMessage("Failed to upload file.");
-        setSuccessMessage("");
-      });
-  };
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
   const handleTextareaChange = (event) => {
-    setDefaultValue(event.target.value);
+    setValue(event.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
-
   return (
     <div className="opentab_details_container">
       <div className="opentab_details">
@@ -82,8 +33,6 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={profileName}
-              
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -94,10 +43,8 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              // value={selectedValue}
+              value={selectedValue}
               onChange={handleChange}
-              defaultValue={File_type && selectedValue}
-              disabled
             >
               <option value="" disabled hidden>
                 Select an option
@@ -116,7 +63,7 @@ export const OpenTabDetails = () => {
             <textarea
               className="opentab_details_input"
               ref={textareaRef}
-              defaultValue={Description}
+              value={value}
               onChange={handleTextareaChange}
               placeholder="Description"
             />
@@ -140,34 +87,16 @@ export const OpenTabDetails = () => {
                       text={"scanChangedFilesBehaviour"}
                       type={"text"}
                     />
-                    value
+                    <InputField text={"moveFilesToFolder"} type={"text"} />
                     <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
                     <InputField text={"scanFolders"} type={"checkbox"} />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
-                    <InputField text={"id"} type={"text"} value={Id} />
-                    <InputField text={"Type"} type={"text"} value={Type} />
-                    <InputField
-                      text={"Last Run On"}
-                      type={"text"}
-                      value={normalDate}
-                    />
-                    <InputField
-                      text={"Run Number"}
-                      type={"text"}
-                      value={Run_Number === "" ? "No Runtime" : Run_Number}
-                    />
-                    <InputField
-                      selectedValue={selectedValue}
-                      fileOnChange={fileOnChange}
-                      sendFile={sendFile}
-                      errorMessage={errorMessage}
-                      successMessage={successMessage}
-                      text={"fileInfo"}
-                      type={"file"}
-                    />
+                    <InputField text={"scanQuary"} type={"text"} />
+                    <InputField text={"excludeAllData"} type={"text"} />
+                    <InputField text={"excludeData"} type={"text"} />
                   </>
                 )}
                 {selectedValue === "DataBase(MySQL)" && (
@@ -184,3 +113,5 @@ export const OpenTabDetails = () => {
     </div>
   );
 };
+
+export default PropertiesDetails;

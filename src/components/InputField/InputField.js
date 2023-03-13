@@ -11,6 +11,8 @@ export const InputField = ({
   sendFile,
   successMessage,
   errorMessage,
+  register,
+  registerFieldText,
 }) => {
   return (
     <tr>
@@ -40,7 +42,13 @@ export const InputField = ({
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </>
         ) : (
-          <input className={"parameter_inputfield"} type={type} name={type} defaultValue={value} />
+          <input
+            className={"parameter_inputfield"}
+            type={type}
+            name={type}
+            defaultValue={value}
+            {...register(registerFieldText)}
+          />
         )}
       </td>
     </tr>

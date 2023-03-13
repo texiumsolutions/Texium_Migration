@@ -1,7 +1,61 @@
-.details_form_imports{
+.table_header {
+  width: 100%;
   display: flex;
- 
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
 }
-.Imports_soruce_type_left{
-  display:block;
+.table_header button .table_header_link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-inline: 0px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  color: #777777;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--background);
+}
+.table_header button .table_header_link:hover {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  padding: 3px 8px;
+}
+.reload_btn {
+  border-left: 1px solid var(--text) !important;
+  color: #007700 !important;
+  font-size: 22px !important;
+  margin-left: 10px !important;
+  border-radius: 0px !important;
+  background-color: transparent !important;
+}
+.table_header .reload_btn .table_header_link:hover {
+  border: 0px solid var(--primary) !important;
+  border-left: 1px solid var(--text) !important;
+  color: #007700 !important;
+  padding: 5px 10px !important;
+  font-size: 22px !important;
+}
+/* all scanner global css */
+
+.filter_input {
+  outline: none;
+  width: 25%;
+  border: none;
+  font-size: 14px;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-bottom: 15px;
+  font-family: "Poppins", sans-serif;
+}
+.filter_input:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.filter_input:hover {
+  border-bottom: 2px solid var(--primary);
 }

@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { FaPause, FaPlay, FaSquare } from "react-icons/fa";
-import { IoReloadCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import {
+  AiOutlineDelete,
+  AiOutlineEdit,
+  AiOutlinePlusCircle,
+  AiOutlineReload
+} from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
-import "./Scanner.css";
+import "./Imports.css";
 
-export const Scanner = () => {
+export const Imports = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const navigate = useNavigate();
@@ -23,7 +27,7 @@ export const Scanner = () => {
     if (rows && rows.selectedRows) {
       const selectedRow = rows.selectedRows[0];
       setSelectedRows(selectedRows);
-      navigate(`/scanner/openTab/details`, {
+      navigate(`/imports/importsTab/details`, {
         state: {
           name: selectedRow.Name,
           Description: selectedRow.Description,
@@ -117,17 +121,23 @@ export const Scanner = () => {
         <Card height="calc(100vh)" width="calc(100%)">
           <div className="table_header">
             <button type="button">
-              <FaPlay />
+              <Link className="table_header_link" to={"/imports/importsTab/add"}>
+                <AiOutlinePlusCircle />
+              </Link>
             </button>
             <button type="button">
-              <FaPause />
+              <Link className="table_header_link" to={""}>
+                <AiOutlineEdit />
+              </Link>
             </button>
             <button type="button">
-              <FaSquare />
+              <Link className="table_header_link" to={""}>
+                <AiOutlineDelete />
+              </Link>
             </button>
 
             <button className="reload_btn" type="button">
-              <IoReloadCircle />
+              <AiOutlineReload />
             </button>
           </div>
 

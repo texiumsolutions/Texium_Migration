@@ -39,7 +39,7 @@ export const NavBar = () => {
 
           <NavigationLink icon={<MdOutlineWindow />} routePath={"/migsets"} />
 
-          <NavigationLink icon={<AiOutlineLogout />} routePath={"/importers"} />
+          <NavigationLink icon={<AiOutlineLogout />} routePath={"/imports"} />
 
           <hr className="nav_divider" />
 

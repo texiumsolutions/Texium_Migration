@@ -1,0 +1,34 @@
+.opentab_details_container {
+  display: grid;
+  gap: 15px;
+  height: 100%;
+  text-align: left;
+  grid-template-columns: 1fr 2fr;
+}
+.opentab_details_container p {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Details Section */
+.opentab_details_form .label {
+  font-size: 10px;
+}
+.opentab_details_form .opentab_details_input {
+  outline: none;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-bottom: 15px;
+  font-family: "Poppins", sans-serif;
+  resize: none;
+}
+.opentab_details_form .opentab_details_input:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.opentab_details_form .opentab_details_input:hover {
+  border-bottom: 2px solid var(--primary);
+}
