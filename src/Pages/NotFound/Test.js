@@ -5,7 +5,7 @@ const Test = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/testing')
+    axios.get('http://localhost:5000/users')
       .then(response => {
         setData(response.data);
       })
@@ -23,7 +23,7 @@ const Test = () => {
     //     console.error(error);
     //   });
     // alert(id);
-    fetch(`http://localhost:5000/testing/${id}`, {
+    fetch(`http://localhost:5000/users/${id}`, {
       method:'DELETE'
     }).then((result) =>{
       result.json().then((res)=>{
@@ -38,12 +38,12 @@ const Test = () => {
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
+          {/* <th>Name</th>
           <th>Type</th>
           <th>Description</th>
           <th>Run Time</th>
           <th>Last Run On</th>
-          <th>Last Run Status</th>
+          <th>Last Run Status</th> */}
           <th>Delete</th>
         </tr>
       </thead>
