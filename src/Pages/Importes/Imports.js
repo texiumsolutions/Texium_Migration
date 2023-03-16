@@ -4,7 +4,7 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlinePlusCircle,
-  AiOutlineReload
+  AiOutlineReload,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
@@ -13,11 +13,11 @@ import "./Imports.css";
 
 export const Imports = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
-  const navigate = useNavigate();
+  // const [selectedRows, setSelectedRows] = useState([]);
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceFileInfo")
+    fetch("http://localhost:5000/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
@@ -26,19 +26,47 @@ export const Imports = () => {
   const handleSelectedRowsChange = (rows) => {
     if (rows && rows.selectedRows) {
       const selectedRow = rows.selectedRows[0];
-      setSelectedRows(selectedRows);
-      navigate(`/imports/importsTab/details`, {
-        state: {
-          name: selectedRow.Name,
-          Description: selectedRow.Description,
-          Last_Run_On: selectedRow.Last_Run_On,
-          normalDate: selectedRow.normalDate,
-          Run_Number: selectedRow.Run_Number,
-          Type: selectedRow.Type,
-          Id: selectedRow._id,
-        },
-      });
+      console.log(selectedRow);
+      // setSelectedRows(selectedRows);
+      // navigate(`/imports/importsTab/details`, {
+      //   state: {
+      //     name: selectedRow.Name,
+      //     Description: selectedRow.Description,
+      //     Last_Run_On: selectedRow.Last_Run_On,
+      //     normalDate: selectedRow.normalDate,
+      //     Run_Number: selectedRow.Run_Number,
+      //     Type: selectedRow.Type,
+      //     Id: selectedRow._id,
+      //   },
+      // });
     }
+  };
+
+  // handle delete
+  const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this row?")) {
+      return;
+    }
+
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          const newSourceFileInfo = sourceFileInfo.filter(
+            (row) => row._id !== id
+          );
+          setSourceFileInfo(newSourceFileInfo);
+          alert("Row deleted successfully!");
+        } else {
+          alert("Failed to delete row");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to delete row");
+      });
   };
 
   const customStyles = {
@@ -69,18 +97,18 @@ export const Imports = () => {
     selector: (row) => getField(row, column),
     sortable: true,
   }));
-  const detailsButton = {
-    cell: () => (
-      <button onClick={() => alert("Will be done by Sumaya")}>Show</button>
-    ),
-    ignoreRowClick: true,
-    allowOverflow: true,
-    button: true,
-  };
-  columnsToDisplay.push(detailsButton);
+  // const detailsButton = {
+  //   cell: () => (
+  //     <button onClick={() => alert("Will be done by Sumaya")}>Show</button>
+  //   ),
+  //   ignoreRowClick: true,
+  //   allowOverflow: true,
+  //   button: true,
+  // };
+  // columnsToDisplay.push(detailsButton);
   const deleteButton = {
-    cell: () => (
-      <button onClick={() => alert("Are you sure to delete?")}>Delete</button>
+    cell: (row) => (
+      <button onClick={() => handleDelete(row._id)}>Delete</button>
     ),
     ignoreRowClick: true,
     allowOverflow: true,
@@ -121,7 +149,10 @@ export const Imports = () => {
         <Card height="calc(100vh)" width="calc(100%)">
           <div className="table_header">
             <button type="button">
-              <Link className="table_header_link" to={"/imports/importsTab/add"}>
+              <Link
+                className="table_header_link"
+                to={"/imports/importsTab/add"}
+              >
                 <AiOutlinePlusCircle />
               </Link>
             </button>
