@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { json, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./ImportsDetails.css";
@@ -11,19 +11,18 @@ export const ImportsDetails = () => {
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const location = useLocation();
 
-  // passed Datas
-  const profileName = location.state?.name;
-  const Description = location.state?.Description;
-  const Last_Run_On = location.state?.Last_Run_On;
-  const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = location.state?.Run_Number;
-  const Type = location.state?.Type;
-  const Id = location.state?._id;
-  // const File_type = location.state?.Type;
-  console.log(Type);
-  console.log(defaultValue);
+  const { detailsId } = useParams();
+  const [detailsInfo, setDetailsInfo] = useState({});
+
+  useEffect(() => {
+    const uri = `http://localhost:5000/testing/${detailsId}`;
+
+    fetch(uri)
+      .then((response) => response, json())
+      .then((data) => setDetailsInfo(data));
+  }, [detailsId]);
+  console.log(detailsInfo);
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -35,7 +34,7 @@ export const ImportsDetails = () => {
 
     formData.append("avater", file);
 
-    fetch("http://localhost:5000/uploadFile", {
+    fetch("http://localhost:5000/testing", {
       method: "post",
       body: formData,
     })
@@ -82,7 +81,7 @@ export const ImportsDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={profileName}
+              defaultValue={detailsInfo.fileName}
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -94,8 +93,7 @@ export const ImportsDetails = () => {
             <select
               className="opentab_details_input"
               onChange={handleChange}
-              defaultValue={Type && selectedValue}
-              disabled
+              // defaultValue={Type && selectedValue}
             >
               <option value="" disabled hidden>
                 Select an option
@@ -114,7 +112,7 @@ export const ImportsDetails = () => {
             <textarea
               className="opentab_details_input"
               ref={textareaRef}
-              defaultValue={Description}
+              // defaultValue={Description}
               onChange={handleTextareaChange}
               placeholder="Description"
             />
@@ -138,24 +136,23 @@ export const ImportsDetails = () => {
                       text={"scanChangedFilesBehaviour"}
                       type={"text"}
                     />
-                    value
                     <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
                     <InputField text={"scanFolders"} type={"checkbox"} />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
-                    <InputField text={"id"} type={"text"} value={Id} />
-                    <InputField text={"Type"} type={"text"} value={Type} />
+                    {/* <InputField text={"id"} type={"text"} value={Id} /> */}
+                    {/* <InputField text={"Type"} type={"text"} value={Type} /> */}
                     <InputField
                       text={"Last Run On"}
                       type={"text"}
-                      value={normalDate}
+                      // value={normalDate}
                     />
                     <InputField
                       text={"Run Number"}
                       type={"text"}
-                      value={Run_Number === "" ? "No Runtime" : Run_Number}
+                      // value={Run_Number === "" ? "No Runtime" : Run_Number}
                     />
                     <InputField
                       selectedValue={selectedValue}

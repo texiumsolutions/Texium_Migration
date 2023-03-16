@@ -19,10 +19,12 @@
   padding: 5px 10px;
   border-radius: 5px;
   background-color: var(--background);
+  transition: background-color 200ms;
 }
 .table_header button .table_header_link:hover {
-  border: 2px solid var(--primary);
-  color: var(--primary);
+  border: 2px solid #007700;
+  background-color: #007700;
+  color: var(--white);
   padding: 3px 8px;
 }
 .reload_btn {
@@ -58,4 +60,33 @@
 }
 .filter_input:hover {
   border-bottom: 2px solid var(--primary);
+}
+
+/* Delete Edit Button */
+.edit_button,
+.delete_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--white);
+  border: none;
+  padding: 2px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.edit_button {
+  background-color: var(--secondary);
+}
+.edit_button:hover {
+  background-color: var(--primary);
+}
+.delete_button {
+  background-color: #ff3f3f;
+  /* NO CHANGES */
+}
+.delete_button:hover {
+  background-color: #ff0000;
 }

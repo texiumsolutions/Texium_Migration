@@ -5,7 +5,7 @@ import { Modal } from "../../../components/Modal/Modal";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 import "./ImportsTab.css";
 
-export const ImportsTab = () => {
+export const ImportsTab = ({data}) => {
   const location = useLocation();
   const [showDetails, setShowDetails] = useState(false);
   const [showRun, setShowRun] = useState(false);
@@ -19,6 +19,7 @@ export const ImportsTab = () => {
       <div className="nav_container">
         <NavBar />
       </div>
+
 
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">

@@ -6,14 +6,13 @@ import {
   AiOutlinePlusCircle,
   AiOutlineReload,
 } from "react-icons/ai";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import "./Imports.css";
 
 export const Imports = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-  // const [selectedRows, setSelectedRows] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,32 +22,13 @@ export const Imports = () => {
       .catch((error) => alert(error));
   }, []);
 
-  const handleSelectedRowsChange = (rows) => {
-    if (rows && rows.selectedRows) {
-      const selectedRow = rows.selectedRows[0];
-      console.log(selectedRow);
-      // setSelectedRows(selectedRows);
-      // navigate(`/imports/importsTab/details`, {
-      //   state: {
-      //     name: selectedRow.Name,
-      //     Description: selectedRow.Description,
-      //     Last_Run_On: selectedRow.Last_Run_On,
-      //     normalDate: selectedRow.normalDate,
-      //     Run_Number: selectedRow.Run_Number,
-      //     Type: selectedRow.Type,
-      //     Id: selectedRow._id,
-      //   },
-      // });
-    }
-  };
-
   // handle Show
-  const handleShow = (id) => {
+  const handleEdit = (id) => {
     fetch(`http://localhost:5000/testing/${id}`, {
       method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    }).then((response) => response.json());
+
+    navigate(`/imports/importsTab/details/${id}`);
   };
 
   // handle delete
@@ -77,12 +57,6 @@ export const Imports = () => {
         alert("Failed to delete row");
       });
   };
-
-  const handleEdit = (id)=>{
-    alert(id)
- 
-    navigate(`/imports/importsTab/details/${id}`)
-  }
 
   const customStyles = {
     headCells: {
@@ -114,34 +88,30 @@ export const Imports = () => {
   }));
 
   // Show single data buttom
-  const detailsButton = {
-    cell: (row) => <button onClick={() => handleShow(row._id)}>Show</button>,
+  const showDetailsButton = {
+    cell: (row) => (
+      <button className="edit_button" onClick={() => handleEdit(row._id)}>
+        <AiOutlineEdit />
+      </button>
+    ),
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
   };
 
   // Delete button
-  columnsToDisplay.push(detailsButton);
+  columnsToDisplay.push(showDetailsButton);
   const deleteButton = {
     cell: (row) => (
-      <button onClick={() => handleDelete(row._id)}>Delete</button>
+      <button className="delete_button" onClick={() => handleDelete(row._id)}>
+        <AiOutlineDelete />
+      </button>
     ),
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
   };
   columnsToDisplay.push(deleteButton);
-
-  const editButton = {
-    cell: (row) => (
-      <button onClick={() => handleEdit(row._id)}>Edit</button>
-    ),
-    ignoreRowClick: true,
-    allowOverflow: true,
-    button: true,
-  };
-  columnsToDisplay.push(editButton);
 
   const data = sourceFileInfo.map((info) => {
     const flatInfo = {};
@@ -183,16 +153,6 @@ export const Imports = () => {
                 <AiOutlinePlusCircle />
               </Link>
             </button>
-            {/* <button type="button">
-              <Link className="table_header_link" to={""}>
-                <AiOutlineEdit />
-              </Link>
-            </button> */}
-            {/* <button type="button">
-              <Link className="table_header_link" to={""}>
-                <AiOutlineDelete />
-              </Link>
-            </button> */}
 
             <button className="reload_btn" type="button">
               <AiOutlineReload />
@@ -212,8 +172,6 @@ export const Imports = () => {
             responsive
             persistTableHead
             noDataComponent="No Data? Please Wait!"
-            selectableRows
-            onSelectedRowsChange={handleSelectedRowsChange}
             selectableRowsHighlight
             subHeader
             subHeaderComponent={

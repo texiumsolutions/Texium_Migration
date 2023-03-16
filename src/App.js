@@ -57,7 +57,7 @@ function App() {
 
         <Route path="/imports" element={<Imports />} />
         <Route path="/imports/importsTab/" element={<ImportsTab />}>
-          <Route path="details" element={<ImportsDetails />} />
+          <Route path="details/:detailsId" element={<ImportsDetails />} />
           <Route path="add" element={<ImportsAdd />} />
           <Route path="selection" element={<ImportsSelection />} />
           <Route path="importRuns" element={<ImportsRuns />} />
@@ -80,7 +80,7 @@ function App() {
 
         {/* Testing Routes */}
         <Route path="/loading" element={<Loading />} />
-        <Route path="/test" element={<Test />} />
+        {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/modal" element={<Modal />} />
       </Routes>
     </div>
