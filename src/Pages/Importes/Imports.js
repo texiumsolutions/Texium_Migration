@@ -6,7 +6,7 @@ import {
   AiOutlinePlusCircle,
   AiOutlineReload,
 } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import "./Imports.css";
@@ -14,7 +14,7 @@ import "./Imports.css";
 export const Imports = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
   // const [selectedRows, setSelectedRows] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5000/testing")
@@ -69,6 +69,12 @@ export const Imports = () => {
       });
   };
 
+  const handleEdit = (id)=>{
+    alert(id)
+ 
+    navigate(`/imports/importsTab/details/${id}`)
+  }
+
   const customStyles = {
     headCells: {
       style: {
@@ -116,6 +122,16 @@ export const Imports = () => {
   };
   columnsToDisplay.push(deleteButton);
 
+  const editButton = {
+    cell: (row) => (
+      <button onClick={() => handleEdit(row._id)}>Edit</button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+  columnsToDisplay.push(editButton);
+
   const data = sourceFileInfo.map((info) => {
     const flatInfo = {};
     for (const key in info) {
@@ -156,16 +172,16 @@ export const Imports = () => {
                 <AiOutlinePlusCircle />
               </Link>
             </button>
-            <button type="button">
+            {/* <button type="button">
               <Link className="table_header_link" to={""}>
                 <AiOutlineEdit />
               </Link>
-            </button>
-            <button type="button">
+            </button> */}
+            {/* <button type="button">
               <Link className="table_header_link" to={""}>
                 <AiOutlineDelete />
               </Link>
-            </button>
+            </button> */}
 
             <button className="reload_btn" type="button">
               <AiOutlineReload />
