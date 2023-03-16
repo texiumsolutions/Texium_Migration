@@ -7,7 +7,7 @@ const ImportsAdd = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+   
 
     fetch("http://localhost:5000/testing", {
       method: "POST",
@@ -27,7 +27,9 @@ const ImportsAdd = () => {
           alert("Failed add to the data");
         }
       });
+      console.log(data);
   };
+  
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
