@@ -42,6 +42,15 @@ export const Imports = () => {
     }
   };
 
+  // handle Show
+  const handleShow = (id) => {
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+  };
+
   // handle delete
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this row?")) {
@@ -103,15 +112,17 @@ export const Imports = () => {
     selector: (row) => getField(row, column),
     sortable: true,
   }));
-  // const detailsButton = {
-  //   cell: () => (
-  //     <button onClick={() => alert("Will be done by Sumaya")}>Show</button>
-  //   ),
-  //   ignoreRowClick: true,
-  //   allowOverflow: true,
-  //   button: true,
-  // };
-  // columnsToDisplay.push(detailsButton);
+
+  // Show single data buttom
+  const detailsButton = {
+    cell: (row) => <button onClick={() => handleShow(row._id)}>Show</button>,
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+
+  // Delete button
+  columnsToDisplay.push(detailsButton);
   const deleteButton = {
     cell: (row) => (
       <button onClick={() => handleDelete(row._id)}>Delete</button>
