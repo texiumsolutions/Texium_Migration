@@ -15,9 +15,9 @@ export const Home = () => {
 
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">
-          {displayName && <h3>{ displayName }</h3>}
+          {displayName && <h3>Hello { displayName }</h3>}
           <h1>
-            WELCOME!{" "}
+            WELCOME To!{" "}
             <small style={{ color: "var(--primary)" }}>
               <small>
                 <small>

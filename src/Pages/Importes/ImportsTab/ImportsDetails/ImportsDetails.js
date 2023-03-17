@@ -72,19 +72,20 @@ export const ImportsDetails = () => {
         <p>Details</p>
         <Card height={"calc(100vh - 255px)"}>
           <form className="opentab_details_form">
-            <label className="label" htmlFor="fileName">
+          <label className="label" htmlFor="fileName">
               Name
             </label>
-            <br />
             <input
               className="opentab_details_input"
               type="text"
-              name="fileName"
               placeholder="File Name"
               defaultValue={detailsInfo.fileName}
             />
+            <br />
+         
 
             <label className="label" htmlFor="fileSystem">
+              
               Type
             </label>
 
@@ -93,7 +94,7 @@ export const ImportsDetails = () => {
             <select
               className="opentab_details_input"
               onChange={handleChange}
-              // defaultValue={Type && selectedValue}
+              defaultValue={ selectedValue}
             >
               <option value="" disabled hidden>
                 Select an option

@@ -24,7 +24,6 @@ import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDe
 import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
-import Test from "./Pages/NotFound/Test";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
 import { Imports } from "./Pages/Importes/Imports";
 import { ImportsTab } from "./Pages/Importes/ImportsTab/ImportsTab";
@@ -37,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route
           path="/home"
           element={
@@ -46,35 +45,35 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/jobs" element={  <RequireAuth><Jobs />  </RequireAuth>} />
 
-        <Route path="/scanner" element={<Scanner />} />
-        <Route path="/scanner/openTab/" element={<OpenTab />}>
+        <Route path="/scanner" element={<RequireAuth><Scanner /> </RequireAuth>} />
+        <Route path="/scanner/openTab/" element={<RequireAuth><OpenTab /> </RequireAuth>}>
           <Route path="details" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
         </Route>
 
-        <Route path="/imports" element={<Imports />} />
-        <Route path="/imports/importsTab/" element={<ImportsTab />}>
+        <Route path="/imports" element={<RequireAuth><Imports /></RequireAuth>} />
+        <Route path="/imports/importsTab/" element={<RequireAuth><ImportsTab /></RequireAuth>}>
           <Route path="details/:detailsId" element={<ImportsDetails />} />
           <Route path="add" element={<ImportsAdd />} />
           <Route path="selection" element={<ImportsSelection />} />
           <Route path="importRuns" element={<ImportsRuns />} />
         </Route>
-        <Route path="/migsets" element={<MigSets />} />
-        <Route path="/migsets/migsets-route" element={<MigsetRoutes />}>
+        <Route path="/migsets" element={<RequireAuth><MigSets /></RequireAuth>} />
+        <Route path="/migsets/migsets-route" element={<RequireAuth><MigsetRoutes /></RequireAuth>}>
           <Route path="properties" element={<Propertise />} />
           <Route path="transformation" element={<Transformation />} />
           <Route path="source-object" element={<SourceObject />} />
           <Route path="target-object" element={<TargetObject />} />
           <Route path="error-object" element={<ErrorObject />} />
         </Route>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/configuration" element={<Configuration />} />
-        <Route path="/help" element={<Help />} />
+        <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+        <Route path="/configuration" element={<RequireAuth><Configuration /></RequireAuth>} />
+        <Route path="/help" element={<RequireAuth><Help /></RequireAuth>} />
 
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/registration" element={<Registration />} />
         <Route path="*" element={<NotFound />}></Route>
 

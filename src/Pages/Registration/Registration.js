@@ -136,7 +136,7 @@ export const Registration = () => {
 
           <p className="registration_link">
             Already have an account?{" "}
-            <Link to="/login" className="registration_page_link">
+            <Link to="/" className="registration_page_link">
               login Here
             </Link>
           </p>

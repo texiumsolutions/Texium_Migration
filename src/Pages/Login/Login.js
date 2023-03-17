@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../../components/Loading/Loading";
@@ -16,9 +16,12 @@ export const Login = () => {
   } = useForm();
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
+
   const navigate = useNavigate();
+  const location = useLocation();
   let signInError;
-  
+  let from = location.state?.from?.pathname || "/";
+
   if (loading) {
     return <Loading></Loading>;
   }
@@ -27,13 +30,14 @@ export const Login = () => {
   }
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-    navigate("/home");
+    navigate(from, {replace: true});
   };
 
   return (
     <div className="login_container">
       <div className="login_section">
         <h3>Login</h3>
+        {signInError}
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="username_section ">
             <BiUser className="login_input_icon" />
@@ -95,7 +99,7 @@ export const Login = () => {
           )}
 
           <br />
-          {signInError}
+          
           <input
             className="login_btn"
             type="submit"

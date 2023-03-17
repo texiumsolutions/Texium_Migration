@@ -23,10 +23,15 @@ export const NavBar = () => {
     signOut(auth);
   };
 
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+
   return (
     <div className="navbar_container">
       <Link to="/home">
         <img src={logo} className="nav_logo" alt="Logo" />
+       
       </Link>
 
       <div className="navbar_sections">
@@ -56,17 +61,24 @@ export const NavBar = () => {
             icon={<AiOutlineQuestionCircle />}
             routePath={"/help"}
           />
-          {user && (
+          {user ? (
             <NavLink
               onClick={() => setShowModal(true)}
               className="route_btn logout_btn"
+              logout={logout}
             >
-              <button className="route_btn" type="button">
+              <button
+                onClick={handleSignOut}
+                className="route_btn"
+                type="button"
+              >
                 <div className="navbar_icon">
                   <BiLogOut />
                 </div>
               </button>
             </NavLink>
+          ) : (
+            null
           )}
         </section>
       </div>
@@ -76,7 +88,6 @@ export const NavBar = () => {
           text="Am I Disturbing You?"
           btnText="Sign Out"
           path="/"
-          logout={logout}
           setShowModal={setShowModal}
         />
       ) : null}
