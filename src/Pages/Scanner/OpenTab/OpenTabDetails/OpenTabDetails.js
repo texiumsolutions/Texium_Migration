@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
@@ -13,8 +13,20 @@ export const OpenTabDetails = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
 
+  const { detailsId } = useParams();
+  const [detailsInfo, setDetailsInfo] = useState({});
+
+  useEffect(() => {
+    const uri = `http://localhost:5000/testing/${detailsId}`;
+
+    fetch(uri)
+      .then((response) => response.json())
+      .then((data) => setDetailsInfo(data));
+  }, [detailsId]);
+  console.log(defaultValue);
+
   // passed Datas
-  const profileName = location.state?.name;
+  // const profileName = location.state?.name;
   const Description = location.state?.Description;
   const Last_Run_On = location.state?.Last_Run_On;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
@@ -22,8 +34,6 @@ export const OpenTabDetails = () => {
   const Type = location.state?.Type;
   const Id = location.state?._id;
   const File_type = location.state?.File_type;
-  console.log(defaultValue);
-
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -57,6 +67,7 @@ export const OpenTabDetails = () => {
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    console.log(event.target.value);
   };
 
   const handleTextareaChange = (event) => {
@@ -82,7 +93,7 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={profileName}
+              defaultValue={detailsInfo}
               
             />
 
@@ -94,10 +105,10 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              // value={selectedValue}
+              value={selectedValue}
               onChange={handleChange}
               defaultValue={File_type && selectedValue}
-              disabled
+              // disabled
             >
               <option value="" disabled hidden>
                 Select an option

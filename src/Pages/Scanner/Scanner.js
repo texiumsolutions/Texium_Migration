@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { FaPause, FaPlay, FaSquare } from "react-icons/fa";
-import { IoReloadCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlusCircle, AiOutlineReload } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 import "./Scanner.css";
@@ -13,11 +12,47 @@ export const Scanner = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceFileInfo")
+    fetch("http://localhost:5000/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
   }, []);
+
+  // handle Show
+  const handleEdit = (id) => {
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "GET",
+    }).then((response) => response.json());
+
+    navigate(`/imports/importsTab/details/${id}`);
+  };
+
+  // handle delete
+  const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this row?")) {
+      return;
+    }
+
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          const newSourceFileInfo = sourceFileInfo.filter(
+            (row) => row._id !== id
+          );
+          setSourceFileInfo(newSourceFileInfo);
+          alert("Row deleted successfully!");
+        } else {
+          alert("Failed to delete row");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to delete row");
+      });
+  };
 
   const handleSelectedRowsChange = (rows) => {
     if (rows && rows.selectedRows) {
@@ -65,18 +100,26 @@ export const Scanner = () => {
     selector: (row) => getField(row, column),
     sortable: true,
   }));
-  const detailsButton = {
-    cell: () => (
-      <button onClick={() => alert("Will be done by Sumaya")}>Show</button>
+  
+  // Show single data buttom
+  const showDetailsButton = {
+    cell: (row) => (
+      <button className="edit_button" onClick={() => handleEdit(row._id)}>
+        <AiOutlineEdit />
+      </button>
     ),
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
   };
-  columnsToDisplay.push(detailsButton);
+
+  // Delete button
+  columnsToDisplay.push(showDetailsButton);
   const deleteButton = {
-    cell: () => (
-      <button onClick={() => alert("Are you sure to delete?")}>Delete</button>
+    cell: (row) => (
+      <button className="delete_button" onClick={() => handleDelete(row._id)}>
+        <AiOutlineDelete />
+      </button>
     ),
     ignoreRowClick: true,
     allowOverflow: true,
@@ -115,19 +158,18 @@ export const Scanner = () => {
 
       <div className="content_container">
         <Card height="calc(100vh)" width="calc(100%)">
-          <div className="table_header">
+        <div className="table_header">
             <button type="button">
-              <FaPlay />
-            </button>
-            <button type="button">
-              <FaPause />
-            </button>
-            <button type="button">
-              <FaSquare />
+              <Link
+                className="table_header_link"
+                to={"/addProfileInfo"}
+              >
+                <AiOutlinePlusCircle />
+              </Link>
             </button>
 
             <button className="reload_btn" type="button">
-              <IoReloadCircle />
+              <AiOutlineReload />
             </button>
           </div>
 

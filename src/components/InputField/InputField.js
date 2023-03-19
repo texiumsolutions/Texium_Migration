@@ -47,7 +47,7 @@ export const InputField = ({
             type={type}
             name={type}
             defaultValue={value}
-            {...register(registerFieldText)}
+            // {...register(registerFieldText)}
           />
         )}
       </td>

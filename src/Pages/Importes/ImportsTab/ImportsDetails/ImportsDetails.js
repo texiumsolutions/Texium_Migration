@@ -22,7 +22,7 @@ export const ImportsDetails = () => {
       .then((response) => response, json())
       .then((data) => setDetailsInfo(data));
   }, [detailsId]);
-  console.log(detailsInfo);
+  console.log(defaultValue);
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);

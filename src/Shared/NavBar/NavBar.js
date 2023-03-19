@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineLogout, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { FiPlay } from "react-icons/fi";
@@ -17,7 +17,7 @@ import { NavigationLink } from "./NavigationLink";
 export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
 
   const logout = () => {
     signOut(auth);
@@ -56,18 +56,18 @@ export const NavBar = () => {
             icon={<AiOutlineQuestionCircle />}
             routePath={"/help"}
           />
-          {user && (
-            <NavLink
-              onClick={() => setShowModal(true)}
-              className="route_btn logout_btn"
-            >
-              <button className="route_btn" type="button">
-                <div className="navbar_icon">
-                  <BiLogOut />
-                </div>
-              </button>
-            </NavLink>
-          )}
+          {/* {user && ( */}
+          <NavLink
+            onClick={() => setShowModal(true)}
+            className="route_btn logout_btn"
+          >
+            <button className="route_btn" type="button">
+              <div className="navbar_icon">
+                <BiLogOut />
+              </div>
+            </button>
+          </NavLink>
+          {/* )} */}
         </section>
       </div>
       {showModal ? (

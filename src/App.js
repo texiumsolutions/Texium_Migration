@@ -3,11 +3,18 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading/Loading";
 import { Modal } from "./components/Modal/Modal";
+import AddProfileInfo from "./Pages/AddProfileInfo/AddProfileInfo";
 // import auth from "./firebase.init";
+import ImportsAdd from "./Pages/AddProfileInfo/AddProfileInfo";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
+import { Imports } from "./Pages/Importes/Imports";
+import { ImportsDetails } from "./Pages/Importes/ImportsTab/ImportsDetails/ImportsDetails";
+import { ImportsRuns } from "./Pages/Importes/ImportsTab/ImportsRuns/ImportsRuns";
+import { ImportsSelection } from "./Pages/Importes/ImportsTab/ImportsSelection/ImportsSelection";
+import { ImportsTab } from "./Pages/Importes/ImportsTab/ImportsTab";
 import { Jobs } from "./Pages/Jobs/Jobs";
 import { Login } from "./Pages/Login/Login";
 import ErrorObject from "./Pages/MigSets/ChildRoute/Error Object/ErrorObject";
@@ -24,14 +31,7 @@ import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDe
 import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
-import Test from "./Pages/NotFound/Test";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
-import { Imports } from "./Pages/Importes/Imports";
-import { ImportsTab } from "./Pages/Importes/ImportsTab/ImportsTab";
-import { ImportsDetails } from "./Pages/Importes/ImportsTab/ImportsDetails/ImportsDetails";
-import ImportsAdd from "./Pages/Importes/ImportsTab/ImportsAdd/ImportsAdd";
-import { ImportsSelection } from "./Pages/Importes/ImportsTab/ImportsSelection/ImportsSelection";
-import { ImportsRuns } from "./Pages/Importes/ImportsTab/ImportsRuns/ImportsRuns";
 
 function App() {
   return (
@@ -47,10 +47,11 @@ function App() {
           }
         />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/addProfileInfo" element={<AddProfileInfo />} />
 
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/scanner/openTab/" element={<OpenTab />}>
-          <Route path="details" element={<OpenTabDetails />} />
+          <Route path="details/:detailsId" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
         </Route>
@@ -80,7 +81,6 @@ function App() {
 
         {/* Testing Routes */}
         <Route path="/loading" element={<Loading />} />
-        {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/modal" element={<Modal />} />
       </Routes>
     </div>
