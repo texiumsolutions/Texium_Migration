@@ -1,3 +1,4 @@
+import { sendEmailVerification } from "firebase/auth";
 import React from "react";
 import {
     useCreateUserWithEmailAndPassword,
@@ -23,6 +24,13 @@ export const Registration = () => {
   if (loading || updating) {
     return <Loading></Loading>;
   }
+
+  const verifyEmail = () =>{
+    sendEmailVerification(auth.currentUser)
+    .then(() =>{
+      console.log("Email verification send!")
+    })
+  }
   if (error || Uerror) {
     signInError = (
       <p className="error_message">{error?.message || Uerror?.message}</p>
@@ -32,11 +40,19 @@ export const Registration = () => {
   //   console.log(user);
   // }
   const onSubmit = async (data) => {
+    verifyEmail();
     createUserWithEmailAndPassword(data.email, data.password);
+    
     await updateProfile({ displayName: data.name, photoURL: data.url });
-
     navigate("/home");
   };
+
+  // const handlePasswordReset = () =>{
+  //   sendPasswordResetEmail(auth, data.email)
+  //   .then(() =>{
+  //     console.log("Email sent!")
+  //   })
+  // }
 
   return (
     <div className="login_container">
@@ -125,6 +141,7 @@ export const Registration = () => {
 
           <br />
           {signInError}
+         
           <input
             className="login_btn"
             type="submit"

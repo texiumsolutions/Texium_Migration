@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { json, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./ImportsDetails.css";
 
 export const ImportsDetails = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const [defaultValue, setDefaultValue] = useState("");
-  const textareaRef = useRef(null);
-  const [file, setFile] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [selectedValue, setSelectedValue] = useState("");
+  // const [ defaultValue, setDefaultValue] = useState("");
+  // const textareaRef = useRef(null);
+  // const [file, setFile] = useState({});
+  // const [successMessage, setSuccessMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const { detailsId } = useParams();
   const [detailsInfo, setDetailsInfo] = useState({});
@@ -24,42 +25,79 @@ export const ImportsDetails = () => {
   }, [detailsId]);
   console.log(detailsInfo);
 
-  const fileOnChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  // const fileOnChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
-  const sendFile = (event) => {
-    event.preventDefault();
-    let formData = new FormData();
+  // const sendFile = (event) => {
+  //   event.preventDefault();
+  //   let formData = new FormData();
+  //   formData.append("avater", file);
 
-    formData.append("avater", file);
+  //   fetch(`http://localhost:5000/testing/${detailsId}`, {
+  //     // method: "GET",
+  //     body: formData,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((resBody) => {
+  //       if (resBody.success) {
+  //         setSuccessMessage(resBody.message);
+  //         setErrorMessage("");
+  //       } else {
+  //         setErrorMessage(resBody.message);
+  //         setSuccessMessage("");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setErrorMessage("Failed to upload file.");
+  //       setSuccessMessage("");
+  //     });
+  // };
 
-    fetch("http://localhost:5000/testing", {
-      method: "post",
-      body: formData,
+  // const handleChange = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
+
+  // const handleTextareaChange = (event) => {
+  //   setDefaultValue(event.target.value);
+  //   if (textareaRef.current) {
+  //     textareaRef.current.style.height = "auto";
+  //     textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+  //   }
+  // };
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    fetch(`http://localhost:5000/testing/${detailsId}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+
+      body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((resBody) => {
-        if (resBody.success) {
-          setSuccessMessage(resBody.message);
-          setErrorMessage("");
+      .then((res) => res.json())
+      .then((inserted) => {
+        if (inserted.insertedId) {
+          alert("Added New Product Successfully");
+
+          reset();
         } else {
-          setErrorMessage(resBody.message);
-          setSuccessMessage("");
+          alert("Failed add to the data");
         }
-      })
-      .catch((error) => {
-        setErrorMessage("Failed to upload file.");
-        setSuccessMessage("");
       });
+    console.log(data);
   };
+  const [selectedValue, setSelectedValue] = useState("");
+  const [value, setValue] = useState("");
+  const textareaRef = useRef(null);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
   const handleTextareaChange = (event) => {
-    setDefaultValue(event.target.value);
+    setValue(event.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -67,34 +105,36 @@ export const ImportsDetails = () => {
   };
 
   return (
-    <div className="opentab_details_container">
-      <div className="opentab_details">
-        <p>Details</p>
-        <Card height={"calc(100vh - 255px)"}>
-          <form className="opentab_details_form">
-          <label className="label" htmlFor="fileName">
-              Name
+    <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="opentab_details_container">
+        <div className="opentab_details">
+          <p>Add Data {detailsInfo.fileName}</p>
+          <Card height={"calc(100vh - 255px)"}>
+            <label className="label" htmlFor="">
+              Name {detailsInfo.fileName}
             </label>
+            <br />
             <input
               className="opentab_details_input"
               type="text"
-              placeholder="File Name"
+              // placeholder="File Name"
               defaultValue={detailsInfo.fileName}
+              {...register("fileName")}
             />
-            <br />
-         
 
-            <label className="label" htmlFor="fileSystem">
-              
+            <label className="label" htmlFor="option">
               Type
             </label>
 
             <br />
 
             <select
+              type="text"
+              {...register("dropdown")}
+              required
               className="opentab_details_input"
+              value={selectedValue}
               onChange={handleChange}
-              defaultValue={ selectedValue}
             >
               <option value="" disabled hidden>
                 Select an option
@@ -104,79 +144,112 @@ export const ImportsDetails = () => {
               <option value="DataBase(MySQL)">DataBase(MySQL)</option>
             </select>
 
-            <label className="label" htmlFor="Description">
-              Description
-            </label>
+            <label className="label">Description</label>
 
             <br />
 
             <textarea
+              type="text"
+              name="description"
               className="opentab_details_input"
-              ref={textareaRef}
-              // defaultValue={Description}
+              {...register("description")}
+              value={value}
               onChange={handleTextareaChange}
-              placeholder="Description"
             />
-          </form>
-        </Card>
-      </div>
+            <input className="submit_button" type="submit" value="Save & Run" />
+          </Card>
+        </div>
+        <div className="opentab_parameters">
+          <p>Parameters</p>
 
-      <div className="opentab_parameters">
-        <p>Parameters</p>
+          <Card height={"calc(100vh - 255px)"}>
+            <div className="parameter_container">
+              <table>
+                <tbody>
+                  {selectedValue === "File System" && (
+                    <>
+                      <InputField
+                        text={"Run Time"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"run_time"}
+                      />
 
-        <Card height={"calc(100vh - 255px)"}>
-          <div className="parameter_container">
-            <table>
-              <tbody>
-                {selectedValue === "File System" && (
-                  <>
-                    <InputField text={"scanFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFiles"} type={"text"} />
-                    <InputField
-                      text={"scanChangedFilesBehaviour"}
-                      type={"text"}
-                    />
-                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-                    <InputField text={"scanFolders"} type={"checkbox"} />
-                  </>
-                )}
-                {selectedValue === "MongoDB" && (
-                  <>
-                    {/* <InputField text={"id"} type={"text"} value={Id} /> */}
-                    {/* <InputField text={"Type"} type={"text"} value={Type} /> */}
-                    <InputField
-                      text={"Last Run On"}
-                      type={"text"}
-                      // value={normalDate}
-                    />
-                    <InputField
-                      text={"Run Number"}
-                      type={"text"}
-                      // value={Run_Number === "" ? "No Runtime" : Run_Number}
-                    />
-                    <InputField
-                      selectedValue={selectedValue}
-                      fileOnChange={fileOnChange}
-                      sendFile={sendFile}
-                      errorMessage={errorMessage}
-                      successMessage={successMessage}
-                      text={"fileInfo"}
-                      type={"file"}
-                    />
-                  </>
-                )}
-                {selectedValue === "DataBase(MySQL)" && (
-                  <>
-                    <InputField text={"scanQuaryForAll"} type={"text"} />
-                    <InputField text={"excludeSingleData"} type={"text"} />
-                  </>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+                      <InputField
+                        text={"Last Run On"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"last_run_on"}
+                      />
+
+                      <InputField
+                        text={"Last Run Status"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"last_run_status"}
+                      />
+                    </>
+                  )}
+                  {selectedValue === "MongoDB" && (
+                    <>
+                      <InputField
+                        text={"Scan Query"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scan_query"}
+                      />
+                      <InputField
+                        text={"Exclude AllData"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_allData"}
+                      />
+                      <InputField
+                        text={"Exclude Data"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_data"}
+                      />
+                    </>
+                  )}
+                  {selectedValue === "DataBase(MySQL)" && (
+                    <>
+                      <InputField
+                        text={"Scan Quary For All"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scanQuaryForAll"}
+                      />
+                      <InputField
+                        text={"Exclude Single Data"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"excludeSingleData"}
+                      />
+                    </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };

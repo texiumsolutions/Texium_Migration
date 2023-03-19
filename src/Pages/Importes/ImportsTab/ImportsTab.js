@@ -70,7 +70,7 @@ export const ImportsTab = ({data}) => {
                 </NavLink>
               </div>
 
-              <div className="opentab_buttons">
+              {/* <div className="opentab_buttons">
                 <button className="opentab_btn" type="button">
                   Close
                 </button>
@@ -88,7 +88,7 @@ export const ImportsTab = ({data}) => {
                 >
                   Save
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <Outlet />
