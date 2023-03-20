@@ -1,0 +1,20 @@
+/* .filePath{
+    width: 150%;
+    background-color: red;
+} */
+.filePath input {
+  outline: none;
+  border: none;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-left: 15px;
+  font-family: "Poppins", sans-serif;
+  resize: none;
+}
+.parameter_inputfield:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.parameter_inputfield:hover {
+  border-bottom: 2px solid var(--primary);
+}

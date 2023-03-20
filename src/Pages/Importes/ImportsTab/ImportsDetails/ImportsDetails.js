@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import React, { useRef, useState } from "react";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./ImportsDetails.css";
@@ -12,16 +11,6 @@ export const ImportsDetails = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { detailsId } = useParams();
-  const [detailsInfo, setDetailsInfo] = useState({});
-
-  useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
-
-    fetch(uri)
-      .then((response) => response, json())
-      .then((data) => setDetailsInfo(data));
-  }, [detailsId]);
   console.log(defaultValue);
 
   const fileOnChange = (event) => {
@@ -81,7 +70,7 @@ export const ImportsDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={detailsInfo.fileName}
+              // defaultValue={""}
             />
 
             <label className="label" htmlFor="fileSystem">

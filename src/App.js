@@ -8,6 +8,7 @@ import AddProfileInfo from "./Pages/AddProfileInfo/AddProfileInfo";
 import ImportsAdd from "./Pages/AddProfileInfo/AddProfileInfo";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
+import { EditProfileInfo } from "./Pages/EditProfileInfo/EditProfileInfo";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
 import { Imports } from "./Pages/Importes/Imports";
@@ -48,10 +49,12 @@ function App() {
         />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/addProfileInfo" element={<AddProfileInfo />} />
+        <Route path="/editProfileInfo/:detailsId" element={<EditProfileInfo />} />
 
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/scanner/openTab/" element={<OpenTab />}>
-          <Route path="details/:detailsId" element={<OpenTabDetails />} />
+          <Route path="details" element={<OpenTabDetails />} />
+          {/* <Route path="details/:detailsId" element={<OpenTabDetails />} /> */}
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
         </Route>

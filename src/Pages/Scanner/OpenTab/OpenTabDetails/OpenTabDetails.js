@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
+import { FileUploader } from "../../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
@@ -13,27 +14,14 @@ export const OpenTabDetails = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
 
-  const { detailsId } = useParams();
-  const [detailsInfo, setDetailsInfo] = useState({});
-
-  useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
-
-    fetch(uri)
-      .then((response) => response.json())
-      .then((data) => setDetailsInfo(data));
-  }, [detailsId]);
-  console.log(defaultValue);
-
   // passed Datas
-  // const profileName = location.state?.name;
+  const profileName = location.state?.name;
   const Description = location.state?.Description;
   const Last_Run_On = location.state?.Last_Run_On;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
   const Run_Number = location.state?.Run_Number;
   const Type = location.state?.Type;
   const Id = location.state?._id;
-  const File_type = location.state?.File_type;
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -93,8 +81,7 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={detailsInfo}
-              
+              defaultValue={profileName}
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -107,7 +94,7 @@ export const OpenTabDetails = () => {
               className="opentab_details_input"
               value={selectedValue}
               onChange={handleChange}
-              defaultValue={File_type && selectedValue}
+              defaultValue={selectedValue}
               // disabled
             >
               <option value="" disabled hidden>
@@ -144,16 +131,10 @@ export const OpenTabDetails = () => {
               <tbody>
                 {selectedValue === "File System" && (
                   <>
-                    <InputField text={"scanFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFiles"} type={"text"} />
-                    <InputField
-                      text={"scanChangedFilesBehaviour"}
-                      type={"text"}
-                    />
-                    value
-                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-                    <InputField text={"scanFolders"} type={"checkbox"} />
+                    {/* <InputField text={"scanFolderPaths"} type={"text"} />
+                    <br />
+                    <input type="button" name="fileScanButton" value="SAVE" /> */}
+                    <FileUploader />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
