@@ -4,7 +4,7 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlinePlusCircle,
-  AiOutlineReload
+  AiOutlineReload,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
@@ -13,7 +13,7 @@ import "./Scanner.css";
 
 export const Scanner = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
+  // const [selectedRows, setSelectedRows] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +22,8 @@ export const Scanner = () => {
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
   }, []);
-  console.log(sourceFileInfo);
 
-  // handle Show
+  // handle edit
   const handleEdit = (id) => {
     fetch(`http://localhost:5000/testing/${id}`, {
       method: "GET",
@@ -60,23 +59,30 @@ export const Scanner = () => {
       });
   };
 
+  // const handleSelectedRowsChange = (rows) => {
+  //   if (rows && rows.selectedRows) {
+  //     const selectedRow = rows.selectedRows[0];
+  //     console.log(selectedRow);
+  //     setSelectedRows(selectedRow);
+  //     navigate(`/scanner/openTab/details`, {
+  //       state: {
+  //         name: selectedRow.Name,
+  //         Description: selectedRow.Description,
+  //         Last_Run_On: selectedRow.Last_Run_On,
+  //         normalDate: selectedRow.normalDate,
+  //         Run_Number: selectedRow.Run_Number,
+  //         Type: selectedRow.Type,
+  //         Id: selectedRow._id,
+  //       },
+  //     });
+  //   }
+  // };
+
   const handleSelectedRowsChange = (rows) => {
-    if (rows && rows.selectedRows) {
-      const selectedRow = rows.selectedRows[0];
-      console.log(selectedRow);
-      setSelectedRows(selectedRow);
-      navigate(`/scanner/openTab/details`, {
-        state: {
-          name: selectedRow.Name,
-          Description: selectedRow.Description,
-          Last_Run_On: selectedRow.Last_Run_On,
-          normalDate: selectedRow.normalDate,
-          Run_Number: selectedRow.Run_Number,
-          Type: selectedRow.Type,
-          Id: selectedRow._id,
-        },
-      });
-    }
+    fetch(`http://localhost:5000/testing/${rows._id}`, {
+      method: "GET",
+    }).then((response) => response.json());
+    navigate(`/scanner/openTab/details/${rows.selectedRows[0]._id}`);
   };
 
   const customStyles = {

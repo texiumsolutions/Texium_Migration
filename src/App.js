@@ -30,6 +30,7 @@ import { Registration } from "./Pages/Registration/Registration";
 import { OpenTab } from "./Pages/Scanner/OpenTab/OpenTab";
 import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDetails";
 import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
+import { FileUploadRun } from "./Pages/Scanner/OpenTab/OpenTabRun/FileUploadRun";
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
@@ -50,11 +51,11 @@ function App() {
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/addProfileInfo" element={<AddProfileInfo />} />
         <Route path="/editProfileInfo/:detailsId" element={<EditProfileInfo />} />
+        <Route path="/fileUploadRun" element={<FileUploadRun />} />
 
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/scanner/openTab/" element={<OpenTab />}>
-          <Route path="details" element={<OpenTabDetails />} />
-          {/* <Route path="details/:detailsId" element={<OpenTabDetails />} /> */}
+          <Route path="details/:detailsId" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
         </Route>
@@ -66,6 +67,7 @@ function App() {
           <Route path="selection" element={<ImportsSelection />} />
           <Route path="importRuns" element={<ImportsRuns />} />
         </Route>
+
         <Route path="/migsets" element={<MigSets />} />
         <Route path="/migsets/migsets-route" element={<MigsetRoutes />}>
           <Route path="properties" element={<Propertise />} />
@@ -74,6 +76,7 @@ function App() {
           <Route path="target-object" element={<TargetObject />} />
           <Route path="error-object" element={<ErrorObject />} />
         </Route>
+        
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/configuration" element={<Configuration />} />
         <Route path="/help" element={<Help />} />

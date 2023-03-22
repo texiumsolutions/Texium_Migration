@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { FileUploader } from "../../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../../components/InputField/InputField";
@@ -7,21 +7,47 @@ import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const [defaultValue, setDefaultValue] = useState("");
+  const [ setDefaultValue] = useState("");
   const textareaRef = useRef(null);
+  const navigate = useNavigate();
+
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const location = useLocation();
+
+  // Singl Data fetching
+  const { detailsId } = useParams();
+  const [detailsInfo, setDetailsInfo] = useState({});
+  useEffect(() => {
+    const uri = `http://localhost:5000/testing/${detailsId}`;
+    fetch(uri)
+      .then((response) => response.json())
+      .then((data) => setDetailsInfo(data))
+      .catch((error) => alert(error));
+  }, [detailsId]);
 
   // passed Datas
-  const profileName = location.state?.name;
-  const Description = location.state?.Description;
-  const Last_Run_On = location.state?.Last_Run_On;
+  const profileName = detailsInfo.Name;
+  const Description = detailsInfo.Description;
+  const Last_Run_On = detailsInfo.Last_Run_On;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = location.state?.Run_Number;
-  const Type = location.state?.Type;
-  const Id = location.state?._id;
+  const Run_Number = detailsInfo.Run_Number;
+  const Type = detailsInfo.Type;
+  const Id = detailsInfo._id;
+
+  const handleSaveAndRun = () => {
+    navigate(`/scanner/openTab/run`, {
+      state: {
+        name: detailsInfo.Name,
+        Description: detailsInfo.Description,
+        Last_Run_On: detailsInfo.Last_Run_On,
+        normalDate: detailsInfo.normalDate,
+        Run_Number: detailsInfo.Run_Number,
+        Type: detailsInfo.Type,
+        _id: detailsInfo._id,
+      },
+    });
+  };
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -55,7 +81,6 @@ export const OpenTabDetails = () => {
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
-    console.log(event.target.value);
   };
 
   const handleTextareaChange = (event) => {
@@ -92,7 +117,6 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              value={selectedValue}
               onChange={handleChange}
               defaultValue={selectedValue}
               // disabled
@@ -131,9 +155,6 @@ export const OpenTabDetails = () => {
               <tbody>
                 {selectedValue === "File System" && (
                   <>
-                    {/* <InputField text={"scanFolderPaths"} type={"text"} />
-                    <br />
-                    <input type="button" name="fileScanButton" value="SAVE" /> */}
                     <FileUploader />
                   </>
                 )}
@@ -159,6 +180,13 @@ export const OpenTabDetails = () => {
                       successMessage={successMessage}
                       text={"fileInfo"}
                       type={"file"}
+                    />
+                    <input
+                      onClick={handleSaveAndRun}
+                      className="save_button"
+                      type="button"
+                      name="save_button"
+                      value="Save & Run"
                     />
                   </>
                 )}

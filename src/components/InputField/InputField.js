@@ -13,6 +13,7 @@ export const InputField = ({
   errorMessage,
   register,
   registerFieldText,
+  disabled,
 }) => {
   return (
     <tr>
@@ -32,7 +33,7 @@ export const InputField = ({
 
               <button onClick={sendFile}>
                 <Link className="mongoDB_save_btn" to="/scanner/openTab/run">
-                  Save
+                  Upload
                 </Link>
               </button>
             </div>
@@ -42,12 +43,12 @@ export const InputField = ({
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </>
         ) : (
-          
           <input
             className={"parameter_inputfield"}
             type={type}
             name={type}
             defaultValue={value}
+            disabled={disabled ? (disabled = true) : (disabled = false)}
             // {...register(registerFieldText)}
           />
         )}
