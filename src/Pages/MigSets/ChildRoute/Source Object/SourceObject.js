@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import {
-  AiFillDelete,
-} from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { BiPencil, BiSearchAlt } from "react-icons/bi";
 import {
   HiOutlineAdjustmentsVertical,
@@ -15,7 +13,6 @@ import { Card } from "../../../../components/Card/Card";
 
 const SourceObject = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-
 
   useEffect(() => {
     fetch("http://localhost:5000/sourceObjects")

@@ -1,0 +1,41 @@
+.input_style {
+  outline: none;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  padding: 3px;
+  border-radius: 3px;
+  border-bottom: 2px solid var(--background);
+  margin-bottom: 15px;
+  font-family: "Poppins", sans-serif;
+  resize: none;
+}
+.mapping_migset {
+  display: flex;
+  background-color: rgb(236, 237, 239);
+}
+.mapping_list_left {
+  background-color: white;
+  width: 30%;
+  height: 550px;
+  margin: 3px;
+  text-align: left;
+}
+.mapping_list_right {
+  background-color: rgba(236, 237, 239);
+  width: 70%;
+  margin: 3px;
+  text-align: left;
+  /* height: 550px; */
+}
+.mapping_p {
+  height: 50px;
+  background-color: white;
+}
+
+/* Rules Code  */
+
+.rules_list_part{
+  height: 230px;
+  background-color: rgb(236, 237, 239);
+}

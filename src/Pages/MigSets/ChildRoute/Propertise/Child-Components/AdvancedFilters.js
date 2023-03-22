@@ -3,6 +3,7 @@ import DataTable from "react-data-table-component";
 import { useForm } from "react-hook-form";
 import { Card } from "../../../../../components/Card/Card";
 import { InputField } from "../../../../../components/InputField/InputField";
+import "../../../Migset.css";
 
 const AdvancedFilters = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -49,7 +50,7 @@ const data = [
       <div className="table_header">
         <InputField
           text={"Source Operator"}
-          className="opentab_details_input"
+          className="input_style"
           type={"text"}
           handleSubmit={handleSubmit}
           register={register}
@@ -57,7 +58,7 @@ const data = [
         />
         <InputField
           text={"Scan Query"}
-          className="opentab_details_input"
+          className="input_style"
           type={"text"}
           handleSubmit={handleSubmit}
           register={register}
@@ -65,7 +66,7 @@ const data = [
         />
         <InputField
           text={"Scan Query"}
-          className="opentab_details_input"
+          className="input_style"
           type={"text"}
           handleSubmit={handleSubmit}
           register={register}

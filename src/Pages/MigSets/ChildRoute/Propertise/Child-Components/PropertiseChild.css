@@ -1,0 +1,8 @@
+.exclution_container{
+  display: flex;
+  background-color: darkgrey;
+}
+.exclution_classname{
+  width: 33%;
+  margin: 3px;
+}
