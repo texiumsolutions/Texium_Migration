@@ -1,8 +1,32 @@
 import React, { useRef, useState } from "react";
-import { Card } from "../../../../../components/Card/Card";
+import { useForm } from "react-hook-form";
 import { InputField } from "../../../../../components/InputField/InputField";
 
 const PropertiesDetails = () => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    fetch("http://localhost:5000/sourceObjects", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((inserted) => {
+        if (inserted.insertedId) {
+          alert("Added New Product Successfully");
+
+          reset();
+        } else {
+          alert("Failed add to the data");
+        }
+      });
+    console.log(data);
+  };
+
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -19,29 +43,33 @@ const PropertiesDetails = () => {
     }
   };
   return (
-    <div className="opentab_details_container">
-      <div className="opentab_details">
-        <p>Details</p>
-        <Card height={"calc(100vh - 255px)"}>
-          <form className="opentab_details_form">
-            <label className="label" htmlFor="fileName">
+    <>
+      <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="opentab_details_container">
+          <div className="opentab_details">
+            <p>Add Data</p>
+
+            <label className="label" htmlFor="">
               Name
             </label>
             <br />
             <input
               className="opentab_details_input"
               type="text"
-              name="fileName"
               placeholder="File Name"
+              {...register("fileName")}
             />
 
-            <label className="label" htmlFor="fileSystem">
+            <label className="label" htmlFor="option">
               Type
             </label>
 
             <br />
 
             <select
+              type="text"
+              {...register("dropdown")}
+              required
               className="opentab_details_input"
               value={selectedValue}
               onChange={handleChange}
@@ -54,63 +82,111 @@ const PropertiesDetails = () => {
               <option value="DataBase(MySQL)">DataBase(MySQL)</option>
             </select>
 
-            <label className="label" htmlFor="Description">
-              Description
-            </label>
+            <label className="label">Description</label>
 
             <br />
 
             <textarea
+              type="text"
+              name="description"
               className="opentab_details_input"
-              ref={textareaRef}
+              {...register("description")}
               value={value}
               onChange={handleTextareaChange}
-              placeholder="Description"
             />
-          </form>
-        </Card>
-      </div>
-
-      <div className="opentab_parameters">
-        <p>Parameters</p>
-
-        <Card height={"calc(100vh - 255px)"}>
-          <div className="parameter_container">
-            <table>
-              <tbody>
-                {selectedValue === "File System" && (
-                  <>
-                    <InputField text={"scanFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFiles"} type={"text"} />
-                    <InputField
-                      text={"scanChangedFilesBehaviour"}
-                      type={"text"}
-                    />
-                    <InputField text={"moveFilesToFolder"} type={"text"} />
-                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-                    <InputField text={"scanFolders"} type={"checkbox"} />
-                  </>
-                )}
-                {selectedValue === "MongoDB" && (
-                  <>
-                    <InputField text={"scanQuary"} type={"text"} />
-                    <InputField text={"excludeAllData"} type={"text"} />
-                    <InputField text={"excludeData"} type={"text"} />
-                  </>
-                )}
-                {selectedValue === "DataBase(MySQL)" && (
-                  <>
-                    <InputField text={"scanQuaryForAll"} type={"text"} />
-                    <InputField text={"excludeSingleData"} type={"text"} />
-                  </>
-                )}
-              </tbody>
-            </table>
+            <input className="submit_button" type="submit" value="Save & Run" />
           </div>
-        </Card>
-      </div>
-    </div>
+          <div className="opentab_parameters">
+            <p>Parameters</p>
+
+            <div className="parameter_container">
+              <table>
+                <tbody>
+                  {selectedValue === "File System" && (
+                    <>
+                      <InputField
+                        text={"Run Time"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"run_time"}
+                      />
+
+                      <InputField
+                        text={"Last Run On"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"last_run_on"}
+                      />
+
+                      <InputField
+                        text={"Last Run Status"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"last_run_status"}
+                      />
+                    </>
+                  )}
+                  {selectedValue === "MongoDB" && (
+                    <>
+                      <InputField
+                        text={"Scan Query"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scan_query"}
+                      />
+                      <InputField
+                        text={"Exclude AllData"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_allData"}
+                      />
+                      <InputField
+                        text={"Exclude Data"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"exclude_data"}
+                      />
+                    </>
+                  )}
+                  {selectedValue === "DataBase(MySQL)" && (
+                    <>
+                      <InputField
+                        text={"Scan Quary For All"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"scanQuaryForAll"}
+                      />
+                      <InputField
+                        text={"Exclude Single Data"}
+                        className="opentab_details_input"
+                        type={"text"}
+                        handleSubmit={handleSubmit}
+                        register={register}
+                        registerFieldText={"excludeSingleData"}
+                      />
+                    </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </>
   );
 };
 

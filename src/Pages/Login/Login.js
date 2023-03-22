@@ -20,7 +20,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   let signInError;
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || "/home";
 
   if (loading) {
     return <Loading></Loading>;

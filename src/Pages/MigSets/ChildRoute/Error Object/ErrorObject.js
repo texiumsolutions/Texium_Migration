@@ -1,118 +1,134 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
+import { AiFillDelete } from 'react-icons/ai';
+import { BiPencil, BiSearchAlt } from 'react-icons/bi';
+import { HiOutlineAdjustmentsVertical, HiOutlineBars3BottomRight } from 'react-icons/hi2';
+import { MdFileDownload } from 'react-icons/md';
+import { TbShare } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import { Card } from '../../../../components/Card/Card';
 
 const ErrorObject = () => {
-  const columns = [
-    {
-        name: 'ID',
-        selector: row => row.id,
-    },
-    {
-        name: 'Name',
-        selector: row => row.year,
-    },
-    {
-        name: 'Processing Type',
-        selector: row => row.description,
-    },
-    {
-        name: 'Creation Date',
-        selector: row => row.year,
-    },
-    {
-        name: 'Total Object',
-        selector: row => row.title,
-    },
-    {
-        name: 'Unproceed',
-        selector: row => row.year,
-    },
-    {
-        name: 'Transformed',
-        selector: row => row.title,
-    },
-    {
-        name: 'Validated',
-        selector: row => row.year,
-    },
-    {
-        name: 'Imported',
-        selector: row => row.title,
-    },
-    {
-        name: 'Partially Imported',
-        selector: row => row.year,
-    },
-    {
-        name: 'Errors',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Operation',
-        selector: row => row.title,
-    },
-    {
-        name: 'Last Date',
-        selector: row => row.year,
-    }
-];
+    const [sourceFileInfo, setSourceFileInfo] = useState([]);
 
-const data = [
-    {
-        id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-    },
-    {
-        id: 2,
-        title: 'Ghostbusters',
-        year: '1984',
-    },
-    {
-        id: 3,
-        title: 'Orange',
-        year: '1944',
-    },
-]
-const customStyles={
-  rows: {
-    style: {
-    },
-},
-headCells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
-        backgroundColor:"#C1C1C1",
-        border: "1px solid black"
 
-    },
-},
-cells: {
-    style: {
-        paddingLeft: '8px', 
-        paddingRight: '8px',
-        backgroundColor:"#FFF"
-    },
-},
-}
+    useEffect(() => {
+      fetch("http://localhost:5000/errorsObjects")
+        .then((response) => response.json())
+        .then((data) => setSourceFileInfo(data))
+        .catch((error) => alert(error));
+    }, []);
+  
+    const customStyles = {
+      headCells: {
+        style: {
+          backgroundColor: "#dddddd",
+          borderRight: "1px solid var(--primary)",
+          fontWeight: "900",
+          color: "var(--primary)",
+        },
+      },
+      cells: {
+        style: {
+          paddingLeft: "16px",
+          paddingRight: "8px",
+          borderRight: "1px solid var(--background)",
+        },
+      },
+    };
+  
+    const columns =
+      sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+  
+    const colDisplay = columns.slice(0, -1);
+  
+    const columnsToDisplay = colDisplay.map((column) => ({
+      name: column,
+      selector: (row) => getField(row, column),
+      sortable: true,
+    }));
+  
+    const data = sourceFileInfo.map((info) => {
+      const flatInfo = {};
+      for (const key in info) {
+        if (typeof info[key] === "object" && info[key] !== null) {
+          for (const subKey in info[key]) {
+            flatInfo[`${key}.${subKey}`] = info[key][subKey];
+          }
+        } else {
+          flatInfo[key] = info[key];
+        }
+      }
+      return flatInfo;
+    });
+  
+    const getField = (row, field) => {
+      const fields = field.split(".");
+      let value = row[fields[0]];
+      for (let i = 1; i < fields.length; i++) {
+        value = value?.[fields[i]];
+      }
+      return value;
+    };
   return (
-    <div>
-      Error Object
-      <DataTable
-        columns={columns}
-        data={data}
-        customStyles={customStyles}
-        pointerOnHover
-        responsive
-        selectableRows
-        selectableRowsHighlight
-        selectableRowsRadio="radio"
-        fixedHeaderScrollHeight="700px"
-        highlightOnHover
-        dense
-      />
+    <Card height="calc(100vh)" width="calc(100%)">
+    <div className="table_header">
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <HiOutlineAdjustmentsVertical />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <MdFileDownload />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <BiSearchAlt />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <HiOutlineBars3BottomRight />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <BiPencil />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <TbShare />
+        </Link>
+      </button>
+      <button type="button">
+        <Link className="table_header_link" to={""}>
+          <AiFillDelete />
+        </Link>
+      </button>
     </div>
+    <h3>Errors Object ({sourceFileInfo.length})</h3>
+    <DataTable
+      columns={columnsToDisplay}
+      data={data}
+      customStyles={customStyles}
+      defaultSortAsc
+      dense
+      fixedHeader
+      Delayed
+      highlightOnHover
+      pointerOnHover
+      responsive
+      persistTableHead
+      noDataComponent="No Data? Please Wait!"
+      selectableRowsHighlight
+      pagination
+      paginationPerPage={15}
+      paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
+    />
+  </Card>
   );
 };
 

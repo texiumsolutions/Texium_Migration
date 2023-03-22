@@ -1,140 +1,188 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { Link } from "react-router-dom";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlusCircle, AiOutlineReload } from "react-icons/ai";
+
+import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
 
 export const MigSets = () => {
-  const columns = [
-    {
-      name: "ID",
-      selector: (row) => row.id,
-    },
-    {
-      name: "Name",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Processing Type",
-      selector: (row) => row.description,
-    },
-    {
-      name: "Creation Date",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Total Object",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Unproceed",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Transformed",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Validated",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Imported",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Partially Imported",
-      selector: (row) => row.year,
-    },
-    {
-      name: "Errors",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Last Operation",
-      selector: (row) => row.title,
-    },
-    {
-      name: "Last Date",
-      selector: (row) => row.year,
-    },
-  ];
+  const [sourceFileInfo, setSourceFileInfo] = useState([]);
+  const navigate = useNavigate();
 
-  const data = [
-    {
-      id: 1,
-      title: "Beetlejuice",
-      year: "1988",
-    },
-    {
-      id: 2,
-      title: "Ghostbusters",
-      year: "1984",
-    },
-    {
-      id: 3,
-      title: "Orange",
-      year: "1944",
-    },
-  ];
+  useEffect(() => {
+    fetch("http://localhost:5000/testing")
+      .then((response) => response.json())
+      .then((data) => setSourceFileInfo(data))
+      .catch((error) => alert(error));
+  }, []);
+
+  // handle Show
+  const handleEdit = (id) => {
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "GET",
+    }).then((response) => response.json());
+
+    navigate(`/imports/importsTab/details/${id}`);
+  };
+
+  // handle delete
+  const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this row?")) {
+      return;
+    }
+
+    fetch(`http://localhost:5000/testing/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          const newSourceFileInfo = sourceFileInfo.filter(
+            (row) => row._id !== id
+          );
+          setSourceFileInfo(newSourceFileInfo);
+          alert("Row deleted successfully!");
+        } else {
+          alert("Failed to delete row");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to delete row");
+      });
+  };
+
   const customStyles = {
-    rows: {
-      style: {
-        minHeight: "72px",
-      },
-    },
     headCells: {
       style: {
-        paddingLeft: "8px",
-        paddingRight: "8px",
-        backgroundColor: "#C1C1C1",
-        border: "1px solid black",
+        backgroundColor: "#dddddd",
+        borderRight: "1px solid var(--primary)",
+        fontWeight: "900",
+        color: "var(--primary)",
       },
     },
     cells: {
       style: {
-        paddingLeft: "8px",
+        paddingLeft: "16px",
         paddingRight: "8px",
-        backgroundColor: "#F5F5F5",
+        borderRight: "1px solid var(--background)",
       },
     },
   };
+
+  const columns =
+    sourceFileInfo.length > 0 ? Object.keys(sourceFileInfo[0]) : [];
+
+  const colDisplay = columns.slice(0, -1);
+
+  const columnsToDisplay = colDisplay.map((column) => ({
+    name: column,
+    selector: (row) => getField(row, column),
+    sortable: true,
+  }));
+
+  // Show single data buttom
+  const showDetailsButton = {
+    cell: (row) => (
+      <button className="edit_button" onClick={() => handleEdit(row._id)}>
+        <AiOutlineEdit />
+      </button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+
+  // Delete button
+  columnsToDisplay.push(showDetailsButton);
+  const deleteButton = {
+    cell: (row) => (
+      <button className="delete_button" onClick={() => handleDelete(row._id)}>
+        <AiOutlineDelete />
+      </button>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  };
+  columnsToDisplay.push(deleteButton);
+
+  const data = sourceFileInfo.map((info) => {
+    const flatInfo = {};
+    for (const key in info) {
+      if (typeof info[key] === "object" && info[key] !== null) {
+        for (const subKey in info[key]) {
+          flatInfo[`${key}.${subKey}`] = info[key][subKey];
+        }
+      } else {
+        flatInfo[key] = info[key];
+      }
+    }
+    return flatInfo;
+  });
+
+  const getField = (row, field) => {
+    const fields = field.split(".");
+    let value = row[fields[0]];
+    for (let i = 1; i < fields.length; i++) {
+      value = value?.[fields[i]];
+    }
+    return value;
+  };
+
   return (
     <div className="container">
-      <div className="nav_container">
-        <NavBar />
-      </div>
-
-      <div className="content_container">
-        <Card height="calc(100%)" width="calc(100%)">
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <div>
-              <button>Add</button>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-            <h1>MigSets</h1>
-          </div>
-          <DataTable
-            columns={columns}
-            data={data}
-            customStyles={customStyles}
-            pointerOnHover
-            responsive
-            selectableRows
-            selectableRowsHighlight
-            selectableRowsRadio="radio"
-            fixedHeaderScrollHeight="700px"
-            highlightOnHover
-            dense
-          />{" "}
-          <Link to="/migsets/migsets-route">Go the next page</Link>
-        </Card>
-      </div>
+    <div className="nav_container">
+      <NavBar />
     </div>
+
+    <div className="content_container">
+      <Card height="calc(100vh)" width="calc(100%)">
+        <div className="table_header">
+          <button type="button">
+            <Link
+              className="table_header_link"
+              to={"/migsets/migsets-route/properties/properties-details"}
+            >
+              <AiOutlinePlusCircle />
+            </Link>
+          </button>
+
+          <button className="reload_btn" type="button">
+            <AiOutlineReload />
+          </button>
+        </div>
+
+        <DataTable
+          columns={columnsToDisplay}
+          data={data}
+          customStyles={customStyles}
+          defaultSortAsc
+          dense
+          fixedHeader
+          Delayed
+          highlightOnHover
+          pointerOnHover
+          responsive
+          persistTableHead
+          noDataComponent="No Data? Please Wait!"
+          selectableRowsHighlight
+          subHeader
+          subHeaderComponent={
+            <input
+              type="text"
+              name="button"
+              className="filter_input"
+              placeholder="Search Here"
+            />
+          }
+          pagination
+          paginationPerPage={15}
+          paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
+        /> <Link to="/migsets/migsets-route">Go the next page</Link>
+      </Card>
+    </div>
+  </div>
   );
 };

@@ -1,9 +1,5 @@
-import { sendEmailVerification } from "firebase/auth";
 import React from "react";
-import {
-    useCreateUserWithEmailAndPassword,
-    useUpdateProfile
-} from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,33 +14,30 @@ export const Registration = () => {
   } = useForm();
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
+  // const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
   const navigate = useNavigate();
   let signInError;
-  if (loading || updating) {
+  if (loading) {
     return <Loading></Loading>;
   }
 
-  const verifyEmail = () =>{
-    sendEmailVerification(auth.currentUser)
-    .then(() =>{
-      console.log("Email verification send!")
-    })
-  }
-  if (error || Uerror) {
-    signInError = (
-      <p className="error_message">{error?.message || Uerror?.message}</p>
-    );
+  // const verifyEmail = () =>{
+  //   sendEmailVerification(auth.currentUser)
+  //   .then(() =>{
+  //     console.log("Email verification send!")
+  //   })
+  // }
+  if (error) {
+    signInError = <p className="error_message">{error?.message}</p>;
   }
   // if (user) {
   //   console.log(user);
   // }
   const onSubmit = async (data) => {
-    verifyEmail();
+    // verifyEmail();
     createUserWithEmailAndPassword(data.email, data.password);
-    
-    await updateProfile({ displayName: data.name, photoURL: data.url });
     navigate("/home");
+    // await updateProfile({ displayName: data.name, photoURL: data.url });
   };
 
   // const handlePasswordReset = () =>{
@@ -141,7 +134,7 @@ export const Registration = () => {
 
           <br />
           {signInError}
-         
+
           <input
             className="login_btn"
             type="submit"

@@ -1,25 +1,48 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { AiFillDelete } from "react-icons/ai";
+import { BiPencil, BiSearchAlt } from "react-icons/bi";
+import { FaPause, FaPlay, FaSquare } from "react-icons/fa";
 import {
   HiOutlineAdjustmentsVertical,
   HiOutlineBars3BottomRight,
 } from "react-icons/hi2";
+import { IoReloadCircle } from "react-icons/io5";
 import { MdFileDownload } from "react-icons/md";
 import { TbShare } from "react-icons/tb";
-import { BiSearchAlt, BiPencil } from "react-icons/bi";
-import { Link } from "react-router-dom";
-import { Card } from "../../../../components/Card/Card";
+import { Link, useNavigate } from "react-router-dom";
+import { Card } from "../../../../../components/Card/Card";
+import { NavBar } from "../../../../../Shared/NavBar/NavBar";
 
-const TargetObject = () => {
+const ObjectPreview = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceObjects")
+    fetch("http://localhost:5000/sourceFileInfo")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
   }, []);
+
+  const handleSelectedRowsChange = (rows) => {
+    if (rows && rows.selectedRows) {
+      const selectedRow = rows.selectedRows[0];
+      setSelectedRows(selectedRows);
+      navigate(``, {
+        state: {
+          name: selectedRow.Name,
+          Description: selectedRow.Description,
+          Last_Run_On: selectedRow.Last_Run_On,
+          normalDate: selectedRow.normalDate,
+          Run_Number: selectedRow.Run_Number,
+          Type: selectedRow.Type,
+          Id: selectedRow._id,
+        },
+      });
+    }
+  };
 
   const customStyles = {
     headCells: {
@@ -72,6 +95,7 @@ const TargetObject = () => {
     }
     return value;
   };
+
   return (
     <Card height="calc(100vh)" width="calc(100%)">
       <div className="table_header">
@@ -129,9 +153,20 @@ const TargetObject = () => {
         pagination
         paginationPerPage={15}
         paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
+        selectableRows
+        onSelectedRowsChange={handleSelectedRowsChange}
+        subHeader
+        subHeaderComponent={
+          <input
+            type="text"
+            name="button"
+            className="filter_input"
+            placeholder="Search Here"
+          />
+        }
       />
     </Card>
   );
 };
 
-export default TargetObject;
+export default ObjectPreview;
