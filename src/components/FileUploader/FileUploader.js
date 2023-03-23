@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./FileUploader.css";
 
-export const FileUploader = () => {
+export const FileUploader = (register, registerFieldText) => {
   const navigate = useNavigate();
   const [directoryPath, setDirectoryPath] = useState("");
   const [dataFiles, setDataFiles] = useState("");
@@ -21,13 +21,12 @@ export const FileUploader = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const files = data.files;
-        setDataFiles(files);
+        setDataFiles(data.files);
+        // navigate("/fileUploadRun", {
+        //   state: { dataFiles: data.files, directoryPath: directoryPath },
+        // });
       })
       .catch((error) => console.error(error));
-
-    console.log(dataFiles);
-    navigate("/fileUploadRun", { state: { dataFiles } });
   };
 
   return (
@@ -39,6 +38,7 @@ export const FileUploader = () => {
           type="text"
           value={directoryPath}
           onChange={handleChange}
+          {...register(registerFieldText)}
         />
       </div>
 

@@ -29,6 +29,7 @@ export const InputField = ({
                 className={"parameter_inputfield"}
                 type={type}
                 onChange={fileOnChange}
+                disabled={disabled ? (disabled = true) : (disabled = false)}
               />
 
               <button onClick={sendFile}>
@@ -49,7 +50,7 @@ export const InputField = ({
             name={type}
             defaultValue={value}
             disabled={disabled ? (disabled = true) : (disabled = false)}
-            // {...register(registerFieldText)}
+            {...register(registerFieldText)}
           />
         )}
       </td>

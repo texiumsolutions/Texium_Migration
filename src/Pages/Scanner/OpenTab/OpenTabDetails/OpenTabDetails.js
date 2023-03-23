@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
-import { FileUploader } from "../../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
@@ -155,12 +154,12 @@ export const OpenTabDetails = () => {
               <tbody>
                 {selectedValue === "File System" && (
                   <>
-                    <FileUploader />
+                    <InputField text={"id"} type={"text"} value={Id} />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
-                    <InputField text={"id"} type={"text"} value={Id} />
+                    
                     <InputField text={"Type"} type={"text"} value={Type} />
                     <InputField
                       text={"Last Run On"}

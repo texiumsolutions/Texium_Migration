@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Card } from "../../components/Card/Card";
-import { InputField } from "../../components/InputField/InputField";
-import { NavBar } from "../../Shared/NavBar/NavBar";
+import { Card } from "../../../components/Card/Card";
+import { FileUploader } from "../../../components/FileUploader/FileUploader";
+import { InputField } from "../../../components/InputField/InputField";
+import { NavBar } from "../../../Shared/NavBar/NavBar";
 
 const AddProfileInfo = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -14,14 +15,12 @@ const AddProfileInfo = () => {
       headers: {
         "content-type": "application/json",
       },
-
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((inserted) => {
         if (inserted.insertedId) {
           alert("Added New Product Successfully");
-
           reset();
         } else {
           alert("Failed add to the data");
@@ -45,6 +44,7 @@ const AddProfileInfo = () => {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
+
   return (
     <div className="container">
       <div className="nav_container">
@@ -53,11 +53,11 @@ const AddProfileInfo = () => {
 
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">
-        <div className="opentab_header">
-          <Link className="opentab_back_btn" to={"/scanner"}>
-            Back
-          </Link>
-        </div>
+          <div className="opentab_header">
+            <Link className="opentab_back_btn" to={"/scanner"}>
+              Back
+            </Link>
+          </div>
           <form
             className="opentab_details_form"
             onSubmit={handleSubmit(onSubmit)}
@@ -127,31 +127,9 @@ const AddProfileInfo = () => {
                       <tbody>
                         {selectedValue === "File System" && (
                           <>
-                            <InputField
-                              text={"Run Time"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              handleSubmit={handleSubmit}
+                            <FileUploader
                               register={register}
-                              registerFieldText={"run_time"}
-                            />
-
-                            <InputField
-                              text={"Last Run On"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
-                              registerFieldText={"last_run_on"}
-                            />
-
-                            <InputField
-                              text={"Last Run Status"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
-                              registerFieldText={"last_run_status"}
+                              registerFieldText={"file_info"}
                             />
                           </>
                         )}

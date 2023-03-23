@@ -6,10 +6,21 @@ import { NavBar } from "../../../../Shared/NavBar/NavBar";
 
 export const FileUploadRun = () => {
   const location = useLocation();
-  const name = location.state?.name;
+  const fileData = location?.state?.dataFiles;
+  const directoryPath = location?.state.directoryPath;
 
-  const files = location.state.dataFiles;
-  console.log(files);
+  const fileRows = Array.isArray(fileData)
+    ? fileData.map((file) => {
+        return {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          modifiedDate: file.modifiedDate,
+          createdDate: file.createdDate,
+          directoryPath: directoryPath,
+        };
+      })
+    : [];
 
   const customStyles = {
     headCells: {
@@ -35,41 +46,39 @@ export const FileUploadRun = () => {
       selector: (row) => row.name,
       sortable: true,
     },
-    // {
-    //   name: "File Size",
-    //   selector: "size",
-    //   sortable: true,
-    //   format: ({ size }) => {
-    //     return `${(size / (1024 * 1024)).toFixed(2)} MB`;
-    //   },
-    // },
-    // {
-    //   name: "File Type",
-    //   selector: "type",
-    //   sortable: true,
-    // },
-    // {
-    //   name: "Modified Date",
-    //   selector: "modifiedDate",
-    //   sortable: true,
-    //   format: ({ modifiedDate }) => {
-    //     return new Date(modifiedDate).toLocaleString();
-    //   },
-    // },
-    // {
-    //   name: "Created Date",
-    //   selector: "createdDate",
-    //   sortable: true,
-    //   format: ({ createdDate }) => {
-    //     return new Date(createdDate).toLocaleString();
-    //   },
-    // },
-  ];
-
-  const data = [
     {
-      name: name,
-      title: "name",
+      name: "File Size",
+      selector: (row) => row.size,
+      sortable: true,
+      format: ({ size }) => {
+        return `${(size / (1024 * 1024)).toFixed(2)} MB`;
+      },
+    },
+    {
+      name: "Content Location",
+      selector: (row) => row.directoryPath,
+      sortable: true,
+    },
+    {
+      name: "File Type",
+      selector: (row) => row.type,
+      sortable: true,
+    },
+    {
+      name: "Modified Date",
+      selector: (row) => row.modifiedDate,
+      sortable: true,
+      format: ({ modifiedDate }) => {
+        return new Date(modifiedDate).toLocaleString();
+      },
+    },
+    {
+      name: "Created Date",
+      selector: (row) => row.createdDate,
+      sortable: true,
+      format: ({ createdDate }) => {
+        return new Date(createdDate).toLocaleString();
+      },
     },
   ];
 
@@ -83,7 +92,7 @@ export const FileUploadRun = () => {
         <Card height={"calc(100vh)"} width={"100%"}>
           <DataTable
             columns={columns}
-            data={data}
+            data={fileRows}
             customStyles={customStyles}
             defaultSortAsc
             dense

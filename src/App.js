@@ -3,9 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Loading from "./components/Loading/Loading";
 import { Modal } from "./components/Modal/Modal";
-import AddProfileInfo from "./Pages/AddProfileInfo/AddProfileInfo";
 // import auth from "./firebase.init";
-import ImportsAdd from "./Pages/AddProfileInfo/AddProfileInfo";
+import ImportsAdd from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { EditProfileInfo } from "./Pages/EditProfileInfo/EditProfileInfo";
@@ -26,6 +25,7 @@ import Transformation from "./Pages/MigSets/ChildRoute/Transformation/Transforma
 import MigsetRoutes from "./Pages/MigSets/MigsetRoutes";
 import { MigSets } from "./Pages/MigSets/MigSets";
 import NotFound from "./Pages/NotFound/NotFound";
+import AddProfileInfo from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
 import { Registration } from "./Pages/Registration/Registration";
 import { OpenTab } from "./Pages/Scanner/OpenTab/OpenTab";
 import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDetails";
