@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
+import { FileUploader } from "../../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
   const [selectedValue, setSelectedValue] = useState("");
-  const [ setDefaultValue] = useState("");
+  const [setDefaultValue] = useState("");
   const textareaRef = useRef(null);
   const navigate = useNavigate();
+  const register = (text) => {
+    return text;
+  };
+
+  console.log(selectedValue);
 
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -154,22 +160,23 @@ export const OpenTabDetails = () => {
               <tbody>
                 {selectedValue === "File System" && (
                   <>
-                    <InputField text={"id"} type={"text"} value={Id} />
+                    <FileUploader register={register} />
                   </>
                 )}
                 {selectedValue === "MongoDB" && (
                   <>
-                    
-                    <InputField text={"Type"} type={"text"} value={Type} />
+                    <InputField text={"Type"} type={"text"} value={Type} register={register} />
                     <InputField
                       text={"Last Run On"}
                       type={"text"}
                       value={normalDate}
+                      register={register}
                     />
                     <InputField
                       text={"Run Number"}
                       type={"text"}
                       value={Run_Number === "" ? "No Runtime" : Run_Number}
+                      register={register}
                     />
                     <InputField
                       selectedValue={selectedValue}
@@ -179,6 +186,7 @@ export const OpenTabDetails = () => {
                       successMessage={successMessage}
                       text={"fileInfo"}
                       type={"file"}
+                      register={register}
                     />
                     <input
                       onClick={handleSaveAndRun}
@@ -191,8 +199,8 @@ export const OpenTabDetails = () => {
                 )}
                 {selectedValue === "DataBase(MySQL)" && (
                   <>
-                    <InputField text={"scanQuaryForAll"} type={"text"} />
-                    <InputField text={"excludeSingleData"} type={"text"} />
+                    <InputField text={"scanQuaryForAll"} type={"text"} register={register} />
+                    <InputField text={"excludeSingleData"} type={"text"} register={register} />
                   </>
                 )}
               </tbody>

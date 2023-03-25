@@ -20,13 +20,12 @@ const AddProfileInfo = () => {
       .then((res) => res.json())
       .then((inserted) => {
         if (inserted.insertedId) {
-          alert("Added New Product Successfully");
+          alert("Added New Product Successfully!");
           reset();
         } else {
           alert("Failed add to the data");
         }
       });
-    console.log(data);
   };
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -65,8 +64,8 @@ const AddProfileInfo = () => {
             <div className="opentab_details_container">
               <div className="opentab_details">
                 <p>Add Data</p>
-                <Card height={"calc(100vh - 255px)"}>
-                  <label className="label" htmlFor="">
+                <Card height={"calc(100vh - 13.5em)"}>
+                  <label className="label" htmlFor="name">
                     Name
                   </label>
                   <br />
@@ -85,7 +84,7 @@ const AddProfileInfo = () => {
 
                   <select
                     type="text"
-                    {...register("dropdown")}
+                    {...register("fileType")}
                     required
                     className="opentab_details_input"
                     value={selectedValue}
@@ -111,17 +110,12 @@ const AddProfileInfo = () => {
                     value={value}
                     onChange={handleTextareaChange}
                   />
-                  <input
-                    className="submit_button"
-                    type="submit"
-                    value="Save & Run"
-                  />
                 </Card>
               </div>
               <div className="opentab_parameters">
                 <p>Parameters</p>
 
-                <Card height={"calc(100vh - 255px)"}>
+                <Card height={"calc(100vh - 13.5em)"}>
                   <div className="parameter_container">
                     <table>
                       <tbody>
@@ -129,7 +123,8 @@ const AddProfileInfo = () => {
                           <>
                             <FileUploader
                               register={register}
-                              registerFieldText={"file_info"}
+                              registerFieldText={"filePath"}
+                              submitButton={<input className="submit_button" type="submit" value="Submit" />}
                             />
                           </>
                         )}
@@ -141,7 +136,7 @@ const AddProfileInfo = () => {
                               type={"text"}
                               handleSubmit={handleSubmit}
                               register={register}
-                              registerFieldText={"scan_query"}
+                              registerFieldText={"scanQuery"}
                             />
                             <InputField
                               text={"Exclude AllData"}
@@ -149,7 +144,7 @@ const AddProfileInfo = () => {
                               type={"text"}
                               handleSubmit={handleSubmit}
                               register={register}
-                              registerFieldText={"exclude_allData"}
+                              registerFieldText={"excludeAllData"}
                             />
                             <InputField
                               text={"Exclude Data"}
@@ -157,7 +152,7 @@ const AddProfileInfo = () => {
                               type={"text"}
                               handleSubmit={handleSubmit}
                               register={register}
-                              registerFieldText={"exclude_data"}
+                              registerFieldText={"excludeData"}
                             />
                           </>
                         )}

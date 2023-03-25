@@ -4,7 +4,7 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlinePlusCircle,
-  AiOutlineReload,
+  AiOutlineReload
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
@@ -79,6 +79,7 @@ export const Scanner = () => {
   // };
 
   const handleSelectedRowsChange = (rows) => {
+    console.log(rows.selectedRows);
     fetch(`http://localhost:5000/testing/${rows._id}`, {
       method: "GET",
     }).then((response) => response.json());

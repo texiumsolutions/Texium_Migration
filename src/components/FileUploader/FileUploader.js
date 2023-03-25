@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./FileUploader.css";
 
-export const FileUploader = (register, registerFieldText) => {
+export const FileUploader = ({ register, registerFieldText, submitButton }) => {
   const navigate = useNavigate();
   const [directoryPath, setDirectoryPath] = useState("");
   const [dataFiles, setDataFiles] = useState("");
@@ -22,6 +22,7 @@ export const FileUploader = (register, registerFieldText) => {
       .then((response) => response.json())
       .then((data) => {
         setDataFiles(data.files);
+        register({ ...registerFieldText, value: data.files });
         // navigate("/fileUploadRun", {
         //   state: { dataFiles: data.files, directoryPath: directoryPath },
         // });
@@ -34,11 +35,11 @@ export const FileUploader = (register, registerFieldText) => {
       <div className="filePath">
         <label for="input">Path</label>
         <input
+          {...register(registerFieldText)}
           className="parameter_inputfield"
           type="text"
           value={directoryPath}
           onChange={handleChange}
-          {...register(registerFieldText)}
         />
       </div>
 
@@ -46,6 +47,7 @@ export const FileUploader = (register, registerFieldText) => {
       <button className="upload_btn" onClick={handleUpload}>
         Submit
       </button>
+      {submitButton}    
     </div>
   );
 };
