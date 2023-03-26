@@ -13,6 +13,7 @@ export const InputField = ({
   errorMessage,
   register,
   registerFieldText,
+  disabled,
 }) => {
   return (
     <tr>
@@ -28,11 +29,12 @@ export const InputField = ({
                 className={"parameter_inputfield"}
                 type={type}
                 onChange={fileOnChange}
+                disabled={disabled ? (disabled = true) : (disabled = false)}
               />
 
               <button onClick={sendFile}>
                 <Link className="mongoDB_save_btn" to="/scanner/openTab/run">
-                  Save
+                  Upload
                 </Link>
               </button>
             </div>
@@ -47,6 +49,7 @@ export const InputField = ({
             type={type}
             name={type}
             defaultValue={value}
+            disabled={disabled ? (disabled = true) : (disabled = false)}
             {...register(registerFieldText)}
           />
         )}

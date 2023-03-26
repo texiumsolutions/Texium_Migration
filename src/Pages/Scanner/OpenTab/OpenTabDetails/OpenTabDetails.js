@@ -1,29 +1,55 @@
-import React, { useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const [defaultValue, setDefaultValue] = useState("");
+  const [setDefaultValue] = useState("");
   const textareaRef = useRef(null);
+  const navigate = useNavigate();
+  const register = (text) => {
+    return text;
+  };
+
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const location = useLocation();
+
+  // Singl Data fetching
+  const { detailsId } = useParams();
+  const [detailsInfo, setDetailsInfo] = useState({});
+  useEffect(() => {
+    const uri = `http://localhost:5000/testing/${detailsId}`;
+    fetch(uri)
+      .then((response) => response.json())
+      .then((data) => setDetailsInfo(data))
+      .catch((error) => alert(error));
+  }, [detailsId]);
 
   // passed Datas
-  const profileName = location.state?.name;
-  const Description = location.state?.Description;
-  const Last_Run_On = location.state?.Last_Run_On;
+  const profileName = detailsInfo.File_Name;
+  const Description = detailsInfo.Description;
+  const Last_Run_On = detailsInfo.Last_Run_On;
+  const Source_Type = detailsInfo.Source_Type;
+  const Directory_Path = detailsInfo.Directory_Path;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = location.state?.Run_Number;
-  const Type = location.state?.Type;
-  const Id = location.state?._id;
-  const File_type = location.state?.File_type;
-  console.log(defaultValue);
+  const Run_Number = detailsInfo.Run_Number;
+  const Type = detailsInfo.Type;
 
+  const handleSaveAndRun = () => {
+    navigate(`/scanner/openTab/run`, {
+      state: {
+        name: detailsInfo.Name,
+        Description: detailsInfo.Description,
+        Last_Run_On: detailsInfo.Last_Run_On,
+        normalDate: detailsInfo.normalDate,
+        Run_Number: detailsInfo.Run_Number,
+        Type: detailsInfo.Type,
+        _id: detailsInfo._id,
+      },
+    });
+  };
 
   const fileOnChange = (event) => {
     setFile(event.target.files[0]);
@@ -55,10 +81,6 @@ export const OpenTabDetails = () => {
       });
   };
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
   const handleTextareaChange = (event) => {
     setDefaultValue(event.target.value);
     if (textareaRef.current) {
@@ -82,8 +104,7 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={profileName}
-              
+              value={profileName}
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -94,9 +115,7 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              // value={selectedValue}
-              onChange={handleChange}
-              defaultValue={File_type && selectedValue}
+              defaultValue={Source_Type}
               disabled
             >
               <option value="" disabled hidden>
@@ -116,7 +135,7 @@ export const OpenTabDetails = () => {
             <textarea
               className="opentab_details_input"
               ref={textareaRef}
-              defaultValue={Description}
+              value={Description}
               onChange={handleTextareaChange}
               placeholder="Description"
             />
@@ -131,49 +150,76 @@ export const OpenTabDetails = () => {
           <div className="parameter_container">
             <table>
               <tbody>
-                {selectedValue === "File System" && (
+                {Source_Type === "File System" && (
                   <>
-                    <InputField text={"scanFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFolderPaths"} type={"text"} />
-                    <InputField text={"excludeFiles"} type={"text"} />
-                    <InputField
-                      text={"scanChangedFilesBehaviour"}
-                      type={"text"}
+                    <div className="filePath">
+                      <label htmlFor="path">Path</label>
+                      <input
+                        className="parameter_inputfield"
+                        type="text"
+                        name="path"
+                        value={Directory_Path}
+                      />
+                    </div>
+                    <input
+                      onClick={handleSaveAndRun}
+                      className="save_button"
+                      type="button"
+                      name="save_button"
+                      value="Save & Run"
                     />
-                    value
-                    <InputField text={"ignoreHiddenFiles"} type={"checkbox"} />
-                    <InputField text={"scanFolders"} type={"checkbox"} />
                   </>
                 )}
-                {selectedValue === "MongoDB" && (
+                {Source_Type === "MongoDB" && (
                   <>
-                    <InputField text={"id"} type={"text"} value={Id} />
-                    <InputField text={"Type"} type={"text"} value={Type} />
+                    <InputField
+                      text={"Type"}
+                      type={"text"}
+                      value={Type}
+                      register={register}
+                    />
                     <InputField
                       text={"Last Run On"}
                       type={"text"}
                       value={normalDate}
+                      register={register}
                     />
                     <InputField
                       text={"Run Number"}
                       type={"text"}
                       value={Run_Number === "" ? "No Runtime" : Run_Number}
+                      register={register}
                     />
                     <InputField
-                      selectedValue={selectedValue}
                       fileOnChange={fileOnChange}
                       sendFile={sendFile}
                       errorMessage={errorMessage}
                       successMessage={successMessage}
                       text={"fileInfo"}
                       type={"file"}
+                      register={register}
+                    />
+                    <input
+                      onClick={handleSaveAndRun}
+                      className="save_button"
+                      type="button"
+                      name="save_button"
+                      value="Save & Run"
                     />
                   </>
                 )}
-                {selectedValue === "DataBase(MySQL)" && (
+                {Source_Type === "DataBase(MySQL)" && (
                   <>
-                    <InputField text={"scanQuaryForAll"} type={"text"} />
-                    <InputField text={"excludeSingleData"} type={"text"} />
+                    <InputField
+                      text={"scanQuaryForAll"}
+                      type={"text"}
+                      register={register}
+                    />
+                    <InputField
+                      text={"excludeSingleData"}
+                      type={"text"}
+                      register={register}
+                    />
                   </>
                 )}
               </tbody>

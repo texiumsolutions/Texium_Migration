@@ -4,7 +4,7 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlinePlusCircle,
-  AiOutlineReload,
+  AiOutlineReload
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
@@ -22,7 +22,7 @@ export const Imports = () => {
       .catch((error) => alert(error));
   }, []);
 
-  // handle Show
+  // handle Edit
   const handleEdit = (id) => {
     fetch(`http://localhost:5000/testing/${id}`, {
       method: "GET",

@@ -22,10 +22,8 @@
   transition: background-color 200ms;
 }
 .table_header button .table_header_link:hover {
-  border: 2px solid #007700;
-  background-color: #007700;
+  background-color: var(--secondary);
   color: var(--white);
-  padding: 3px 8px;
 }
 .reload_btn {
   border-left: 1px solid var(--text) !important;

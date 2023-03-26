@@ -1,6 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { AiOutlineLogout, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { FiPlay } from "react-icons/fi";

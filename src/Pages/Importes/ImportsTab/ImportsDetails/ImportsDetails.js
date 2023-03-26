@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { json, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./ImportsDetails.css";
@@ -13,17 +12,7 @@ export const ImportsDetails = () => {
   // const [successMessage, setSuccessMessage] = useState("");
   // const [errorMessage, setErrorMessage] = useState("");
 
-  const { detailsId } = useParams();
-  const [detailsInfo, setDetailsInfo] = useState({});
-
-  useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
-
-    fetch(uri)
-      .then((response) => response, json())
-      .then((data) => setDetailsInfo(data));
-  }, [detailsId]);
-  console.log(detailsInfo);
+  // console.log(defaultValue);
 
   // const fileOnChange = (event) => {
   //   setFile(event.target.files[0]);
@@ -67,27 +56,27 @@ export const ImportsDetails = () => {
   // };
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    fetch(`http://localhost:5000/testing/${detailsId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
+  // const onSubmit = (data) => {
+  //   fetch(`http://localhost:5000/testing/${detailsId}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
 
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((inserted) => {
-        if (inserted.insertedId) {
-          alert("Added New Product Successfully");
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((inserted) => {
+  //       if (inserted.insertedId) {
+  //         alert("Added New Product Successfully");
 
-          reset();
-        } else {
-          alert("Failed add to the data");
-        }
-      });
-    console.log(data);
-  };
+  //         reset();
+  //       } else {
+  //         alert("Failed add to the data");
+  //       }
+  //     });
+  //   console.log(data);
+  // };
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -105,21 +94,24 @@ export const ImportsDetails = () => {
   };
 
   return (
-    <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+    <form className=" opentab_details_form" >
       <div className="opentab_details_container">
         <div className="opentab_details">
-          <p>Add Data {detailsInfo.fileName}</p>
+          <p>Add Data 
+            {/* {detailsInfo.fileName} */}
+            </p>
           <Card height={"calc(100vh - 255px)"}>
             <label className="label" htmlFor="">
-              Name {detailsInfo.fileName}
+              Name
+               {/* {detailsInfo.fileName} */}
             </label>
             <br />
             <input
               className="opentab_details_input"
               type="text"
-              // placeholder="File Name"
-              defaultValue={detailsInfo.fileName}
-              {...register("fileName")}
+              name="fileName"
+              placeholder="File Name"
+              // defaultValue={""}
             />
 
             <label className="label" htmlFor="option">

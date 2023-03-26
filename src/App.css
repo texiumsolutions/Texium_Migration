@@ -12,8 +12,8 @@
 
 ::-webkit-scrollbar {
   scroll-behavior: smooth;
-  width: 0.8vw;
-  height: 1.6vh;
+  width: 0.9vw;
+  height: 1.2vh;
 }
 
 ::-webkit-scrollbar-track {

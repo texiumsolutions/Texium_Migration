@@ -30,7 +30,7 @@
   border: none;
   cursor: pointer;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 24px;
   width: 100%;
   padding-block: 5px;
   line-height: 1.5em;
@@ -41,7 +41,7 @@
   background-color: transparent !important;
 }
 .active {
-  background-color: var(--secondary);
+  background-color: var(--background);
 }
 
 .nav_divider {
