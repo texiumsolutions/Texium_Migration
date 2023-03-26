@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputField } from "../../../../../components/InputField/InputField";
 
 const PropertiesDetails = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -43,12 +42,13 @@ const PropertiesDetails = () => {
     }
   };
   return (
-    <>
-      <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="opentab_details_container">
+    <div className="container_migset">
+      <form
+        className=" opentab_details_form "
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="propertice_details_container">
           <div className="opentab_details">
-            <p>Add Data</p>
-
             <label className="label" htmlFor="">
               Name
             </label>
@@ -73,6 +73,7 @@ const PropertiesDetails = () => {
               className="opentab_details_input"
               value={selectedValue}
               onChange={handleChange}
+              disabled
             >
               <option value="" disabled hidden>
                 Select an option
@@ -94,99 +95,23 @@ const PropertiesDetails = () => {
               value={value}
               onChange={handleTextareaChange}
             />
-            <input className="submit_button" type="submit" value="Save & Run" />
-          </div>
-          <div className="opentab_parameters">
-            <p>Parameters</p>
+            <h5>Creation Date</h5>
+            <p>2023-03-29 19:08</p>
 
-            <div className="parameter_container">
-              <table>
-                <tbody>
-                  {selectedValue === "File System" && (
-                    <>
-                      <InputField
-                        text={"Run Time"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"run_time"}
-                      />
+            <h5>Last Operation Date </h5>
+            <p>2023-03-29 19:08</p>
+            <h5>Last operation</h5>
+            <p>Object Unselection</p>
 
-                      <InputField
-                        text={"Last Run On"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"last_run_on"}
-                      />
-
-                      <InputField
-                        text={"Last Run Status"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"last_run_status"}
-                      />
-                    </>
-                  )}
-                  {selectedValue === "MongoDB" && (
-                    <>
-                      <InputField
-                        text={"Scan Query"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"scan_query"}
-                      />
-                      <InputField
-                        text={"Exclude AllData"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"exclude_allData"}
-                      />
-                      <InputField
-                        text={"Exclude Data"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"exclude_data"}
-                      />
-                    </>
-                  )}
-                  {selectedValue === "DataBase(MySQL)" && (
-                    <>
-                      <InputField
-                        text={"Scan Quary For All"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"scanQuaryForAll"}
-                      />
-                      <InputField
-                        text={"Exclude Single Data"}
-                        className="opentab_details_input"
-                        type={"text"}
-                        handleSubmit={handleSubmit}
-                        register={register}
-                        registerFieldText={"excludeSingleData"}
-                      />
-                    </>
-                  )}
-                </tbody>
-              </table>
-            </div>
+            <input
+              className=" propetise_save_button"
+              type="submit"
+              value="Save & Run"
+            />
           </div>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

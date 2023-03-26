@@ -39,6 +39,7 @@ import ObjectPreview from "./Pages/MigSets/ChildRoute/Propertise/Child-Component
 import Rules from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Rules";
 import MappingList from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/MappingList";
 import Association from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Association";
+import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
 
 function App() {
   return (
@@ -136,6 +137,7 @@ function App() {
             <Route path="rules" element={<Rules />} />
           <Route path="mapping-list" element={<MappingList />} />
           <Route path="association" element={<Association />} />
+          <Route path="demo" element={<Demo />} />
           </Route>
           <Route path="source-object" element={<SourceObject />} />
           <Route path="target-object" element={<TargetObject />} />

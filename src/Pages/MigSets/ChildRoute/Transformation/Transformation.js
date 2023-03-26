@@ -39,6 +39,15 @@ const Transformation = () => {
           >
             Association
           </NavLink>
+          <NavLink
+            to={"/migsets/migsets-route/transformation/demo"}
+            onClick={() => setShowObjects(!showObjects)}
+            className={({ isActive }) =>
+              isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
+            }
+          >
+            Demo
+          </NavLink>
         </div>
       </div>
       <Outlet />

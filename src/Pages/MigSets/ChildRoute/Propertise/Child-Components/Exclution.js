@@ -17,26 +17,6 @@ const Exclution = () => {
       selector: (row) => row.valueexcluded,
     },
   ];
-  // const columns2 = [
-  //   {
-  //     name: "Step",
-  //     selector: (row) => row.step,
-  //   },
-  //   {
-  //     name: "Function",
-  //     selector: (row) => row.function,
-  //   },
-  // ];
-  // const columns3 = [
-  //   {
-  //     name: "Step",
-  //     selector: (row) => row.step,
-  //   },
-  //   {
-  //     name: "Function",
-  //     selector: (row) => row.function,
-  //   },
-  // ];
 
   const data = [
     {
@@ -68,35 +48,12 @@ const Exclution = () => {
       attributes: "mc_content_location",
       Excluded: "file (10)",
       valueexcluded: "",
-    }
+    },
   ];
-  // const data2 = [
-  //   {
-  //     step: "1",
-  //     function: "Getvalue (Document)",
-  //   },
-  // ];
-  // const data3 = [
-  //   {
-  //     step: "1",
-  //     function: "Getvalue (Document)",
-  //   },
-  // ];
 
   return (
     <div className="exclution_container">
-      {/* <section className="exclution_classname"> */}
-        {/* <h4>Avilable Attributes</h4> */}
-        <DataTable columns={columns} data={data}></DataTable>
-      {/* </section> */}
-      {/* <section className="exclution_classname">
-        <h4>Include Values- All Value Loaded</h4>
-        <DataTable columns={columns2} data={data2}></DataTable>
-      </section>
-      <section className="exclution_classname">
-        <h4>Excluded value</h4>
-        <DataTable columns={columns3} data={data3}></DataTable>
-      </section> */}
+      <DataTable columns={columns} data={data}></DataTable>
     </div>
   );
 };
