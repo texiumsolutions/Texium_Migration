@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Card } from "../../../components/Card/Card";
 import { FileUploader } from "../../../components/FileUploader/FileUploader";
@@ -7,35 +6,17 @@ import { InputField } from "../../../components/InputField/InputField";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 
 const AddProfileInfo = () => {
-  const { register, handleSubmit, reset } = useForm();
-
-  const onSubmit = (data) => {
-    fetch("http://localhost:5000/testing", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((inserted) => {
-        if (inserted.insertedId) {
-          alert("Added New Product Successfully!");
-          reset();
-        } else {
-          alert("Failed add to the data");
-        }
-      });
-  };
-
+  const [selectedName, setSelectedName] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
 
+  const handleNameChange = (event) => {
+    setSelectedName(event.target.value);
+  };
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
-
   const handleTextareaChange = (event) => {
     setValue(event.target.value);
     if (textareaRef.current) {
@@ -57,10 +38,7 @@ const AddProfileInfo = () => {
               Back
             </Link>
           </div>
-          <form
-            className="opentab_details_form"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <div className="opentab_details_form">
             <div className="opentab_details_container">
               <div className="opentab_details">
                 <p>Add Data</p>
@@ -68,12 +46,15 @@ const AddProfileInfo = () => {
                   <label className="label" htmlFor="name">
                     Name
                   </label>
+
                   <br />
+
                   <input
                     className="opentab_details_input"
                     type="text"
                     placeholder="File Name"
-                    {...register("fileName")}
+                    value={selectedName}
+                    onChange={handleNameChange}
                   />
 
                   <label className="label" htmlFor="option">
@@ -84,7 +65,6 @@ const AddProfileInfo = () => {
 
                   <select
                     type="text"
-                    {...register("fileType")}
                     required
                     className="opentab_details_input"
                     value={selectedValue}
@@ -106,7 +86,6 @@ const AddProfileInfo = () => {
                     type="text"
                     name="description"
                     className="opentab_details_input"
-                    {...register("description")}
                     value={value}
                     onChange={handleTextareaChange}
                   />
@@ -122,9 +101,10 @@ const AddProfileInfo = () => {
                         {selectedValue === "File System" && (
                           <>
                             <FileUploader
-                              register={register}
                               registerFieldText={"filePath"}
-                              submitButton={<input className="submit_button" type="submit" value="Submit" />}
+                              selectedName={selectedName}
+                              selectedValue={selectedValue}
+                              value={value}
                             />
                           </>
                         )}
@@ -134,24 +114,18 @@ const AddProfileInfo = () => {
                               text={"Scan Query"}
                               className="opentab_details_input"
                               type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
                               registerFieldText={"scanQuery"}
                             />
                             <InputField
                               text={"Exclude AllData"}
                               className="opentab_details_input"
                               type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
                               registerFieldText={"excludeAllData"}
                             />
                             <InputField
                               text={"Exclude Data"}
                               className="opentab_details_input"
                               type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
                               registerFieldText={"excludeData"}
                             />
                           </>
@@ -162,16 +136,12 @@ const AddProfileInfo = () => {
                               text={"Scan Quary For All"}
                               className="opentab_details_input"
                               type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
                               registerFieldText={"scanQuaryForAll"}
                             />
                             <InputField
                               text={"Exclude Single Data"}
                               className="opentab_details_input"
                               type={"text"}
-                              handleSubmit={handleSubmit}
-                              register={register}
                               registerFieldText={"excludeSingleData"}
                             />
                           </>
@@ -182,7 +152,7 @@ const AddProfileInfo = () => {
                 </Card>
               </div>
             </div>
-          </form>
+          </div>
         </Card>
       </div>
     </div>

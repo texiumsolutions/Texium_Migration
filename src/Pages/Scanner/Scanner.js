@@ -13,7 +13,6 @@ import "./Scanner.css";
 
 export const Scanner = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-  // const [selectedRows, setSelectedRows] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,25 +58,6 @@ export const Scanner = () => {
       });
   };
 
-  // const handleSelectedRowsChange = (rows) => {
-  //   if (rows && rows.selectedRows) {
-  //     const selectedRow = rows.selectedRows[0];
-  //     console.log(selectedRow);
-  //     setSelectedRows(selectedRow);
-  //     navigate(`/scanner/openTab/details`, {
-  //       state: {
-  //         name: selectedRow.Name,
-  //         Description: selectedRow.Description,
-  //         Last_Run_On: selectedRow.Last_Run_On,
-  //         normalDate: selectedRow.normalDate,
-  //         Run_Number: selectedRow.Run_Number,
-  //         Type: selectedRow.Type,
-  //         Id: selectedRow._id,
-  //       },
-  //     });
-  //   }
-  // };
-
   const handleSelectedRowsChange = (rows) => {
     console.log(rows.selectedRows);
     fetch(`http://localhost:5000/testing/${rows._id}`, {
@@ -114,6 +94,7 @@ export const Scanner = () => {
     selector: (row) => getField(row, column),
     sortable: true,
   }));
+  console.log(sourceFileInfo);
 
   // Show single data buttom
   const showDetailsButton = {
@@ -126,9 +107,9 @@ export const Scanner = () => {
     allowOverflow: true,
     button: true,
   };
+  columnsToDisplay.push(showDetailsButton);
 
   // Delete button
-  columnsToDisplay.push(showDetailsButton);
   const deleteButton = {
     cell: (row) => (
       <button className="delete_button" onClick={() => handleDelete(row._id)}>

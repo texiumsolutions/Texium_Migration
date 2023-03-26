@@ -38,7 +38,7 @@ export const OpenTabDetails = () => {
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
   const Run_Number = detailsInfo.Run_Number;
   const Type = detailsInfo.Type;
-  const Id = detailsInfo._id;
+  // const Id = detailsInfo._id;
 
   const handleSaveAndRun = () => {
     navigate(`/scanner/openTab/run`, {

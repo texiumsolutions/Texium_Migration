@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./FileUploader.css";
 
-export const FileUploader = ({ register, registerFieldText, submitButton }) => {
-  const navigate = useNavigate();
+export const FileUploader = ({ selectedName, selectedValue, value }) => {
   const [directoryPath, setDirectoryPath] = useState("");
-  const [dataFiles, setDataFiles] = useState("");
 
   const handleChange = (event) => {
     setDirectoryPath(event.target.value);
@@ -17,17 +14,25 @@ export const FileUploader = ({ register, registerFieldText, submitButton }) => {
     fetch("http://localhost:5000/upload", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ directoryPath }),
+      body: JSON.stringify({
+        directoryPath,
+        selectedName,
+        selectedValue,
+        value,
+      }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setDataFiles(data.files);
-        register({ ...registerFieldText, value: data.files });
-        // navigate("/fileUploadRun", {
-        //   state: { dataFiles: data.files, directoryPath: directoryPath },
-        // });
+      .then((response) => {
+        if (response.ok) {
+          alert("Upload successful!");
+        } else {
+          alert("Upload failed!");
+        }
+        return response.json();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        alert("Upload failed!");
+      });
   };
 
   return (
@@ -35,7 +40,6 @@ export const FileUploader = ({ register, registerFieldText, submitButton }) => {
       <div className="filePath">
         <label for="input">Path</label>
         <input
-          {...register(registerFieldText)}
           className="parameter_inputfield"
           type="text"
           value={directoryPath}
@@ -44,10 +48,10 @@ export const FileUploader = ({ register, registerFieldText, submitButton }) => {
       </div>
 
       <br />
+
       <button className="upload_btn" onClick={handleUpload}>
         Submit
       </button>
-      {submitButton}    
     </div>
   );
 };
