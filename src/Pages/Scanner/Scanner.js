@@ -59,10 +59,6 @@ export const Scanner = () => {
   };
 
   const handleSelectedRowsChange = (rows) => {
-    console.log(rows.selectedRows);
-    fetch(`http://localhost:5000/testing/${rows._id}`, {
-      method: "GET",
-    }).then((response) => response.json());
     navigate(`/scanner/openTab/details/${rows.selectedRows[0]._id}`);
   };
 
@@ -94,7 +90,6 @@ export const Scanner = () => {
     selector: (row) => getField(row, column),
     sortable: true,
   }));
-  console.log(sourceFileInfo);
 
   // Show single data buttom
   const showDetailsButton = {

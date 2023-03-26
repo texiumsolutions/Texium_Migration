@@ -23,6 +23,10 @@
 
 /* button */
 .upload_btn {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+
   height: fit-content;
   width: fit-content;
   border: none;

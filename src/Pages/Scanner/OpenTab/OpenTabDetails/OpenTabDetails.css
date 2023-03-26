@@ -63,3 +63,26 @@
   top: 0;
   background-color: transparent;
 }
+
+.filePath {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.parameter_inputfield {
+  outline: none;
+  border: none;
+  padding: 3px;
+  border-radius: 3px;
+  width: clamp(100%, 400px, 400px);
+  border-bottom: 2px solid var(--background);
+  margin-left: 15px;
+  font-family: "Poppins", sans-serif;
+  resize: none;
+}
+.parameter_inputfield:focus {
+  border-bottom: 2px solid var(--primary);
+}
+.parameter_inputfield:hover {
+  border-bottom: 2px solid var(--primary);
+}

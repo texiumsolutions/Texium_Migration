@@ -10,6 +10,9 @@ const AddProfileInfo = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
+  const register = (text) => {
+    return text;
+  };
 
   const handleNameChange = (event) => {
     setSelectedName(event.target.value);
@@ -114,18 +117,21 @@ const AddProfileInfo = () => {
                               text={"Scan Query"}
                               className="opentab_details_input"
                               type={"text"}
+                              register={register}
                               registerFieldText={"scanQuery"}
                             />
                             <InputField
                               text={"Exclude AllData"}
                               className="opentab_details_input"
                               type={"text"}
+                              register={register}
                               registerFieldText={"excludeAllData"}
                             />
                             <InputField
                               text={"Exclude Data"}
                               className="opentab_details_input"
                               type={"text"}
+                              register={register}
                               registerFieldText={"excludeData"}
                             />
                           </>
@@ -136,12 +142,14 @@ const AddProfileInfo = () => {
                               text={"Scan Quary For All"}
                               className="opentab_details_input"
                               type={"text"}
+                              register={register}
                               registerFieldText={"scanQuaryForAll"}
                             />
                             <InputField
                               text={"Exclude Single Data"}
                               className="opentab_details_input"
                               type={"text"}
+                              register={register}
                               registerFieldText={"excludeSingleData"}
                             />
                           </>

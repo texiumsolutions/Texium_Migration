@@ -1,20 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card } from "../../../../components/Card/Card";
-import { FileUploader } from "../../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
-  const [selectedValue, setSelectedValue] = useState("");
   const [setDefaultValue] = useState("");
   const textareaRef = useRef(null);
   const navigate = useNavigate();
   const register = (text) => {
     return text;
   };
-
-  console.log(selectedValue);
 
   const [file, setFile] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -32,13 +28,14 @@ export const OpenTabDetails = () => {
   }, [detailsId]);
 
   // passed Datas
-  const profileName = detailsInfo.Name;
+  const profileName = detailsInfo.File_Name;
   const Description = detailsInfo.Description;
   const Last_Run_On = detailsInfo.Last_Run_On;
+  const Source_Type = detailsInfo.Source_Type;
+  const Directory_Path = detailsInfo.Directory_Path;
   const normalDate = new Date(Last_Run_On).toLocaleDateString();
   const Run_Number = detailsInfo.Run_Number;
   const Type = detailsInfo.Type;
-  // const Id = detailsInfo._id;
 
   const handleSaveAndRun = () => {
     navigate(`/scanner/openTab/run`, {
@@ -84,10 +81,6 @@ export const OpenTabDetails = () => {
       });
   };
 
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-
   const handleTextareaChange = (event) => {
     setDefaultValue(event.target.value);
     if (textareaRef.current) {
@@ -111,7 +104,7 @@ export const OpenTabDetails = () => {
               type="text"
               name="fileName"
               placeholder="File Name"
-              defaultValue={profileName}
+              value={profileName}
             />
 
             <label className="label" htmlFor="fileSystem">
@@ -122,9 +115,8 @@ export const OpenTabDetails = () => {
 
             <select
               className="opentab_details_input"
-              onChange={handleChange}
-              defaultValue={selectedValue}
-              // disabled
+              defaultValue={Source_Type}
+              disabled
             >
               <option value="" disabled hidden>
                 Select an option
@@ -143,7 +135,7 @@ export const OpenTabDetails = () => {
             <textarea
               className="opentab_details_input"
               ref={textareaRef}
-              defaultValue={Description}
+              value={Description}
               onChange={handleTextareaChange}
               placeholder="Description"
             />
@@ -158,14 +150,34 @@ export const OpenTabDetails = () => {
           <div className="parameter_container">
             <table>
               <tbody>
-                {selectedValue === "File System" && (
+                {Source_Type === "File System" && (
                   <>
-                    <FileUploader register={register} />
+                    <div className="filePath">
+                      <label htmlFor="path">Path</label>
+                      <input
+                        className="parameter_inputfield"
+                        type="text"
+                        name="path"
+                        value={Directory_Path}
+                      />
+                    </div>
+                    <input
+                      onClick={handleSaveAndRun}
+                      className="save_button"
+                      type="button"
+                      name="save_button"
+                      value="Save & Run"
+                    />
                   </>
                 )}
-                {selectedValue === "MongoDB" && (
+                {Source_Type === "MongoDB" && (
                   <>
-                    <InputField text={"Type"} type={"text"} value={Type} register={register} />
+                    <InputField
+                      text={"Type"}
+                      type={"text"}
+                      value={Type}
+                      register={register}
+                    />
                     <InputField
                       text={"Last Run On"}
                       type={"text"}
@@ -179,7 +191,6 @@ export const OpenTabDetails = () => {
                       register={register}
                     />
                     <InputField
-                      selectedValue={selectedValue}
                       fileOnChange={fileOnChange}
                       sendFile={sendFile}
                       errorMessage={errorMessage}
@@ -197,10 +208,18 @@ export const OpenTabDetails = () => {
                     />
                   </>
                 )}
-                {selectedValue === "DataBase(MySQL)" && (
+                {Source_Type === "DataBase(MySQL)" && (
                   <>
-                    <InputField text={"scanQuaryForAll"} type={"text"} register={register} />
-                    <InputField text={"excludeSingleData"} type={"text"} register={register} />
+                    <InputField
+                      text={"scanQuaryForAll"}
+                      type={"text"}
+                      register={register}
+                    />
+                    <InputField
+                      text={"excludeSingleData"}
+                      type={"text"}
+                      register={register}
+                    />
                   </>
                 )}
               </tbody>
