@@ -1,0 +1,54 @@
+.content_container_h3{
+  color: rgb(4, 80, 97);
+  display: flex;
+  align-items: center;
+  justify-content:end;
+  font-size: 12px;
+}
+.content_container img{
+  height: 50px;
+  width: 50px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.home_body {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 80, 97, 0.638);
+  border-radius: 15px;
+}
+
+.type_writer_h1 {
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.type_writer {
+  position: relative;
+}
+
+.type_writer::after {
+  scroll-behavior: smooth;
+  content: "Hello!";
+  position: absolute;
+  right: 0;
+  color: rgba(4, 80, 97, 0.638);
+  background: white;
+  border-radius: 15px;
+  width: 100%;
+  animation: typing 7s alternate infinite, line 2s infinite;
+}
+
+@keyframes typing {
+  to {
+    width: 0%;
+  }
+}
+@keyframes line {
+  50% {
+    color: transparent;
+  }
+}

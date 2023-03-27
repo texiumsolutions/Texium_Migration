@@ -119,6 +119,15 @@ const Demo = () => {
           <div ref={refRight} className="resizer resizer-r"> Hello</div>
           <div ref={refBottom} className="resizer resizer-b"></div>
         </div>
+
+      <select >
+        <option value="female">female</option>
+        <option value="male">male</option>
+        <option value="other">other</option>
+      </select>
+      <input type="submit" />
+
+
       </div>
     </>
   );

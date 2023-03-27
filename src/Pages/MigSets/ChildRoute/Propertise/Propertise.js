@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { NavBar } from "../../../../Shared/NavBar/NavBar";
-import MigsetRoutes from "../../MigsetRoutes";
 
 
 const Propertise = () => {

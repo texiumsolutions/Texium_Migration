@@ -18,36 +18,130 @@
   min-width: 15px;
   min-height: 15px;
 }
-.resizer{
+.resizer {
   position: absolute;
   background-color: rgb(81, 79, 79);
 }
 
-.resizer-r{
+.resizer-r {
   cursor: col-resize;
   height: 100%;
   right: 0;
   top: 0;
   width: 5px;
 }
-.resizer-t{
+.resizer-t {
   cursor: row-resize;
   height: 5px;
   left: 0;
   top: 0;
   width: 100%;
 }
-.resizer-b{
+.resizer-b {
   cursor: row-resize;
   height: 5px;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-.resizer-l{
+.resizer-l {
   cursor: col-resize;
   height: 100%;
   left: 0;
   top: 0;
   width: 5px;
 }
+/* Option  */
+.mapping {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.mapping_body {
+  /* background-color: var(--primary); */
+}
+.mapping_container {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+  margin: 80px auto 30px;
+  /* background-color: var(--primary); */
+  border-radius: 8px;
+}
+.select_btn {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--primary);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.select_btn .mappin_btn_text {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.select_btn .mappin_arroe_down {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 21px;
+  width: 21px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+}
+.list_items{
+  position: relative;
+  margin-top: 15px;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  /* display: none; */
+}
+
+.list_items .items{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  padding: 0 15px;
+  border-radius: 8px;
+}
+.list_items .items:hover{
+  background-color: var(--primary);
+}
+.items .item_text{
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+}
+
+.items .checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+  border-radius: 4px;
+  margin-right: 12px;
+  border: 1.5px solid #c0c0c0;
+  transition: all 0.3s ease-in-out;
+}
+
+.checkbox .check_icon {
+  font-size: 11px;
+  transform: scale(0);
+}
+
+

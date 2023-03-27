@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Card } from "../../../../../components/Card/Card";
 
 const PropertiesDetails = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -42,59 +43,70 @@ const PropertiesDetails = () => {
     }
   };
   return (
-    <div className="container_migset">
-      <form
-        className=" opentab_details_form "
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="opentab_details_container">
         <div className="propertice_details_container">
           <div className="opentab_details">
-            <label className="label" htmlFor="">
-              Name
-            </label>
-            <br />
-            <input
-              className="opentab_details_input"
-              type="text"
-              placeholder="File Name"
-              {...register("fileName")}
-            />
+            <p>Change Data</p>
+            <Card height={"calc(100vh - 255px)"}>
+              <label className="label" htmlFor="">
+                Name
+              </label>
+              <br />
+              <input
+                className="opentab_details_input"
+                type="text"
+                placeholder="File Name"
+                {...register("fileName")}
+              />
 
-            <label className="label" htmlFor="option">
-              Type
-            </label>
+              <label className="label" htmlFor="option">
+                Type
+              </label>
 
-            <br />
+              <br />
 
-            <select
-              type="text"
-              {...register("dropdown")}
-              required
-              className="opentab_details_input"
-              value={selectedValue}
-              onChange={handleChange}
-              disabled
-            >
-              <option value="" disabled hidden>
-                Select an option
-              </option>
-              <option value="File System">File System</option>
-              <option value="MongoDB">MongoDB</option>
-              <option value="DataBase(MySQL)">DataBase(MySQL)</option>
-            </select>
+              <select
+                type="text"
+                {...register("dropdown")}
+                required
+                className="opentab_details_input"
+                value={selectedValue}
+                onChange={handleChange}
+                disabled
+              >
+                <option value="" disabled hidden>
+                  Select an option
+                </option>
+                <option value="File System">File System</option>
+                <option value="MongoDB">MongoDB</option>
+                <option value="DataBase(MySQL)">DataBase(MySQL)</option>
+              </select>
 
-            <label className="label">Description</label>
+              <label className="label">Description</label>
 
-            <br />
+              <br />
 
-            <textarea
-              type="text"
-              name="description"
-              className="opentab_details_input"
-              {...register("description")}
-              value={value}
-              onChange={handleTextareaChange}
-            />
+              <textarea
+                type="text"
+                name="description"
+                className="opentab_details_input"
+                {...register("description")}
+                value={value}
+                onChange={handleTextareaChange}
+              />
+
+              <input
+                className=" submit_button"
+                type="submit"
+                value="Save & Run"
+              />
+            </Card>
+          </div>
+        </div>
+        <div className="opentab_details">
+          <p>Information</p>
+          <Card height={"calc(100vh - 255px)"}>
             <h5>Creation Date</h5>
             <p>2023-03-29 19:08</p>
 
@@ -102,16 +114,10 @@ const PropertiesDetails = () => {
             <p>2023-03-29 19:08</p>
             <h5>Last operation</h5>
             <p>Object Unselection</p>
-
-            <input
-              className=" propetise_save_button"
-              type="submit"
-              value="Save & Run"
-            />
-          </div>
+          </Card>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

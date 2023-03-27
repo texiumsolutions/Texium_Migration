@@ -43,6 +43,9 @@ import Rules from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Rules";
 import MappingList from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/MappingList";
 import Association from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Association";
 import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
+import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationSourceObject";
+import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
+import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
 
 function App() {
   return (
@@ -123,6 +126,9 @@ function App() {
           <Route path="mapping-list" element={<MappingList />} />
           <Route path="association" element={<Association />} />
           <Route path="demo" element={<Demo />} />
+          <Route path="transformation_source_object" element={<TransformationSourceObject/>} />
+          <Route path="transformation_target_object" element={<TransformationTargetObject/>} />
+          <Route path="transformation_injection" element={<TransformationInjection/>} />
           </Route>
           <Route path="source-object" element={<SourceObject />} />
           <Route path="target-object" element={<TargetObject />} />

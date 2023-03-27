@@ -26,23 +26,3 @@
   text-align: left;
   /* grid-template-columns: 1fr 2fr; */
 }
-.propetise_save_button{
-  /* display: flex; */
-  /* margin: 40px auto; */
-  border: none;
-  border-radius: 3px;
-  outline: none;
-  width: 150px;
-  height: 40px;
-  background-color: var(--primary);
-  transition: box-shadow 0.5s;
-  font-size: 13px;
-  color: white;
-  cursor: pointer;
-}
-
-.propetise_save_button:hover {
-  -webkit-box-shadow: inset 100px 0 0 0 #3c03b7;
-  box-shadow: inset 100px 0 0 0 #3c03b7;
-  color: white;
-}

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
-import { Card } from "../../../../../components/Card/Card";
-import MigsetRoutes from "../../../MigsetRoutes";
-import Propertise from "../Propertise";
+import React, { useEffect, useState } from 'react';
+import DataTable from 'react-data-table-component';
+import { Card } from '../../../../../components/Card/Card';
 
-const ScanRunSelection = () => {
+const TransformationInjection = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
 
   useEffect(() => {
@@ -67,27 +65,27 @@ const ScanRunSelection = () => {
   };
   return (
     <Card height="calc(100vh)" width="calc(100%)">
-      <h3>Source Object ({sourceFileInfo.length})</h3>
-      <DataTable
-        columns={columnsToDisplay}
-        data={data}
-        customStyles={customStyles}
-        defaultSortAsc
-        dense
-        fixedHeader
-        Delayed
-        highlightOnHover
-        pointerOnHover
-        responsive
-        persistTableHead
-        noDataComponent="No Data? Please Wait!"
-        selectableRowsHighlight
-        pagination
-        paginationPerPage={15}
-        paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
-      />
-    </Card>
+    <h3>All Data ({sourceFileInfo.length})</h3>
+    <DataTable
+      columns={columnsToDisplay}
+      data={data}
+      customStyles={customStyles}
+      defaultSortAsc
+      dense
+      fixedHeader
+      Delayed
+      highlightOnHover
+      pointerOnHover
+      responsive
+      persistTableHead
+      noDataComponent="No Data? Please Wait!"
+      selectableRowsHighlight
+      pagination
+      paginationPerPage={15}
+      paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 50, 100]}
+    />
+  </Card>
   );
 };
 
-export default ScanRunSelection;
+export default TransformationInjection;

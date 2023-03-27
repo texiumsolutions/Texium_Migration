@@ -35,7 +35,7 @@ export const Registration = () => {
   // }
   const onSubmit = async (data) => {
     // verifyEmail();
-    createUserWithEmailAndPassword(data.email, data.password);
+   await createUserWithEmailAndPassword(data.email, data.password);
     navigate("/home");
     // await updateProfile({ displayName: data.name, photoURL: data.url });
   };
@@ -58,7 +58,7 @@ export const Registration = () => {
               type="text"
               name="name"
               placeholder="Name"
-              {...register("userName", {
+              {...register("displayName", {
                 required: {
                   value: true,
                   message: "Name is Required",

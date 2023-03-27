@@ -11,42 +11,42 @@ const Transformation = () => {
       <div className="opentab_navbar">
         <div className="opentab_navigations">
           <NavLink
-            to={"/migsets/migsets-route/transformation/rules"}
+            to={"/migsets/migsets-route/transformation/mapping-list"}
             onClick={() => setShowDetails(!showDetails)}
             className={({ isActive }) =>
               isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
             }
           >
-           Rules
+           Mapping
           </NavLink>
 
           <NavLink
-            to={"/migsets/migsets-route/transformation/mapping-list"}
+            to={"/migsets/migsets-route/transformation/transformation_source_object"}
             onClick={() => setShowRun(!showRun)}
             className={({ isActive }) =>
               isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
             }
           >
-            Mapping List
+            Source Data
           </NavLink>
 
           <NavLink
-            to={"/migsets/migsets-route/transformation/association"}
+            to={"/migsets/migsets-route/transformation/transformation_target_object"}
             onClick={() => setShowObjects(!showObjects)}
             className={({ isActive }) =>
               isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
             }
           >
-            Association
+           Target Data
           </NavLink>
           <NavLink
-            to={"/migsets/migsets-route/transformation/demo"}
+            to={"/migsets/migsets-route/transformation/transformation_injection"}
             onClick={() => setShowObjects(!showObjects)}
             className={({ isActive }) =>
               isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
             }
           >
-            Demo
+           Injection
           </NavLink>
         </div>
       </div>
