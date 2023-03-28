@@ -7,7 +7,6 @@ import { Card } from "../../../../../components/Card/Card";
 
 const MappingList = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
-
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -115,51 +114,94 @@ const MappingList = () => {
             <p>Parameters</p>
 
             <Card height={"calc(100vh - 255px)"}>
-              <div className="parameter_container">
-                <div className="mapping">
-                  <div className="mapping_body">
-                    <div className="mapping_container">
-                      <div className="select_btn">
-                        <span className="mappin_btn_text">Select Name</span>
-                        <span className="mappin_arroe_down">
-                          <FaChevronDown></FaChevronDown>
-                        </span>
-                      </div>
-                      <ul className="list_items">
-                        <option className="items">
-                          <span className="checkbox">
-                            <RiCheckboxCircleLine className="check_icon ri_check"></RiCheckboxCircleLine>
-                          </span>
-                          <span className="item_text">File 1</span>
-                        </option>
-                        <option className="items">
-                          <span className="checkbox">
-                            <RiCheckboxCircleLine className="check_icon ri_check"></RiCheckboxCircleLine>
-                          </span>
-                          <span className="item_text">File 2</span>
-                        </option>
-                        <option className="items">
-                          <span className="checkbox">
-                            <RiCheckboxCircleLine className="check_icon ri_check"></RiCheckboxCircleLine>
-                          </span>
-                          <span className="item_text">File 3</span>
-                        </option>
-                        <option className="items">
-                          <span className="checkbox">
-                            <RiCheckboxCircleLine className="check_icon ri_check"></RiCheckboxCircleLine>
-                          </span>
-                          <span className="item_text">File 4</span>
-                        </option>
-                        <option className="items">
-                          <span className="checkbox">
-                            <RiCheckboxCircleLine className="check_icon ri_check"></RiCheckboxCircleLine>
-                          </span>
-                          <span className="item_text">File 4</span>
-                        </option>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+              <div className="select_btn">
+                <span className="mappin_btn_text">Select Name</span>
+                <span className="mappin_arroe_down">
+                  <FaChevronDown></FaChevronDown>
+                </span>
+              </div>
+              <div className="list_items ">
+                <option className="items">
+                  <span className="item_text">File 1</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 2</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 3</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 4</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 5</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 6</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 7</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 8</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 9</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 10</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 11</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 12</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 13</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 14</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 15</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 16</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 17</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 18</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 19</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 20</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 21</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 22</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 23</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 24</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 25</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 26</span>
+                </option>
+                <option className="items">
+                  <span className="item_text">File 27</span>
+                </option>
               </div>
             </Card>
           </div>
@@ -220,8 +262,6 @@ const MappingList = () => {
           </div>
         </div>
       </form>
-
-
     </div>
   );
 };

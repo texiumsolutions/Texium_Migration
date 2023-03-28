@@ -143,7 +143,7 @@ export const MigSets = () => {
           <button type="button">
             <Link
               className="table_header_link"
-              to={"/migsets/migsets-route/properties/properties-details"}
+              to={"/addProfileInfo"}
             >
               <AiOutlinePlusCircle />
             </Link>

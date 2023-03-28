@@ -60,12 +60,12 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/addProfileInfo" element={<AddProfileInfo />} />
-        <Route path="/editProfileInfo/:detailsId" element={<EditProfileInfo />} />
-        <Route path="/fileUploadRun" element={<FileUploadRun />} />
+        <Route path="/jobs" element={ <RequireAuth><Jobs /></RequireAuth>} />
+        <Route path="/addProfileInfo" element={  <RequireAuth><AddProfileInfo /></RequireAuth>} />
+        <Route path="/editProfileInfo/:detailsId" element={ <RequireAuth><EditProfileInfo /></RequireAuth>} />
+        <Route path="/fileUploadRun" element={<RequireAuth><FileUploadRun /></RequireAuth>} />
 
-        <Route path="/scanner" element={<Scanner />} />
+        <Route path="/scanner" element={<RequireAuth><Scanner /></RequireAuth>} />
         <Route path="/scanner/openTab/" element={<OpenTab />}>
           <Route path="details/:detailsId" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
