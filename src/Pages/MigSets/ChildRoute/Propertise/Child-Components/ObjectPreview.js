@@ -20,7 +20,7 @@ const ObjectPreview = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceFileInfo")
+    fetch("https://texium-migration-server.onrender.com/sourceFileInfo")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));

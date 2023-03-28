@@ -11,7 +11,7 @@ export const MigSets = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/testing")
+    fetch("https://texium-migration-server.onrender.com/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
@@ -19,7 +19,7 @@ export const MigSets = () => {
 
   // handle Show
   const handleEdit = (id) => {
-    fetch(`http://localhost:5000/testing/${id}`, {
+    fetch(`https://texium-migration-server.onrender.com/testing/${id}`, {
       method: "GET",
     }).then((response) => response.json());
 
@@ -32,7 +32,7 @@ export const MigSets = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/testing/${id}`, {
+    fetch(`https://texium-migration-server.onrender.com/testing/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

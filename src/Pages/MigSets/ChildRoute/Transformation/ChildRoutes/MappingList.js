@@ -10,7 +10,7 @@ const MappingList = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/testing", {
+    fetch("https://texium-migration-server.onrender.com/testing", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,7 +48,7 @@ const MappingList = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/testing")
+    fetch("https://texium-migration-server.onrender.com/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));

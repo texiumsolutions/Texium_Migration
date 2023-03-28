@@ -6,7 +6,7 @@ const PropertiesDetails = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/sourceObjects", {
+    fetch("https://texium-migration-server.onrender.com/sourceObjects", {
       method: "POST",
       headers: {
         "content-type": "application/json",
