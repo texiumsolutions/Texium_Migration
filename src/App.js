@@ -46,6 +46,7 @@ import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
 import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationSourceObject";
 import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
 import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
+import { OpenTabObjectsMongo } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjectsMongo";
 
 function App() {
   return (
@@ -75,12 +76,15 @@ function App() {
         />
         <Route path="/fileUploadRun" element={<FileUploadRun />} />
 
+        {/* Scan Run Start */}
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/scanner/openTab/" element={<OpenTab />}>
           <Route path="details/:detailsId" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
+          <Route path="objectsMongo" element={<OpenTabObjectsMongo />} />
         </Route>
+        {/* Scan Run End */}
 
         <Route
           path="/imports"

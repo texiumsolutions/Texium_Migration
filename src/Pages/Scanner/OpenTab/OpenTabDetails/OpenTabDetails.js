@@ -16,7 +16,6 @@ export const OpenTabDetails = () => {
   // const [successMessage, setSuccessMessage] = useState("");
   // const [errorMessage, setErrorMessage] = useState("");
 
-  
 
   // Singl Data fetching
   const { detailsId } = useParams();
@@ -50,7 +49,7 @@ export const OpenTabDetails = () => {
     });
   };
 
-  // Selection 
+  // Selection
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };

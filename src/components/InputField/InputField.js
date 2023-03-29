@@ -23,6 +23,7 @@ export const InputField = ({
     setInputValue(event.target.value);
   };
 
+  const [detailsInfoMongo, setDetailsInfoMongo] = useState();
   const handleUpload = (event) => {
     event.preventDefault();
 
@@ -36,10 +37,11 @@ export const InputField = ({
       }),
     })
       .then((response) => response.json())
+      .then((data) => setDetailsInfoMongo(data))
       .catch((error) => {
         console.error(error);
       });
-    // navigate("/scanner/openTab/objects")
+    navigate("/scanner/openTab/objectsMongo", { state: detailsInfoMongo  });
   };
 
   return (
