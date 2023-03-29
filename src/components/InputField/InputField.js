@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./InputField.css";
 
 export const InputField = ({
@@ -15,6 +15,33 @@ export const InputField = ({
   registerFieldText,
   disabled,
 }) => {
+  const [inputValue, setInputValue] = useState("");
+  console.log(inputValue);
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleUpload = (event) => {
+    event.preventDefault();
+
+    fetch(`http://localhost:5000/uploadMongoDB`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inputValue,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+      });
+    // navigate("/scanner/openTab/objects")
+  };
+
   return (
     <tr>
       <td className="input_text_section">
@@ -28,14 +55,17 @@ export const InputField = ({
               <input
                 className={"parameter_inputfield"}
                 type={type}
-                onChange={fileOnChange}
+                onChange={handleChange}
                 disabled={disabled ? (disabled = true) : (disabled = false)}
               />
 
-              <button onClick={sendFile}>
+              {/* <button onClick={sendFile}>
                 <Link className="mongoDB_save_btn" to="/scanner/openTab/run">
                   Upload
                 </Link>
+              </button> */}
+              <button className="mongoDB_upload_btn" onClick={handleUpload}>
+                Submit
               </button>
             </div>
             {successMessage && (
