@@ -20,8 +20,8 @@ export const Home = () => {
             <h3 className="content_container_h3">
               {displayName}{" "}
               <img
-                src="https://i.ibb.co/WBwFw0W/pexels-anastasiya-gepp-1462636.jpg"
-                alt=""
+                src="https://th.bing.com/th/id/R.6b1fb669e8c684200a9203b189201e5c?rik=K2iDog8Tcq7ajA&pid=ImgRaw&r=0"
+                alt="profile photos"
               />
             </h3>
           )}

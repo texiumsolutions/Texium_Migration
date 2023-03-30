@@ -67,7 +67,7 @@
   width: calc(100% - 4.4em);
 }
 
-.submit_button{
+.submit_button {
   border: none;
   border-radius: 3px;
   outline: none;
@@ -88,3 +88,35 @@
   font-weight: 700;
 }
 
+/* ************* */
+/* Upload Button */
+/* ************* */
+.save_button,
+.edit_btn,
+.upload_btn {
+  position: absolute;
+  top: -2.5em;
+  right: 1em;
+
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  margin-inline: 2px;
+  padding: 9px 23px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--white);
+  transition: background-color 300ms;
+}
+.save_button:hover,
+.edit_btn:hover,
+.upload_btn:hover {
+  background-color: var(--primary);
+  padding: 9px 23px;
+  font-weight: 500;
+  color: var(--white);
+}
+/* .edit_btn {
+  top: 0;
+  background-color: transparent;
+} */

@@ -47,12 +47,20 @@ import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformatio
 import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
 import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
 import Test from "./Pages/Home/Test";
+import { OpenTabObjectsMongo } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjectsMongo";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/home"
           element={
@@ -71,7 +79,9 @@ function App() {
           <Route path="details/:detailsId" element={<OpenTabDetails />} />
           <Route path="run" element={<OpenTabRun />} />
           <Route path="objects" element={<OpenTabObjects />} />
+          <Route path="objectsMongo" element={<OpenTabObjectsMongo />} />
         </Route>
+        {/* Scan Run End */}
 
         <Route
           path="/imports"
@@ -110,32 +120,51 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route path="properties" element={ <RequireAuth>
-              <Propertise />
-            </RequireAuth>} >
+          <Route
+            path="properties"
+            element={
+              <RequireAuth>
+                <Propertise />
+              </RequireAuth>
+            }
+          >
             <Route path="properties-details" element={<PropertiesDetails />} />
-          <Route path="scan-run-selection" element={<ScanRunSelection />} />
-          <Route path="exclution" element={<Exclution />} />
-          <Route path="advanced-filters" element={<AdvancedFilters />} />
-          <Route path="object-preview" element={<ObjectPreview/>} />
+            <Route path="scan-run-selection" element={<ScanRunSelection />} />
+            <Route path="exclution" element={<Exclution />} />
+            <Route path="advanced-filters" element={<AdvancedFilters />} />
+            <Route path="object-preview" element={<ObjectPreview />} />
           </Route>
           <Route path="transformation" element={<Transformation />} />
-          <Route path="transformation" element={ <RequireAuth>
-              <Transformation />
-            </RequireAuth>} >
+          <Route
+            path="transformation"
+            element={
+              <RequireAuth>
+                <Transformation />
+              </RequireAuth>
+            }
+          >
             <Route path="rules" element={<Rules />} />
-          <Route path="mapping-list" element={<MappingList />} />
-          <Route path="association" element={<Association />} />
-          <Route path="demo" element={<Demo />} />
-          <Route path="transformation_source_object" element={<TransformationSourceObject/>} />
-          <Route path="transformation_target_object" element={<TransformationTargetObject/>} />
-          <Route path="transformation_injection" element={<TransformationInjection/>} />
+            <Route path="mapping-list" element={<MappingList />} />
+            <Route path="association" element={<Association />} />
+            <Route path="demo" element={<Demo />} />
+            <Route
+              path="transformation_source_object"
+              element={<TransformationSourceObject />}
+            />
+            <Route
+              path="transformation_target_object"
+              element={<TransformationTargetObject />}
+            />
+            <Route
+              path="transformation_injection"
+              element={<TransformationInjection />}
+            />
           </Route>
           <Route path="source-object" element={<SourceObject />} />
           <Route path="target-object" element={<TargetObject />} />
           <Route path="error-object" element={<ErrorObject />} />
         </Route>
-  
+
         <Route
           path="/dashboard"
           element={
@@ -163,6 +192,7 @@ function App() {
 
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />}></Route>
 
         {/* Testing Routes */}

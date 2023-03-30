@@ -5,16 +5,17 @@ import { InputField } from "../../../../components/InputField/InputField";
 import "./OpenTabDetails.css";
 
 export const OpenTabDetails = () => {
+  const [selectedValue, setSelectedValue] = useState("");
   const [setDefaultValue] = useState("");
   const textareaRef = useRef(null);
   const navigate = useNavigate();
   const register = (text) => {
     return text;
   };
+  // const [file, setFile] = useState({});
+  // const [successMessage, setSuccessMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const [file, setFile] = useState({});
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   // Singl Data fetching
   const { detailsId } = useParams();
@@ -30,11 +31,8 @@ export const OpenTabDetails = () => {
   // passed Datas
   const profileName = detailsInfo.File_Name;
   const Description = detailsInfo.Description;
-  const Last_Run_On = detailsInfo.Last_Run_On;
   const Source_Type = detailsInfo.Source_Type;
   const Directory_Path = detailsInfo.Directory_Path;
-  const normalDate = new Date(Last_Run_On).toLocaleDateString();
-  const Run_Number = detailsInfo.Run_Number;
   const Type = detailsInfo.Type;
 
   const handleSaveAndRun = () => {
@@ -51,35 +49,40 @@ export const OpenTabDetails = () => {
     });
   };
 
-  const fileOnChange = (event) => {
-    setFile(event.target.files[0]);
+  // Selection
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
 
-  const sendFile = (event) => {
-    event.preventDefault();
-    let formData = new FormData();
+  // const fileOnChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
-    formData.append("avater", file);
+  // const sendFile = (event) => {
+  //   event.preventDefault();
+  //   let formData = new FormData();
 
-    fetch("https://texium-migration-server.onrender.com/uploadFile", {
-      method: "post",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((resBody) => {
-        if (resBody.success) {
-          setSuccessMessage(resBody.message);
-          setErrorMessage("");
-        } else {
-          setErrorMessage(resBody.message);
-          setSuccessMessage("");
-        }
-      })
-      .catch((error) => {
-        setErrorMessage("Failed to upload file.");
-        setSuccessMessage("");
-      });
-  };
+  //   formData.append("avater", file);
+
+  //   fetch("http://localhost:5000/uploadFile", {
+  //     method: "post",
+  //     body: formData,
+  //   })
+  //     .then((response) => response.json())
+  //     .then((resBody) => {
+  //       if (resBody.success) {
+  //         setSuccessMessage(resBody.message);
+  //         setErrorMessage("");
+  //       } else {
+  //         setErrorMessage(resBody.message);
+  //         setSuccessMessage("");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setErrorMessage("Failed to upload file.");
+  //       setSuccessMessage("");
+  //     });
+  // };
 
   const handleTextareaChange = (event) => {
     setDefaultValue(event.target.value);
@@ -116,7 +119,7 @@ export const OpenTabDetails = () => {
             <select
               className="opentab_details_input"
               defaultValue={Source_Type}
-              disabled
+              onChange={handleChange}
             >
               <option value="" disabled hidden>
                 Select an option
@@ -150,7 +153,7 @@ export const OpenTabDetails = () => {
           <div className="parameter_container">
             <table>
               <tbody>
-                {Source_Type === "File System" && (
+                {selectedValue === "File System" && (
                   <>
                     <div className="filePath">
                       <label htmlFor="path">Path</label>
@@ -170,27 +173,18 @@ export const OpenTabDetails = () => {
                     />
                   </>
                 )}
-                {Source_Type === "MongoDB" && (
+                {selectedValue === "MongoDB" && (
                   <>
                     <InputField
-                      text={"Type"}
+                      text={"Quary"}
                       type={"text"}
                       value={Type}
                       register={register}
+                      selectedValue={selectedValue}
                     />
-                    <InputField
-                      text={"Last Run On"}
-                      type={"text"}
-                      value={normalDate}
-                      register={register}
-                    />
-                    <InputField
-                      text={"Run Number"}
-                      type={"text"}
-                      value={Run_Number === "" ? "No Runtime" : Run_Number}
-                      register={register}
-                    />
-                    <InputField
+                    {/* *********************************** */}
+                    {/* Scan all the content under the file */}
+                    {/* <InputField
                       fileOnChange={fileOnChange}
                       sendFile={sendFile}
                       errorMessage={errorMessage}
@@ -198,17 +192,17 @@ export const OpenTabDetails = () => {
                       text={"fileInfo"}
                       type={"file"}
                       register={register}
-                    />
-                    <input
+                    /> */}
+                    {/* <input
                       onClick={handleSaveAndRun}
                       className="save_button"
                       type="button"
                       name="save_button"
                       value="Save & Run"
-                    />
+                    /> */}
                   </>
                 )}
-                {Source_Type === "DataBase(MySQL)" && (
+                {selectedValue === "DataBase(MySQL)" && (
                   <>
                     <InputField
                       text={"scanQuaryForAll"}
