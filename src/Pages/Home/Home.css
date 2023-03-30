@@ -1,12 +1,12 @@
-.content_container_h3{
+.content_container_h3 {
   color: var(--primary);
   display: flex;
   align-items: center;
-  justify-content:end;
+  justify-content: flex-end;
   font-size: 12px;
   font-weight: 500;
 }
-.content_container img{
+.content_container img {
   height: 45px;
   width: 45px;
   margin-left: 10px;

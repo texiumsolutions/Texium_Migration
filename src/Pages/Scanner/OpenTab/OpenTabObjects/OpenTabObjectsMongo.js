@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import { useLocation } from "react-router-dom";
-import { Card } from "../../../../components/Card/Card";
 import { v4 as uuidv4 } from "uuid";
+import { Card } from "../../../../components/Card/Card";
 
 export const OpenTabObjectsMongo = () => {
-  const [objectInfo, setObjectInfo] = useState({});
   const location = useLocation();
-  const detailsInfoMongo = location.state;
-  console.log(detailsInfoMongo);
+  const objectInfo = location?.state?.data;
 
-  // Single Data for mongoDB
-  useEffect(() => {
-    fetch("http://localhost:5000/uploadMongoDB")
-      .then((response) => response.json())
-      .then((data) => setObjectInfo(data))
-      .catch((error) => console.error(error));
-  }, []);
-  console.log(objectInfo);
+  const [data, setData] = useState([]);
+
+  const [hola, setHola] = useState([]);
+  // console.log(objectInfo);
 
   const customStyles = {
     headCells: {
@@ -47,44 +41,63 @@ export const OpenTabObjectsMongo = () => {
     hour12: true,
   });
 
-  const data = objectInfo?.Files?.map((file) => {
-    const id = uuidv4();
-    const sizeInMB = (file.size / 1048576).toFixed(2) + " MB";
-    const modifiedDate = new Date(file.modifiedDate).toLocaleString("en-BD", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: true,
-    });
-    const createdDate = new Date(file.createdDate).toLocaleString("en-BD", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: true,
-    });
+  useEffect(() => {
+    if (objectInfo) {
+      let newData = objectInfo?.map((file) => {
+        
+        // console.log(allData);
+        const id = uuidv4();
+        // const sizeInMB = (file.size / 1048576).toFixed(2) + " MB";
+        
 
-    return {
-      id: id.slice(0, 8),
-      Source_Type: objectInfo.Source_Type,
-      Status: "Scanned",
-      Is_Update: "False",
-      Run_Number: parseInt(objectInfo.Run_Number) + 1,
-      Directory_Path: objectInfo.Directory_Path,
-      Started: time,
-      Ended: time,
-      name: file.name,
-      size: sizeInMB,
-      type: file.type,
-      modifiedDate,
-      createdDate,
-    };
-  });
+        const shawarFile = file.Files?.map((something) => {
+          const modifiedDate = new Date(something.modifiedDate).toLocaleString(
+            "en-BD",
+            {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              second: "numeric",
+              hour12: true,
+            }
+          );
+          const createdDate = new Date(something.createdDate).toLocaleString("en-BD", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          });
+          return {
+            id: id.slice(0, 8),
+            Source_Type: file.Source_Type,
+            Status: "Scanned",
+            Is_Update: "False",
+            Run_Number: parseInt(file.Run_Number) + 1,
+            Directory_Path: file.Directory_Path,
+            Started: time,
+            Ended: time,
+            name: file.File_Name,
+            size: something.size,
+            type: something.type,
+            modifiedDate: modifiedDate,
+            createdDate: createdDate,
+
+          };
+        })
+
+        return shawarFile;
+      });
+
+      setData(newData)
+    }
+  }, [objectInfo]);
+
+  // console.log(data);
 
   const columns = [
     {
@@ -154,11 +167,26 @@ export const OpenTabObjectsMongo = () => {
     },
   ];
 
+
+  useEffect(() => {
+    const newArray = [];
+    data?.forEach(el => {
+      el?.forEach(el2 => {
+        setHola(prevState => [...prevState, el2])
+      })
+    })
+  }, [data])
+// setHola(newArray);
+  console.log(hola)
+
+
+  // const mergedArray = [...data[0], ...data[1]]
+
   return (
     <Card height={"calc(100vh - 200px)"}>
       <DataTable
         columns={columns}
-        data={data}
+        data={hola}
         rowKey={(data) => data.id + data.name}
         customStyles={customStyles}
         defaultSortAsc

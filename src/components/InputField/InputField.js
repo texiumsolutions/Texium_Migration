@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./InputField.css";
 
@@ -16,7 +16,6 @@ export const InputField = ({
   disabled,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  console.log(inputValue);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -24,7 +23,7 @@ export const InputField = ({
   };
 
   const [detailsInfoMongo, setDetailsInfoMongo] = useState();
-  const handleUpload = (event) => {
+  const handleUpload = async (event) => {
     event.preventDefault();
 
     fetch(`http://localhost:5000/uploadMongoDB`, {
@@ -37,12 +36,21 @@ export const InputField = ({
       }),
     })
       .then((response) => response.json())
-      .then((data) => setDetailsInfoMongo(data))
+      .then((data) => {
+        setDetailsInfoMongo(data);
+      })
       .catch((error) => {
         console.error(error);
       });
-    navigate("/scanner/openTab/objectsMongo", { state: detailsInfoMongo  });
   };
+
+  useEffect(() => {
+    if (detailsInfoMongo) {
+      navigate("/scanner/openTab/objectsMongo", {
+        state: { data: detailsInfoMongo },
+      });
+    }
+  }, [detailsInfoMongo, navigate]);
 
   return (
     <tr>

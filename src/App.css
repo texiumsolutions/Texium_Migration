@@ -105,7 +105,7 @@
   cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
-  background-color: var(--white);
+  background-color: transparent;
   transition: background-color 300ms;
 }
 .save_button:hover,
