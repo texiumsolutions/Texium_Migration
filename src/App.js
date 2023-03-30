@@ -48,6 +48,7 @@ import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformatio
 import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
 import Test from "./Pages/Home/Test";
 import { OpenTabObjectsMongo } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjectsMongo";
+import SpecificMapping from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Mapping/SpecificMapping";
 
 function App() {
   return (
@@ -145,6 +146,7 @@ function App() {
           >
             <Route path="rules" element={<Rules />} />
             <Route path="mapping-list" element={<MappingList />} />
+            <Route path="source/:sourceId" element={<SpecificMapping />} />
             <Route path="association" element={<Association />} />
             <Route path="demo" element={<Demo />} />
             <Route

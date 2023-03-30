@@ -18,7 +18,7 @@ export const Home = () => {
         <Card height="calc(100%)" className="inter_card" width="calc(100%)">
           {displayName && (
             <h3 className="content_container_h3">
-              {displayName}{" "}
+              {displayName}{" "} 
               <img
                 src="https://th.bing.com/th/id/R.6b1fb669e8c684200a9203b189201e5c?rik=K2iDog8Tcq7ajA&pid=ImgRaw&r=0"
                 alt="profile photos"
