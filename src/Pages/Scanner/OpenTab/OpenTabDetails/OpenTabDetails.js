@@ -20,7 +20,7 @@ export const OpenTabDetails = () => {
   const { detailsId } = useParams();
   const [detailsInfo, setDetailsInfo] = useState({});
   useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
+    const uri = `https://texium-migration-server.onrender.com/testing/${detailsId}`;
     fetch(uri)
       .then((response) => response.json())
       .then((data) => setDetailsInfo(data))
@@ -61,7 +61,7 @@ export const OpenTabDetails = () => {
 
     formData.append("avater", file);
 
-    fetch("http://localhost:5000/uploadFile", {
+    fetch("https://texium-migration-server.onrender.com/uploadFile", {
       method: "post",
       body: formData,
     })

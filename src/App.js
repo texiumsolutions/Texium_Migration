@@ -46,6 +46,7 @@ import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
 import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationSourceObject";
 import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
 import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
+import Test from "./Pages/Home/Test";
 
 function App() {
   return (
@@ -166,6 +167,7 @@ function App() {
 
         {/* Testing Routes */}
         <Route path="/loading" element={<Loading />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/modal" element={<Modal />} />
       </Routes>
     </div>

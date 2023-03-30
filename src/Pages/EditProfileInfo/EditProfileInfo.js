@@ -13,7 +13,7 @@ export const EditProfileInfo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
+    const uri = `https://texium-migration-server.onrender.com/testing/${detailsId}`;
     fetch(uri)
       .then((response) => response.json())
       .then((data) => setDetailsInfo(data))
@@ -35,7 +35,7 @@ export const EditProfileInfo = () => {
     console.log(updateData);
 
     // send data to the server
-    fetch(`http://localhost:5000/testing/${detailsId}`, {
+    fetch(`https://texium-migration-server.onrender.com/${detailsId}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

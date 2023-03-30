@@ -7,7 +7,7 @@ export const EditProfileInfo = () => {
 //   console.log(detailsInfo);
 
   useEffect(() => {
-    const uri = `http://localhost:5000/testing/${detailsId}`;
+    const uri = `https://texium-migration-server.onrender.com/testing/${detailsId}`;
 
     fetch(uri)
       .then((response) => response.json())

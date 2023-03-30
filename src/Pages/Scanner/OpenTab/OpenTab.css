@@ -30,7 +30,7 @@
   align-items: center;
 }
 .opentab_navlink {
-  pointer-events: none;
+  /* pointer-events: none; */
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   background-color: transparent;

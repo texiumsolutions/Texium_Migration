@@ -13,7 +13,7 @@ const ErrorObject = () => {
 
 
     useEffect(() => {
-      fetch("http://localhost:5000/errorsObjects")
+      fetch("https://texium-migration-server.onrender.com/errorsObjects")
         .then((response) => response.json())
         .then((data) => setSourceFileInfo(data))
         .catch((error) => alert(error));

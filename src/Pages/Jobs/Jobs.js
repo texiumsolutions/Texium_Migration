@@ -29,7 +29,7 @@ export const Jobs = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/user")
+    fetch("https://texium-migration-server.onrender.com/user")
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);
