@@ -7,11 +7,8 @@ import { Card } from "../../../../components/Card/Card";
 export const OpenTabObjectsMongo = () => {
   const location = useLocation();
   const objectInfo = location?.state?.data;
-
   const [data, setData] = useState([]);
-
-  const [hola, setHola] = useState([]);
-  // console.log(objectInfo);
+  const [fileData, setFileData] = useState([]);
 
   const customStyles = {
     headCells: {
@@ -44,13 +41,10 @@ export const OpenTabObjectsMongo = () => {
   useEffect(() => {
     if (objectInfo) {
       let newData = objectInfo?.map((file) => {
-        
-        // console.log(allData);
         const id = uuidv4();
-        // const sizeInMB = (file.size / 1048576).toFixed(2) + " MB";
-        
 
-        const shawarFile = file.Files?.map((something) => {
+        const childFiles = file.Files?.map((something) => {
+          const sizeInMB = (something.size / 1048576).toFixed(2) + " MB";
           const modifiedDate = new Date(something.modifiedDate).toLocaleString(
             "en-BD",
             {
@@ -63,15 +57,18 @@ export const OpenTabObjectsMongo = () => {
               hour12: true,
             }
           );
-          const createdDate = new Date(something.createdDate).toLocaleString("en-BD", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-            hour12: true,
-          });
+          const createdDate = new Date(something.createdDate).toLocaleString(
+            "en-BD",
+            {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              second: "numeric",
+              hour12: true,
+            }
+          );
           return {
             id: id.slice(0, 8),
             Source_Type: file.Source_Type,
@@ -82,22 +79,19 @@ export const OpenTabObjectsMongo = () => {
             Started: time,
             Ended: time,
             name: file.File_Name,
-            size: something.size,
+            size: sizeInMB,
             type: something.type,
             modifiedDate: modifiedDate,
             createdDate: createdDate,
-
           };
-        })
+        });
 
-        return shawarFile;
+        return childFiles;
       });
 
-      setData(newData)
+      setData(newData);
     }
   }, [objectInfo]);
-
-  // console.log(data);
 
   const columns = [
     {
@@ -167,26 +161,19 @@ export const OpenTabObjectsMongo = () => {
     },
   ];
 
-
   useEffect(() => {
-    const newArray = [];
-    data?.forEach(el => {
-      el?.forEach(el2 => {
-        setHola(prevState => [...prevState, el2])
-      })
-    })
-  }, [data])
-// setHola(newArray);
-  console.log(hola)
-
-
-  // const mergedArray = [...data[0], ...data[1]]
+    data?.forEach((el) => {
+      el?.forEach((el2) => {
+        setFileData((prevState) => [...prevState, el2]);
+      });
+    });
+  }, [data]);
 
   return (
     <Card height={"calc(100vh - 200px)"}>
       <DataTable
         columns={columns}
-        data={hola}
+        data={fileData}
         rowKey={(data) => data.id + data.name}
         customStyles={customStyles}
         defaultSortAsc

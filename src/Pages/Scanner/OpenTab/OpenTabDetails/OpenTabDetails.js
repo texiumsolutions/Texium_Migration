@@ -16,7 +16,6 @@ export const OpenTabDetails = () => {
   // const [successMessage, setSuccessMessage] = useState("");
   // const [errorMessage, setErrorMessage] = useState("");
 
-
   // Singl Data fetching
   const { detailsId } = useParams();
   const [detailsInfo, setDetailsInfo] = useState({});
@@ -98,17 +97,21 @@ export const OpenTabDetails = () => {
         <p>Details</p>
         <Card height={"calc(100vh - 255px)"}>
           <form className="opentab_details_form">
-            <label className="label" htmlFor="fileName">
-              Name
-            </label>
-            <br />
-            <input
-              className="opentab_details_input"
-              type="text"
-              name="fileName"
-              placeholder="File Name"
-              value={profileName}
-            />
+            {selectedValue !== "MongoDB" && (
+              <>
+                <label className="label" htmlFor="fileName">
+                  Name
+                </label>
+                <br />
+                <input
+                  className="opentab_details_input"
+                  type="text"
+                  name="fileName"
+                  placeholder="File Name"
+                  value={profileName}
+                />
+              </>
+            )}
 
             <label className="label" htmlFor="fileSystem">
               Type
@@ -129,19 +132,23 @@ export const OpenTabDetails = () => {
               <option value="DataBase(MySQL)">DataBase(MySQL)</option>
             </select>
 
-            <label className="label" htmlFor="Description">
-              Description
-            </label>
+            {selectedValue !== "MongoDB" && (
+              <>
+                <label className="label" htmlFor="Description">
+                  Description
+                </label>
 
-            <br />
+                <br />
 
-            <textarea
-              className="opentab_details_input"
-              ref={textareaRef}
-              value={Description}
-              onChange={handleTextareaChange}
-              placeholder="Description"
-            />
+                <textarea
+                  className="opentab_details_input"
+                  ref={textareaRef}
+                  value={Description}
+                  onChange={handleTextareaChange}
+                  placeholder="Description"
+                />
+              </>
+            )}
           </form>
         </Card>
       </div>
