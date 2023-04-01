@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 const SpecificMapping = () => {
   const { sourceId } = useParams();
   const [sourceOne, setsourceOne] = useState({});
-  const [sourceAdd, setSourceAdd] = useState("");
+  // const [sourceAdd, setSourceAdd] = useState("");
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const SpecificMapping = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(sourceAdd),
+      body: JSON.stringify(setsourceOne),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -47,7 +47,7 @@ const SpecificMapping = () => {
           alert("Failed to add mapping!");
         }
         
-        setSourceAdd();
+        setsourceOne();
       });
       
   };
