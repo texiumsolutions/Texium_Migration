@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Transformation = () => {
+  
   const [showDetails, setShowDetails] = useState(false);
   const [showRun, setShowRun] = useState(false);
   const [showObjects, setShowObjects] = useState(false);
@@ -17,9 +18,18 @@ const Transformation = () => {
               isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
             }
           >
-           Mapping
+           All File 
           </NavLink>
 
+          <NavLink
+            to={"/migsets/migsets-route/transformation/source/:sourceId"}
+            onClick={() => setShowRun(!showRun)}
+            className={({ isActive }) =>
+              isActive ? "opentab_navlink opentab_active" : "opentab_navlink"
+            }
+          >
+            Mapping
+          </NavLink>
           <NavLink
             to={"/migsets/migsets-route/transformation/transformation_source_object"}
             onClick={() => setShowRun(!showRun)}

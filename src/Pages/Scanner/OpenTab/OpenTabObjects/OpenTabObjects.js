@@ -10,7 +10,7 @@ export const OpenTabObjects = () => {
   const id = location?.state?.id;
 
   useEffect(() => {
-    const uri = `http://localhost:5000/testing/${id}`;
+    const uri = `https://texium-migration-server.onrender.com/testing/${id}`;
     fetch(uri)
       .then((response) => response.json())
       .then((data) => setObjectInfo(data))

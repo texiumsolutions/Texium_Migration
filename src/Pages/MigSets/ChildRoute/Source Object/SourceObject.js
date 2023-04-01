@@ -15,7 +15,7 @@ const SourceObject = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/sourceObjects")
+    fetch("https://texium-migration-server.onrender.com/sourceObjects")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));

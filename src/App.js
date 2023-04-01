@@ -6,7 +6,6 @@ import { Modal } from "./components/Modal/Modal";
 // import auth from "./firebase.init";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
-import { EditProfileInfo } from "./Pages/EditProfileInfo/EditProfileInfo";
 import { Help } from "./Pages/Help/Help";
 import { Home } from "./Pages/Home/Home";
 import { Imports } from "./Pages/Importes/Imports";
@@ -39,6 +38,7 @@ import NotFound from "./Pages/NotFound/NotFound";
 import {
   default as AddProfileInfo
 } from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
+import { EditProfileInfo } from "./Pages/ProfileInfo/EditProfileInfo/EditProfileInfo";
 import { Registration } from "./Pages/Registration/Registration";
 import { OpenTab } from "./Pages/Scanner/OpenTab/OpenTab";
 import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDetails";
@@ -161,6 +161,7 @@ function App() {
           >
             <Route path="rules" element={<Rules />} />
             <Route path="mapping-list" element={<MappingList />} />
+            {/* <Route path="source/:sourceId" element={<SpecificMapping />} /> */}
             <Route path="association" element={<Association />} />
             <Route path="demo" element={<Demo />} />
             <Route
@@ -213,6 +214,7 @@ function App() {
 
         {/* Testing Routes */}
         <Route path="/loading" element={<Loading />} />
+        {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/modal" element={<Modal />} />
       </Routes>
     </div>

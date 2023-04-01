@@ -11,7 +11,7 @@ export const FileUploader = ({ selectedName, selectedValue, value }) => {
   const handleUpload = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:5000/upload", {
+    fetch("https://texium-migration-server.onrender.com/upload", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

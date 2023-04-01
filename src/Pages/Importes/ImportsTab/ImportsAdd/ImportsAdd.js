@@ -9,7 +9,7 @@ const ImportsAdd = () => {
   const onSubmit = (data) => {
     
 
-    fetch("http://localhost:5000/testing", {
+    fetch("https://texium-migration-server.onrender.com/testing", {
       method: "POST",
       headers: {
         "content-type": "application/json",

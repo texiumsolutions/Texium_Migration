@@ -141,14 +141,21 @@ const AddProfileInfo = () => {
                         {selectedValue === "DataBase(MySQL)" && (
                           <>
                             <InputField
-                              text={"Scan Quary For All"}
+                              text={"IP"}
                               className="opentab_details_input"
                               type={"text"}
                               register={register}
                               registerFieldText={"scanQuaryForAll"}
                             />
                             <InputField
-                              text={"Exclude Single Data"}
+                              text={"Port Number"}
+                              className="opentab_details_input"
+                              type={"text"}
+                              register={register}
+                              registerFieldText={"excludeSingleData"}
+                            />
+                            <InputField
+                              text={"Database Name"}
                               className="opentab_details_input"
                               type={"text"}
                               register={register}

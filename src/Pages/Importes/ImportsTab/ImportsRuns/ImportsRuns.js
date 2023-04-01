@@ -7,7 +7,7 @@ export const ImportsRuns = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/testing")
+    fetch("https://texium-migration-server.onrender.com/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
