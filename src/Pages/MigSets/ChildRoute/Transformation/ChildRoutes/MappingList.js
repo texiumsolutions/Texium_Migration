@@ -32,7 +32,7 @@ const MappingList = () => {
   // onSubmit={handleSubmit(onSubmit)} (this will be in form)
 
   useEffect(() => {
-    fetch("https://texium-migration-server.onrender.com/testing")
+    fetch("http://localhost:5000/testing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));
