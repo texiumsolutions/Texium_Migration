@@ -4,7 +4,6 @@ import "./App.css";
 import Loading from "./components/Loading/Loading";
 import { Modal } from "./components/Modal/Modal";
 // import auth from "./firebase.init";
-import ImportsAdd from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
 import { Configuration } from "./Pages/Configuration/Configuration";
 import { Dashboard } from "./Pages/Dashboard/Dashboard";
 import { EditProfileInfo } from "./Pages/EditProfileInfo/EditProfileInfo";
@@ -18,35 +17,37 @@ import { ImportsTab } from "./Pages/Importes/ImportsTab/ImportsTab";
 import { Jobs } from "./Pages/Jobs/Jobs";
 import { Login } from "./Pages/Login/Login";
 import ErrorObject from "./Pages/MigSets/ChildRoute/Error Object/ErrorObject";
+import AdvancedFilters from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/AdvancedFilters";
+import Exclution from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/Exclution";
+import ObjectPreview from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/ObjectPreview";
+import PropertiesDetails from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/PropertiesDetails";
+import ScanRunSelection from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/ScanRunSelection";
 import Propertise from "./Pages/MigSets/ChildRoute/Propertise/Propertise";
 import SourceObject from "./Pages/MigSets/ChildRoute/Source Object/SourceObject";
 import TargetObject from "./Pages/MigSets/ChildRoute/Target Object/TargetObject";
+import Association from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Association";
+import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
+import MappingList from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/MappingList";
+import Rules from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Rules";
+import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
+import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationSourceObject";
+import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
 import Transformation from "./Pages/MigSets/ChildRoute/Transformation/Transformation";
-import MigsetRoutes from "./Pages/MigSets/MigsetRoutes";
 import { MigSets } from "./Pages/MigSets/MigSets";
+import MigsetRoutes from "./Pages/MigSets/MigsetRoutes";
 import NotFound from "./Pages/NotFound/NotFound";
-import AddProfileInfo from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
+import {
+  default as AddProfileInfo
+} from "./Pages/ProfileInfo/AddProfileInfo/AddProfileInfo";
 import { Registration } from "./Pages/Registration/Registration";
 import { OpenTab } from "./Pages/Scanner/OpenTab/OpenTab";
 import { OpenTabDetails } from "./Pages/Scanner/OpenTab/OpenTabDetails/OpenTabDetails";
 import { OpenTabObjects } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjects";
+import { OpenTabObjectsMongo } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjectsMongo";
 import { FileUploadRun } from "./Pages/Scanner/OpenTab/OpenTabRun/FileUploadRun";
 import { OpenTabRun } from "./Pages/Scanner/OpenTab/OpenTabRun/OpenTabRun";
 import { Scanner } from "./Pages/Scanner/Scanner";
 import RequireAuth from "./Shared/RequireAuth/RequireAuth";
-import PropertiesDetails from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/PropertiesDetails";
-import ScanRunSelection from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/ScanRunSelection";
-import Exclution from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/Exclution";
-import AdvancedFilters from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/AdvancedFilters";
-import ObjectPreview from "./Pages/MigSets/ChildRoute/Propertise/Child-Components/ObjectPreview";
-import Rules from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Rules";
-import MappingList from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/MappingList";
-import Association from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Association";
-import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
-import TransformationSourceObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationSourceObject";
-import TransformationTargetObject from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationTargetObject";
-import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
-import { OpenTabObjectsMongo } from "./Pages/Scanner/OpenTab/OpenTabObjects/OpenTabObjectsMongo";
 
 function App() {
   return (
@@ -69,12 +70,18 @@ function App() {
           }
         />
         <Route path="/jobs" element={<Jobs />} />
+
+        {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
+
+        {/* Profile Information Add, Edit Pages  */}
         <Route path="/addProfileInfo" element={<AddProfileInfo />} />
         <Route
           path="/editProfileInfo/:detailsId"
           element={<EditProfileInfo />}
         />
         <Route path="/fileUploadRun" element={<FileUploadRun />} />
+
+        {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
 
         {/* Scan Run Start */}
         <Route path="/scanner" element={<Scanner />} />
@@ -86,6 +93,9 @@ function App() {
         </Route>
         {/* Scan Run End */}
 
+        {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
+
+        {/* Importers Start */}
         <Route
           path="/imports"
           element={
@@ -103,10 +113,13 @@ function App() {
           }
         >
           <Route path="details/:detailsId" element={<ImportsDetails />} />
-          <Route path="add" element={<ImportsAdd />} />
           <Route path="selection" element={<ImportsSelection />} />
           <Route path="importRuns" element={<ImportsRuns />} />
         </Route>
+        {/* Importers End */}
+
+        {/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
+
         <Route
           path="/migsets"
           element={

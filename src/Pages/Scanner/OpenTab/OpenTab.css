@@ -9,6 +9,10 @@
   padding-inline: 2%;
 }
 .opentab_back_btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
   text-decoration: none;
   color: var(--primary);
   padding-right: 15px;

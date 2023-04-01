@@ -7,8 +7,8 @@ import {
   AiOutlineReload
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
+import { Card } from "../../components/Card/Card";
 import "./Imports.css";
 
 export const Imports = () => {
@@ -148,7 +148,7 @@ export const Imports = () => {
             <button type="button">
               <Link
                 className="table_header_link"
-                to={"/imports/importsTab/add"}
+                to={"/addProfileInfo"}
               >
                 <AiOutlinePlusCircle />
               </Link>

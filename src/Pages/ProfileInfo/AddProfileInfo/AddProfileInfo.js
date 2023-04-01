@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
+import { IoArrowBack } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { NavBar } from "../../../Shared/NavBar/NavBar";
 import { Card } from "../../../components/Card/Card";
 import { FileUploader } from "../../../components/FileUploader/FileUploader";
 import { InputField } from "../../../components/InputField/InputField";
-import { NavBar } from "../../../Shared/NavBar/NavBar";
 
 const AddProfileInfo = () => {
   const [selectedName, setSelectedName] = useState("");
@@ -37,7 +38,8 @@ const AddProfileInfo = () => {
       <div className="content_container">
         <Card height="calc(100%)" width="calc(100%)">
           <div className="opentab_header">
-            <Link className="opentab_back_btn" to={"/scanner"}>
+            <Link className="opentab_back_btn" to={-1}>
+              <IoArrowBack />
               Back
             </Link>
           </div>
@@ -77,7 +79,7 @@ const AddProfileInfo = () => {
                       Select an option
                     </option>
                     <option value="File System">File System</option>
-                    <option value="MongoDB">MongoDB</option>
+                    {/* <option value="MongoDB">MongoDB</option> */}
                     <option value="DataBase(MySQL)">DataBase(MySQL)</option>
                   </select>
 
@@ -104,14 +106,14 @@ const AddProfileInfo = () => {
                         {selectedValue === "File System" && (
                           <>
                             <FileUploader
-                              registerFieldText={"filePath"}
+                              // registerFieldText={"filePath"}
                               selectedName={selectedName}
                               selectedValue={selectedValue}
                               value={value}
                             />
                           </>
                         )}
-                        {selectedValue === "MongoDB" && (
+                        {/* {selectedValue === "MongoDB" && (
                           <>
                             <InputField
                               text={"Scan Query"}
@@ -135,7 +137,7 @@ const AddProfileInfo = () => {
                               registerFieldText={"excludeData"}
                             />
                           </>
-                        )}
+                        )} */}
                         {selectedValue === "DataBase(MySQL)" && (
                           <>
                             <InputField

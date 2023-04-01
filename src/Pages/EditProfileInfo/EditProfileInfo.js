@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
+import { IoArrowBack } from "react-icons/io5";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { NavBar } from "../../Shared/NavBar/NavBar";
 import { Card } from "../../components/Card/Card";
 import { InputField } from "../../components/InputField/InputField";
-import { NavBar } from "../../Shared/NavBar/NavBar";
 
 export const EditProfileInfo = () => {
   const { detailsId } = useParams();
@@ -84,6 +85,7 @@ export const EditProfileInfo = () => {
         <Card height="calc(100%)" width="calc(100%)">
           <div className="opentab_header">
             <Link className="opentab_back_btn" to={"/scanner"}>
+              <IoArrowBack/>
               Back
             </Link>
           </div>
