@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import "../../Transformation.css";
-import { Card } from "../../../../../../components/Card/Card";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { Card } from "../../../../../../components/Card/Card";
+import "../../Transformation.css";
 
 const SpecificMapping = () => {
   const { sourceId } = useParams();
   const [sourceOne, setsourceOne] = useState({});
-  // const [sourceAdd, setSourceAdd] = useState("");
   const { register, handleSubmit, reset } = useForm();
+
 
   useEffect(() => {
     const url = `http://localhost:5000/testing/${sourceId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setsourceOne(data));
-      
   }, [sourceId]);
- console.log(sourceOne);
-  // const { File_Name,  Description, Source_Type } = sourceAdd;
+  console.log(sourceOne);
+
   const onSubmit = (data) => {
     console.log(data);
-    // event.preventDefault();
-    // const File_Name = event.target.File_Name.value;
-    // const sourceAdd = {
-    //   // Id: _id,
-    //   File_Name: File_Name,
-    //   Source_Type: Source_Type,
-    //   Description: Description,
-    //   Directory_Path: Description,
-    // };
 
-    fetch("http://localhost:5000/newTesting", {
+    fetch("http://localhost:5000/editedData", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -46,10 +36,9 @@ const SpecificMapping = () => {
         } else {
           alert("Failed to add mapping!");
         }
-        
+
         setsourceOne();
       });
-      
   };
   return (
     <div>

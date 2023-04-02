@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { Card } from "../../components/Card/Card";
 import { NavBar } from "../../Shared/NavBar/NavBar";
+import { Card } from "../../components/Card/Card";
 
 const MigsetRoutes = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -17,7 +17,7 @@ const MigsetRoutes = () => {
         <Card height="calc(100%)" width="calc(100%)">
           <div>
             <div className="opentab_header">
-              <Link className="opentab_back_btn" to={"/scanner"}>
+              <Link className="opentab_back_btn" to={"/migsets"}>
                 Back
               </Link>
               <p>File name</p>

@@ -26,6 +26,7 @@ import SourceObject from "./Pages/MigSets/ChildRoute/Source Object/SourceObject"
 import TargetObject from "./Pages/MigSets/ChildRoute/Target Object/TargetObject";
 import Association from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Association";
 import Demo from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Demo";
+import SpecificMapping from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Mapping/SpecificMapping";
 import MappingList from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/MappingList";
 import Rules from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/Rules";
 import TransformationInjection from "./Pages/MigSets/ChildRoute/Transformation/ChildRoutes/TransformationInjection";
@@ -161,7 +162,7 @@ function App() {
           >
             <Route path="rules" element={<Rules />} />
             <Route path="mapping-list" element={<MappingList />} />
-            {/* <Route path="source/:sourceId" element={<SpecificMapping />} /> */}
+            <Route path="source/:sourceId" element={<SpecificMapping />} />
             <Route path="association" element={<Association />} />
             <Route path="demo" element={<Demo />} />
             <Route

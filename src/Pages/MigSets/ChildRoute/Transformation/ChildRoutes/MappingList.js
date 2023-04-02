@@ -1,7 +1,7 @@
-import React, { useEffect,  useState } from "react";
-import "../../../Migset.css";
+import React, { useEffect, useState } from "react";
+import { BsArrowRightSquareFill } from "react-icons/bs";
 import { Card } from "../../../../../components/Card/Card";
-import {BsArrowRightSquareFill} from 'react-icons/bs';
+import "../../../Migset.css";
 import IntoMapping from "./Mapping/IntoMapping";
 
 const MappingList = () => {
@@ -40,7 +40,7 @@ const MappingList = () => {
 
   return (
     <div>
-      <div className=" opentab_details_form" >
+      <div className=" opentab_details_form">
         <div className="opentab_details_container">
           <div className="opentab_parameters">
             <p>Parameters</p>
@@ -52,12 +52,11 @@ const MappingList = () => {
                 </span>
 
                 <br />
-                <small
-                  style={{
-                    color: "black",
-                  }}
-                >
-                  Select a file for mapping <span className="icon_arrow"> <BsArrowRightSquareFill ></BsArrowRightSquareFill></span>
+                <small>
+                  <span className="icon_arrow">
+                    {" "}
+                    <BsArrowRightSquareFill></BsArrowRightSquareFill>
+                  </span>
                 </small>
               </div>
 

@@ -48,19 +48,23 @@ const AddProfileInfo = () => {
               <div className="opentab_details">
                 <p>Add Data</p>
                 <Card height={"calc(100vh - 13.5em)"}>
-                  <label className="label" htmlFor="name">
-                    Name
-                  </label>
+                  {selectedValue === "File System" && (
+                    <>
+                      <label className="label" htmlFor="name">
+                        Name
+                      </label>
 
-                  <br />
+                      <br />
 
-                  <input
-                    className="opentab_details_input"
-                    type="text"
-                    placeholder="File Name"
-                    value={selectedName}
-                    onChange={handleNameChange}
-                  />
+                      <input
+                        className="opentab_details_input"
+                        type="text"
+                        placeholder="File Name"
+                        value={selectedName}
+                        onChange={handleNameChange}
+                      />
+                    </>
+                  )}
 
                   <label className="label" htmlFor="option">
                     Type
@@ -83,17 +87,21 @@ const AddProfileInfo = () => {
                     <option value="DataBase(MySQL)">DataBase(MySQL)</option>
                   </select>
 
-                  <label className="label">Description</label>
+                  {selectedValue === "File System" && (
+                    <>
+                      <label className="label">Description</label>
 
-                  <br />
+                      <br />
 
-                  <textarea
-                    type="text"
-                    name="description"
-                    className="opentab_details_input"
-                    value={value}
-                    onChange={handleTextareaChange}
-                  />
+                      <textarea
+                        type="text"
+                        name="description"
+                        className="opentab_details_input"
+                        value={value}
+                        onChange={handleTextareaChange}
+                      />
+                    </>
+                  )}
                 </Card>
               </div>
               <div className="opentab_parameters">
