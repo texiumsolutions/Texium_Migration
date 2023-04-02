@@ -6,7 +6,7 @@ const TransformationTargetObject = () => {
   const [sourceFileInfo, setSourceFileInfo] = useState([]);
 
   useEffect(() => {
-    fetch("https://texium-migration-server.onrender.com/testing")
+    fetch("http://localhost:5000/editing")
       .then((response) => response.json())
       .then((data) => setSourceFileInfo(data))
       .catch((error) => alert(error));

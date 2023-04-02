@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 const SpecificMapping = () => {
   const { sourceId } = useParams();
   const [sourceOne, setsourceOne] = useState({});
-  // const [sourceAdd, setSourceAdd] = useState("");
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
@@ -15,42 +14,31 @@ const SpecificMapping = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setsourceOne(data));
-      
   }, [sourceId]);
- console.log(sourceOne);
-  // const { File_Name,  Description, Source_Type } = sourceAdd;
+  console.log(sourceOne);
   const onSubmit = (data) => {
     console.log(data);
-    // event.preventDefault();
-    // const File_Name = event.target.File_Name.value;
-    // const sourceAdd = {
-    //   // Id: _id,
-    //   File_Name: File_Name,
-    //   Source_Type: Source_Type,
-    //   Description: Description,
-    //   Directory_Path: Description,
-    // };
 
-    fetch("http://localhost:5000/newTesting", {
+    fetch("http://localhost:5000/editing", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(setsourceOne),
+      body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Successfully add mapping!");
+      .then((inserted) => {
+        if (inserted.insertedId) {
+          alert("Added New Product Successfully");
+
           reset();
         } else {
-          alert("Failed to add mapping!");
+          alert("Failed add to the data");
         }
-        
-        setsourceOne();
       });
-      
+      console.log(data);
   };
+
   return (
     <div>
       <form className=" opentab_details_form" onSubmit={handleSubmit(onSubmit)}>
@@ -78,7 +66,7 @@ const SpecificMapping = () => {
               <input
                 className="opentab_details_input"
                 type="text"
-                value={sourceOne.File_Name}
+                defaultValue={sourceOne.File_Name}
                 {...register("File_Name")}
                 required
               />
@@ -92,8 +80,8 @@ const SpecificMapping = () => {
               <input
                 type="text"
                 className="opentab_details_input"
-                value={sourceOne.Source_Type}
-                disabled
+                defaultValue={sourceOne.Source_Type}
+                // disabled
                 required
                 {...register("Source_Type")}
               />
@@ -109,6 +97,20 @@ const SpecificMapping = () => {
                 className="opentab_details_input"
                 defaultValue={sourceOne.Directory_Path}
                 {...register("Directory_Path")}
+                required
+              />
+              <label className="label" htmlFor="option">
+                Files
+              </label>
+
+              <br />
+
+              <textarea
+                type="text"
+                name="description"
+                className="opentab_details_input"
+                defaultValue={sourceOne.Files}
+                {...register("Files")}
                 required
               />
 
