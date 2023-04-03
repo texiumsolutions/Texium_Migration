@@ -7,13 +7,18 @@ export const InputField = ({
   type,
   value,
   selectedValue,
-  fileOnChange,
-  sendFile,
+  // fileOnChange,
+  // sendFile,
   successMessage,
   errorMessage,
   register,
   registerFieldText,
   disabled,
+  onChange,
+  ipValue,
+  userNameValue,
+  passwordValue,
+  databaseValue,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
@@ -22,6 +27,9 @@ export const InputField = ({
     setInputValue(event.target.value);
   };
 
+  
+
+  // File Upload
   const [detailsInfoMongo, setDetailsInfoMongo] = useState();
   const handleUpload = async (event) => {
     event.preventDefault();
@@ -84,14 +92,20 @@ export const InputField = ({
             {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
           </>
         ) : (
-          <input
-            className={"parameter_inputfield"}
-            type={type}
-            name={type}
-            defaultValue={value}
-            disabled={disabled ? (disabled = true) : (disabled = false)}
-            {...register(registerFieldText)}
-          />
+          <>
+            <input
+              className={"parameter_inputfield"}
+              type={type}
+              name={type}
+              defaultValue={value}
+              onChange={onChange}
+              disabled={disabled ? (disabled = true) : (disabled = false)}
+              {...register(registerFieldText)}
+            />
+            <button className="upload_btn" onClick={""}>
+              Submit
+            </button>
+          </>
         )}
       </td>
     </tr>

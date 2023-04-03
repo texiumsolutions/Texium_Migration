@@ -4,15 +4,28 @@ import { Link } from "react-router-dom";
 import { NavBar } from "../../../Shared/NavBar/NavBar";
 import { Card } from "../../../components/Card/Card";
 import { FileUploader } from "../../../components/FileUploader/FileUploader";
-import { InputField } from "../../../components/InputField/InputField";
 
 const AddProfileInfo = () => {
   const [selectedName, setSelectedName] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [value, setValue] = useState("");
+  const [ipValue, setIpValue] = useState("");
+  const [userNameValue, setUserNameValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
+  const [databaseValue, setDatabaseValue] = useState("");
   const textareaRef = useRef(null);
-  const register = (text) => {
-    return text;
+
+  const handleIpChange = (event) => {
+    setIpValue(event.target.value);
+  };
+  const handleUserNameChange = (event) => {
+    setUserNameValue(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPasswordValue(event.target.value);
+  };
+  const handleDatabaseChange = (event) => {
+    setDatabaseValue(event.target.value);
   };
 
   const handleNameChange = (event) => {
@@ -27,6 +40,26 @@ const AddProfileInfo = () => {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
+  };
+
+  // Database
+  const handleUploadDatabase = () => {
+    fetch(`http://localhost:5000/api/addMySQL`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ipValue,
+        userNameValue,
+        passwordValue,
+        databaseValue,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -148,27 +181,68 @@ const AddProfileInfo = () => {
                         )} */}
                         {selectedValue === "DataBase(MySQL)" && (
                           <>
-                            <InputField
-                              text={"IP"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              register={register}
-                              registerFieldText={"scanQuaryForAll"}
-                            />
-                            <InputField
-                              text={"Port Number"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              register={register}
-                              registerFieldText={"excludeSingleData"}
-                            />
-                            <InputField
-                              text={"Database Name"}
-                              className="opentab_details_input"
-                              type={"text"}
-                              register={register}
-                              registerFieldText={"excludeSingleData"}
-                            />
+                            <tr>
+                              <td className="input_text_section">
+                                <p>IP</p>
+                              </td>
+
+                              <td className="input_field_section">
+                                <input
+                                  className={"parameter_inputfield"}
+                                  type={"text"}
+                                  onChange={handleIpChange}
+                                />
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="input_text_section">
+                                <p>User Name</p>
+                              </td>
+
+                              <td className="input_field_section">
+                                <input
+                                  className={"parameter_inputfield"}
+                                  type={"text"}
+                                  onChange={handleUserNameChange}
+                                />
+                              </td>
+                            </tr>
+                            
+                            <tr>
+                              <td className="input_text_section">
+                                <p>Passord</p>
+                              </td>
+
+                              <td className="input_field_section">
+                                <input
+                                  className={"parameter_inputfield"}
+                                  type={"password"}
+                                  onChange={handlePasswordChange}
+                                />
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td className="input_text_section">
+                                <p>Database</p>
+                              </td>
+
+                              <td className="input_field_section">
+                                <input
+                                  className={"parameter_inputfield"}
+                                  type={"text"}
+                                  onChange={handleDatabaseChange}
+                                />
+                              </td>
+                            </tr>
+
+                            <button
+                              className="upload_btn"
+                              onClick={handleUploadDatabase}
+                            >
+                              Submit
+                            </button>
                           </>
                         )}
                       </tbody>
